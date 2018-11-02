@@ -34,6 +34,9 @@ Resonse Type
 
 
 
+## TODO 
+- [] Custom template for the api response
+
 # Special thanks
 
 Thanks to all of third party library provider. 
@@ -67,10 +70,15 @@ Error  template
 ~~~
 
 `status` value must be either `0` or `1`
+
 `message` value must be array.
+
 `errorCode` value must be integer.
+
 `data` would be any kind of response
 
+
+### Reserved code for the respose format
 
 `errorCode` has reserved value from 0 to 999.
 
@@ -85,7 +93,3 @@ Error  template
 Project accept follwing headers
 - application/json
 - application/xml
-
-
-
-
