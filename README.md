@@ -25,6 +25,9 @@ Resonse Type
 - [x] Adding redis library (Flexible and feature-complete Redis client for PHP and HHVM)
 - [x] Adding faker for fake database generation
 - [x] Adding Laravel Repositories Pattern  
+- [x] Adding laravel passport for tokenizer
+- [x] Adding Laravel Cashier for maintain payment(s).
+- [x] Adding laravel event broadcasting
 - [x] Adding larvel debug bar for live debug log on view side.
 - [x] Adding larvel telescope for the debugging purpose ( requests , exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more )
 - [x] Adding Laravel Socialite for social auth ( Facebook, Twitter, LinkedIn, Google, GitHub and Bitbucket. ) 
