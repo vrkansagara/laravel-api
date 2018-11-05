@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +15,20 @@ use Carbon\Carbon;
 |
 */
 
-Route::get('/ping',function(){
+
+Route::get('users', function () {
+    $users = User::paginate();
+    return response()->json([
+        'data' => [
+            'users' => $users
+        ]
+    ]);
+});
+Route::get('/ping', function () {
     return Carbon::now();
 });
 
-Route::get('/users',function(){
+Route::get('/user', function () {
     return Carbon::now();
 });
 
