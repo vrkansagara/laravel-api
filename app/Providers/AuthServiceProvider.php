@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+use Laravel\Passport\Passport;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +27,22 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Passport::routes();
+
+        // Passport::useClientModel(Client::class);
+        // Passport::useTokenModel(TokenModel::class);
+        // Passport::useAuthCodeModel(AuthCode::class);
+        // Passport::usePersonalAccessClientModel(PersonalAccessClient::class);
+        // Passport::enableImplicitGrant();
+        // Passport::personalAccessClientId('client-id');
+
+
+
+        Passport::tokensExpireIn(now()->addDays(15));
+
+        Passport::refreshTokensExpireIn(now()->addDays(30));
+
+
+        // Passport::loadKeysFrom('/secret-keys/oauth');
     }
 }
