@@ -2,16 +2,35 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Controllers\Api\interfaces\AuthInterface;
 use App\Http\Controllers\ApiController;
-use Illuminate\Support\Facades\Request;
 
-class AuthController extends ApiController
+class AuthController extends ApiController implements AuthInterface
 {
 
-    public function login(Request $request)
+
+    public function login()
     {
-        $postData = $request->all();
+        // TODO: Implement login() method.
+    }
+
+    public function logout()
+    {
+        // TODO: Implement logout() method.
+    }
+
+    public function register()
+    {
+        // TODO: Implement register() method.
+    }
+
+    public function forgetPassword()
+    {
+        // TODO: Implement forgetPassword() method.
+    }
+
+    public function resetPassword()
+    {
+        // TODO: Implement resetPassword() method.
     }
 }
