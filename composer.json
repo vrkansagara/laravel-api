@@ -2,8 +2,22 @@
     "name": "vrkansagara/laravel-api",
     "description": "Laravel API",
     "keywords": ["framework", "laravel"],
-    "license": "BSD 3-Clause",
+    "license": "BSD-3-Clause",
     "type": "project",
+    "authors": [
+        {
+            "name": "Vallabh Kansagara",
+            "email": "vrkansagara@gmail.com",
+            "homepage": "https://vrkansagara.in",
+            "role": "Owner"
+        }
+    ],
+    "support": {
+        "email": "vrkansagara@gmail.com",
+        "irc": "irc://irc.freenode.org/composer",
+        "issues":"https://github.com/vrkansagara/laravel-api/issues",
+        "source":"https://github.com/vrkansagara/laravel-api/releases"
+    },
     "require": {
         "php": "^7.1.3",
         "arcanedev/laravel-settings": "^4.0",
