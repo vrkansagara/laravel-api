@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\interfaces\AuthInterface;
 use App\Http\Controllers\ApiController;
-use App\User;
+use App\Entity\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,7 +88,7 @@ class AuthController extends ApiController implements AuthInterface
              * @usedFor = API only
              * @note = With client creation, with refresh token
              */
-//            $token = $this->getPasswordTokenWithGrantType($request, $user);
+            $token = $this->getPasswordTokenWithGrantType($request, $user);
 
             /**
              * @ClientName =  client_credentials
@@ -97,7 +97,7 @@ class AuthController extends ApiController implements AuthInterface
              * @note = With client creation, Only access token
              */
 
-            $token = $this->getClientCredentialsTokenWithGrantType($user);
+//            $token = $this->getClientCredentialsTokenWithGrantType($user);
 
 
             $responseData = [
