@@ -106,14 +106,11 @@ class AuthController extends ApiController implements AuthInterface
             ];
 
             return response()->json($responseData);
-
-
         }
 
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
-
     }
 
     /**
@@ -137,7 +134,6 @@ class AuthController extends ApiController implements AuthInterface
         ];
 
         return response()->json($responseData);
-
     }
 
 
@@ -177,7 +173,7 @@ class AuthController extends ApiController implements AuthInterface
             ->limit(1)
             ->get()
             ->first();
-        if (!empty($isClientExist->id)) {
+        if (! empty($isClientExist->id)) {
             return $isClientExist;
         } else {
             $client = (new Client())->forceFill(
@@ -237,8 +233,6 @@ class AuthController extends ApiController implements AuthInterface
         ];
 
         return $data;
-
-
     }
 
     /**
@@ -417,13 +411,11 @@ class AuthController extends ApiController implements AuthInterface
         $user = $request->user();
 
         if ($user != null) {
-
             $value = $request->bearerToken();
             $id = (new Parser())->parse($value)->getHeader('jti');
             $token = $user->tokens->find($id);
             $token->revoke();
         }
-
     }
 
     public function register(Request $request)

@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
+    "name": "vrkansagara/laravel-api",
+    "description": "Laravel API",
     "keywords": ["framework", "laravel"],
-    "license": "MIT",
+    "license": "BSD 3-Clause",
     "type": "project",
     "require": {
         "php": "^7.1.3",

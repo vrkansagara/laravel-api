@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
 use Laravel\Passport\HasApiTokens;
+
 class User extends Authenticatable
 {
 
@@ -43,5 +44,4 @@ class User extends Authenticatable
      * @var array
      */
     protected $visible = ['name','email'];
-
 }

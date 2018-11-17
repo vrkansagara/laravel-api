@@ -8,7 +8,6 @@
 
 namespace App\Http\Controllers\Api\interfaces;
 
-
 use Illuminate\Http\Request;
 
 interface AuthInterface
@@ -22,5 +21,4 @@ interface AuthInterface
     public function forgetPassword(Request $request);
 
     public function resetPassword(Request $request);
-
 }
