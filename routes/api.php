@@ -16,24 +16,39 @@ use App\User;
 */
 
 
-Route::get('users', function () {
-    $users = User::paginate();
-    return response()->json([
-        'data' => [
-            'users' => $users
-        ]
-    ]);
-});
 Route::get('/ping', function () {
     return Carbon::now();
 });
 
-Route::get('/user', function () {
-    return Carbon::now();
+Route::group(['middleware' => ['api'], 'prefix'=>'auth'], function () {
+
+    Route::post('login', ['name'=>'auth.login','uses'=>'AuthController@login']);
+    Route::post('logout', ['name'=>'auth.logout','uses'=>'AuthController@logout']);
+
+    Route::group(['middleware' => ['auth:api']], function () {
+        Route::post('refresh', ['name'=>'auth.refresh','uses'=>'AuthController@refreshToken']);
+    });
+
+
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+Route::group(['middleware' => ['auth:api']], function () {
+
+    Route::get('user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::get('users', function () {
+        $users = User::paginate();
+        return response()->json([
+            'data' => [
+                'users' => $users
+            ]
+        ]);
+    });
+
 });
 
 

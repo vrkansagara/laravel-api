@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "46786e47-2e76-48de-8f21-359896973850",
+		"name": "Laravel-Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{laravel_api_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{laravel_api_url}}/api/user",
+							"host": [
+								"{{laravel_api_url}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "ijakubowski@example.net",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ijakubowski@example.net",
+									"type": "text"
+								},
+								{
+									"key": "remember",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{laravel_api_url}}/api/auth/login",
+							"host": [
+								"{{laravel_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{laravel_api_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{laravel_api_url}}/api/auth/logout",
+							"host": [
+								"{{laravel_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{laravel_api_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "refresh_token",
+									"value": "def50200a563e5fc93f41fc81e32c299251bc5699c95157770807cda3e3da035a0fabebe87cc49988d344db4c60598c4a7cc8164b9bfadfa469ad2a695f6d23be1e1172c8b6052b876d78596a8bbc5189528007c9450fbc421e3e96bca77148a55aaf0b795c88f1c4b17c47f0ab75cee65407473668c5a457b90c95c6262336da5bd991bff9b05f5fc8700b4bd8fbd7aae2028f16671795b6e69ad35326da8b2112bc9a309a9c6e3aba4d1c620c7c0adcd4cc912f5c12b081a8e78d342925a9b58ad79fc2a2a153f312768a0b634021162a1cba382a32cdceeeab52e1331630818ccbffa091fd11baf0bacf43f4c81c55581bc9a01c246428a4458b33495c56a60c36b80046417baac0fa28654992db087e687515d29727a5bc710f8126b37d75806487834ad7c33d8c51dcc2091f86e63a60f7d900c8fa257f36e1a1a3114a0ef8f52e3137986354e28476d46b14a40226978b445acfce5642be87e829ac5689b3029675e",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{laravel_api_url}}/api/auth/refresh",
+							"host": [
+								"{{laravel_api_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Passport",
+			"item": [
+				{
+					"name": "PasswordToken",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "KQ20dK6IBERxOGKqWGbtc8Jgquiwo2weZFPCApXy",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "*",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "ijakubowski@example.net",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "ijakubowski@example.net",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{laravel_api_url}}/oauth/token",
+							"host": [
+								"{{laravel_api_url}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Api Ping",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{laravel_api_url}}/api/ping",
+					"host": [
+						"{{laravel_api_url}}"
+					],
+					"path": [
+						"api",
+						"ping"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

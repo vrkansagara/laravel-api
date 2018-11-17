@@ -9,16 +9,18 @@
 namespace App\Http\Controllers\Api\interfaces;
 
 
+use Illuminate\Http\Request;
+
 interface AuthInterface
 {
-    public function login();
+    public function login(Request $request);
 
-    public function logout();
+    public function logout(Request $request);
 
-    public function register();
+    public function register(Request $request);
 
-    public function forgetPassword();
+    public function forgetPassword(Request $request);
 
-    public function resetPassword();
+    public function resetPassword(Request $request);
 
 }
