@@ -41,6 +41,8 @@ Route::group(['middleware' => ['auth:api']], function () {
     });
     Route::resource('permission','PermissionController');
     Route::resource('role','RoleController');
+    Route::resource('passport-token','PassportTokenController');
+
 
     Route::get('users', function () {
         $users = User::paginate();

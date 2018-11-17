@@ -21,7 +21,7 @@ class RoleController extends ApiController
      */
     public function index()
     {
-        $roles = $this->roleRepository->all();
+        $roles = $this->roleRepository->paginate();
 
         $responseData = [
             'roles' => $roles

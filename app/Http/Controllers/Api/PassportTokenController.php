@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\ApiController;
-use App\Repositories\PermissionRepository;
+use App\Repositories\PassportTokenRepository;
+use App\Repositories\RoleRepository;
 use Illuminate\Http\Request;
 
-class PermissionController extends ApiController
+class PassportTokenController extends ApiController
 {
-    private  $permissionRepository;
+    private $passportTokenRepository;
 
-    public function __construct(PermissionRepository $permissionRepository)
+    public function __construct( PassportTokenRepository $passportTokenRepository)
     {
-        $this->permissionRepository = $permissionRepository;
+        $this->passportTokenRepository = $passportTokenRepository;
     }
     /**
      * Display a listing of the resource.
@@ -21,15 +22,13 @@ class PermissionController extends ApiController
      */
     public function index()
     {
-        $permissions = $this->permissionRepository->paginate();
+        $passportTokens = $this->passportTokenRepository->all();
 
         $responseData = [
-            'permissions' => $permissions
+            'passportTokens' => $passportTokens
         ];
 
         return response()->json($responseData);
-
-
     }
 
     /**

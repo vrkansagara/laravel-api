@@ -20,7 +20,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "{{laravel_api_token}}",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY5Y2RiMzFmNDkxNTQxZjUzM2I0MWQ5ZjY0MjljMDRjZTAwYjRmNmQ0NzViOWM2NTQwYTBiN2JjMzk2Yzg3OTI2NTIxZWRlM2JkMWFmYWZkIn0.eyJhdWQiOiI1IiwianRpIjoiNjljZGIzMWY0OTE1NDFmNTMzYjQxZDlmNjQyOWMwNGNlMDBiNGY2ZDQ3NWI5YzY1NDBhMGI3YmMzOTZjODc5MjY1MjFlZGUzYmQxYWZhZmQiLCJpYXQiOjE1NDI0Nzg3NDcsIm5iZiI6MTU0MjQ3ODc0NywiZXhwIjoxNTQzNzc0NzQ3LCJzdWIiOiIiLCJzY29wZXMiOltdfQ.pT1wtXlP0PRl-HheCbOcG-Htcdwz1v7U-9IcqyW6dwtXKtts7viEFFWa0GIZvKVwjaybk_bY4en1RbEv8uK3_mNCjylhRu5o0-IeUGeY6Xs_sk5GUAF7-d5GOCTluU3Xwk5DiF9tt67-qjB5k9XabTyXv9-pTx8ZlMeH0hYx7mmqbuuYC7hgZFXXcS0v2QoY9d1dNM7oN68E06edl5aZc0B2LAG8s8RDSaX8OIyd42wGGldEZ86LW2WyrQujmZeaT0sO8m6uZisEIGnsPFxch2stLJ96SZGx_pU1NtNzO_NAd1h3S7arVWp4AXdlyzr2s_gdH3OG_TaNWqzYk9V9pzpChji9InxqeOqfEtZcEvzaBLfTvs9rpbpCSMlM2-4RswL_4UW1n6cwkAMeuZTEfGhDqvIzDyLCfEJohafMQ_i-xJU0sjEBoZ8uxNcVociVKvUXyC2cqlU1HXYySisEHUm3nDhpw-aGk4c1eBg0DP3KC-_wV41Q3Rik1CaUVBhSES-XYr7DiBsXqfy_236G66ZEFUYGiaINWzmlmjxFQFk55B5fQ_yQTWX2SKsE1Nu0vdfClBpm2u9mtXyIN-qOGeTLdxsdHadt3ql5c-Dsqr9MlcBnKinSkKu8wZI6Bnmt7tiT90hhXYWwxtYnT0vfBrdYjSpmzN1hjG5r_N1KOOk",
 								"type": "text"
 							}
 						],
@@ -242,6 +242,115 @@
 							"path": [
 								"oauth",
 								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{laravel_api_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{laravel_api_url}}/api/passport-token",
+							"host": [
+								"{{laravel_api_url}}"
+							],
+							"path": [
+								"api",
+								"passport-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Role",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{laravel_api_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{laravel_api_url}}/api/role",
+							"host": [
+								"{{laravel_api_url}}"
+							],
+							"path": [
+								"api",
+								"role"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Permission",
+			"item": [
+				{
+					"name": "List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{laravel_api_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{laravel_api_url}}/api/permission",
+							"host": [
+								"{{laravel_api_url}}"
+							],
+							"path": [
+								"api",
+								"permission"
 							]
 						}
 					},
