@@ -48,7 +48,7 @@ return [
      */
 
     'route'         => [
-        'enabled'    => true,
+        'enabled'    => false,
 
         'attributes' => [
             'prefix'     => 'log-viewer',
