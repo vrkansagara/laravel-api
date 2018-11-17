@@ -29,18 +29,18 @@ return [
         /**
          * Database table to use
          */
-        'table' => 'vendor_tylercd100_lern_exceptions',
+        'table' => 'error_logs',
 
         /**
          * Information to store
          */
         'collect' => [
-            'method' => false, //When true it will collect GET, POST, DELETE, PUT, etc...
+            'method' => true, //When true it will collect GET, POST, DELETE, PUT, etc...
             'data' => false, //When true it will collect Input data
             'status_code' => true,
-            'user_id' => false,
-            'url' => false,
-            'ip' => false,
+            'user_id' => true,
+            'url' => true,
+            'ip' => true,
         ],
 
         /**

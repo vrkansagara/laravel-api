@@ -12,7 +12,7 @@ Resonse Type
 
  ## Third party library
 
-- [x] Adding package manger secrity using Roave Security Advisories
+- [x] Adding package manger security using Roave Security Advisories
 - [x] Adding coding standard from Zend Framework Coding Standard
 - [x] Adding Role-based-access-control (RBAC) 
 - [x] Adding Log activity
