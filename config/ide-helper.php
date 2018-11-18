@@ -101,12 +101,12 @@ return array(
     | Interface implementations
     |--------------------------------------------------------------------------
     |
-    | These interfaces will be replaced with the implementing class. Some interfaces
+    | These Interfaces will be replaced with the implementing class. Some Interfaces
     | are detected by the helpers, others can be listed below.
     |
     */
 
-    'interfaces' => array(
+    'Interfaces' => array(
 
     ),
 

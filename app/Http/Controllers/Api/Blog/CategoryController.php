@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Api\Blog\Interfaces\CategoryInterface;
+use App\Interfaces\CategoryInterface;
 use Illuminate\Http\Request;
 
 class CategoryController  extends ApiController implements CategoryInterface

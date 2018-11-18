@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Api\Blog\Interfaces\TagInterface;
+use App\Interfaces\TagInterface;
 use Illuminate\Http\Request;
 
 class TagController extends ApiController implements TagInterface

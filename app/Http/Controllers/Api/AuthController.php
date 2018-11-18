@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Api\interfaces\AuthInterface;
+use App\Interfaces\AuthInterface;
 use App\Http\Controllers\ApiController;
 use App\Entity\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;

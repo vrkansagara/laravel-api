@@ -2,12 +2,27 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Api\Blog\BlogInterface;
+use App\Interfaces\BlogInterface;
 use App\Http\Controllers\ApiController;
+use App\Repositories\Blog\BlogRepository;
 use Illuminate\Http\Request;
 
 class BlogController extends ApiController implements BlogInterface
 {
+    /**
+     * @var BlogRepository
+     */
+    private $blogRepository;
+
+    /**
+     * BlogController constructor.
+     * @param BlogRepository $blogRepository
+     */
+    public function __construct(BlogRepository $blogRepository)
+    {
+        $this->blogRepository = $blogRepository;
+    }
+
 
     /**
      * @param Request $request
@@ -15,7 +30,13 @@ class BlogController extends ApiController implements BlogInterface
      */
     public function index(Request $request)
     {
-        // TODO: Implement index() method.
+        $blogs = $this->blogRepository->paginate();
+
+        $responseData = [
+            'blog_posts' => $blogs
+        ];
+
+        return response()->json($responseData);
     }
 
     /**
