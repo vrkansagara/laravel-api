@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateOauthPersonalAccessClientsTable extends Migration
 {
+    use MigrationTrait;
     /**
      * Run the migrations.
      *
@@ -17,6 +18,10 @@ class CreateOauthPersonalAccessClientsTable extends Migration
             $table->increments('id');
             $table->integer('client_id')->index();
             $table->timestamps();
+
+            $table->charset = $this->dbconfig['charset'];
+            $table->engine = $this->dbconfig['engine'];
+            $table->collation = $this->dbconfig['collation'];
         });
     }
 

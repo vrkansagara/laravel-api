@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreatePasswordResetsTable extends Migration
 {
+    use MigrationTrait;
+
     /**
      * Run the migrations.
      *
@@ -17,6 +19,12 @@ class CreatePasswordResetsTable extends Migration
             $table->string('email')->index();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
+
+
+            $table->charset = $this->dbconfig['charset'];
+            $table->engine = $this->dbconfig['engine'];
+            $table->collation = $this->dbconfig['collation'];
+
         });
     }
 

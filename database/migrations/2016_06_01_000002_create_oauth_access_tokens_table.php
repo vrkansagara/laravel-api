@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateOauthAccessTokensTable extends Migration
 {
+    use MigrationTrait;
     /**
      * Run the migrations.
      *
@@ -22,6 +23,12 @@ class CreateOauthAccessTokensTable extends Migration
             $table->boolean('revoked');
             $table->timestamps();
             $table->dateTime('expires_at')->nullable();
+
+            $table->charset = $this->dbconfig['charset'];
+            $table->engine = $this->dbconfig['engine'];
+            $table->collation = $this->dbconfig['collation'];
+
+
         });
     }
 

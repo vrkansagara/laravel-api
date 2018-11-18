@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateOauthAuthCodesTable extends Migration
 {
+    use MigrationTrait;
     /**
      * Run the migrations.
      *
@@ -20,6 +21,10 @@ class CreateOauthAuthCodesTable extends Migration
             $table->text('scopes')->nullable();
             $table->boolean('revoked');
             $table->dateTime('expires_at')->nullable();
+
+            $table->charset = $this->dbconfig['charset'];
+            $table->engine = $this->dbconfig['engine'];
+            $table->collation = $this->dbconfig['collation'];
         });
     }
 

@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 
 class AddUserDataAndUrlToLernTables extends Migration {
 
+    use MigrationTrait;
     /**
      * Run the migrations.
      *
@@ -17,6 +18,12 @@ class AddUserDataAndUrlToLernTables extends Migration {
             $table->text('data')->nullable();
             $table->string('url')->nullable();
             $table->string('method')->nullable();
+
+
+
+            $table->charset = $this->dbconfig['charset'];
+            $table->engine = $this->dbconfig['engine'];
+            $table->collation = $this->dbconfig['collation'];
         });
     }
 

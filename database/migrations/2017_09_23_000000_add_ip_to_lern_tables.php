@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 
 class AddIpToLernTables extends Migration {
 
+    use MigrationTrait;
     /**
      * Run the migrations.
      *
@@ -14,6 +15,11 @@ class AddIpToLernTables extends Migration {
     {
         Schema::table(config('lern.record.table'), function(Blueprint $table) {
             $table->string('ip')->nullable();
+
+
+            $table->charset = $this->dbconfig['charset'];
+            $table->engine = $this->dbconfig['engine'];
+            $table->collation = $this->dbconfig['collation'];
         });
     }
 

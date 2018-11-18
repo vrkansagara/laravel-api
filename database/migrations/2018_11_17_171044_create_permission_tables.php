@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreatePermissionTables extends Migration
 {
+    use MigrationTrait;
     /**
      * Run the migrations.
      *
@@ -22,6 +23,10 @@ class CreatePermissionTables extends Migration
             $table->string('display_name');
             $table->string('guard_name');
             $table->timestamps();
+
+            $table->charset = $this->dbconfig['charset'];
+            $table->engine = $this->dbconfig['engine'];
+            $table->collation = $this->dbconfig['collation'];
         });
 
         Schema::create($tableNames['roles'], function (Blueprint $table) {
@@ -30,6 +35,10 @@ class CreatePermissionTables extends Migration
             $table->string('display_name');
             $table->string('guard_name');
             $table->timestamps();
+
+            $table->charset = $this->dbconfig['charset'];
+            $table->engine = $this->dbconfig['engine'];
+            $table->collation = $this->dbconfig['collation'];
         });
 
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames) {

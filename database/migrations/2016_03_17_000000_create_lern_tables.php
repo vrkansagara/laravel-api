@@ -5,6 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateLernTables extends Migration {
 
+    use MigrationTrait;
     /**
      * Run the migrations.
      *
@@ -22,6 +23,11 @@ class CreateLernTables extends Migration {
             $table->text('message');
             $table->mediumText('trace');
             $table->timestamps();
+
+
+            $table->charset = $this->dbconfig['charset'];
+            $table->engine = $this->dbconfig['engine'];
+            $table->collation = $this->dbconfig['collation'];
         });
     }
 

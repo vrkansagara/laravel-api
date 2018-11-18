@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateProfilesTable extends Migration
 {
+    use MigrationTrait;
     private $table = 'profile';
 
     /**
@@ -28,9 +29,12 @@ class CreateProfilesTable extends Migration
                 $table->timestamps();
                 $table->index('user_id');
                 $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
-                $table->charset = 'utf8';
-                $table->engine = 'InnoDB';
-                $table->collation = 'utf8_unicode_ci';
+
+
+                $table->charset = $this->dbconfig['charset'];
+                $table->engine = $this->dbconfig['engine'];
+                $table->collation = $this->dbconfig['collation'];
+
             }
         );
     }

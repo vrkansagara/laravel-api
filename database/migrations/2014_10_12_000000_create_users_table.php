@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
+    use MigrationTrait;
+
     /**
      * Run the migrations.
      *
@@ -27,6 +29,12 @@ class CreateUsersTable extends Migration
 
             $table->rememberToken();
             $table->timestamps();
+
+
+            $table->charset = $this->dbconfig['charset'];
+            $table->engine = $this->dbconfig['engine'];
+            $table->collation = $this->dbconfig['collation'];
+
         });
     }
 
