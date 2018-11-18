@@ -20,7 +20,7 @@ return [
         'allow_credentials' => false,
 
         'allow_origins' => [
-            '*',
+            'https://localhost:4200',
         ],
 
         'allow_methods' => [
@@ -37,6 +37,7 @@ return [
             'X-Auth-Token',
             'Origin',
             'Authorization',
+            'Access-Control-Allow-Origin'
         ],
 
         'expose_headers' => [
