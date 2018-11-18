@@ -12,7 +12,23 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->json([
+        'status' => 'Laravel API working fine...',
+        'time' => new \Carbon\Carbon()
+    ]);
+//    return view('welcome');
+});
+
+Route::get('/ping', function () {
+    return response()->json([
+        'status' => 200,
+        'message' => 'OK',
+        'data' =>
+            [
+                'time' => new \Carbon\Carbon()
+            ]
+    ]);
+//    return view('welcome');
 });
 
 Auth::routes();
