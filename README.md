@@ -4,11 +4,7 @@ Laravel as API layer
 
 Resonse Type 
 - [x] JSON
-    - Currently suppoted
-- [] JSONP
-- [] HAL JSON
-- [] XML
-
+    - Currently supported
 
  ## Third party library
 
