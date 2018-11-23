@@ -19,8 +19,10 @@ class ApiController extends BaseController implements ApiInterface
 
     }
 
-    public function response()
+    public function response($data)
     {
+
+        return response()->json($data);
 
     }
 }

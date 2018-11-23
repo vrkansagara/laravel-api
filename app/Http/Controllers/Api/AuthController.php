@@ -6,8 +6,11 @@ use App\Interfaces\AuthInterface;
 use App\Http\Controllers\ApiController;
 use App\Entity\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\Client;
 use Lcobucci\JWT\Parser;
 use GuzzleHttp\Client as HttpClient;
@@ -16,6 +19,8 @@ class AuthController extends ApiController implements AuthInterface
 {
 
     use AuthenticatesUsers;
+
+    use SendsPasswordResetEmails;
 
     private $httpClient;
     private $httpClientOptions;
@@ -173,7 +178,7 @@ class AuthController extends ApiController implements AuthInterface
             ->limit(1)
             ->get()
             ->first();
-        if (! empty($isClientExist->id)) {
+        if (!empty($isClientExist->id)) {
             return $isClientExist;
         } else {
             $client = (new Client())->forceFill(
@@ -420,12 +425,35 @@ class AuthController extends ApiController implements AuthInterface
 
     public function register(Request $request)
     {
-        // TODO: Implement register() method.
+        $rules = [
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string',
+        ];
+
+        $validator = Validator::make($request->all(),$rules);
+
+        if($validator->fails()){
+            $errorMessages = $validator->getMessageBag();
+            $this->response($errorMessages);
+        }
+
+        $payLoad = $request->all();
+        $userData = [
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'password' => bcrypt($request->get('password'))
+        ];
+        $user = User::create($userData);
+        return $this->response($user);
+
+
+
     }
 
     public function forgetPassword(Request $request)
     {
-        // TODO: Implement forgetPassword() method.
+        // TODO: Implement resetPassword() method.
     }
 
     public function resetPassword(Request $request)
