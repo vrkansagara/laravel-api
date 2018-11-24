@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class Resetpassword
+class ForgetpasswordEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

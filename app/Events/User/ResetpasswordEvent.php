@@ -2,6 +2,7 @@
 
 namespace App\Events\User;
 
+use App\Traits\EventTraits;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -10,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class Register
+class ResetpasswordEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

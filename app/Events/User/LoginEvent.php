@@ -2,6 +2,7 @@
 
 namespace App\Events\User;
 
+use App\Entity\User;
 use App\Traits\EventTraits;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class Login
+class LoginEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     use EventTraits;
@@ -21,7 +22,7 @@ class Login
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
         //
     }

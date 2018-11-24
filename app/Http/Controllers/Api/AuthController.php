@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\User\LoginEvent;
 use App\Interfaces\AuthInterface;
 use App\Http\Controllers\ApiController;
 use App\Entity\User;
@@ -9,7 +10,6 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Passport\Client;
 use Lcobucci\JWT\Parser;
@@ -110,6 +110,7 @@ class AuthController extends ApiController implements AuthInterface
                 'user' => $user
             ];
 
+            event(new LoginEvent($user));
             return response()->json($responseData);
         }
 
