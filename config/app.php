@@ -173,6 +173,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Tylercd100\LERN\LERNServiceProvider::class,
 
 
 
@@ -232,6 +233,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+
+        /**
+         * Custom application provider with alias
+         */
+        'LERN'=> Tylercd100\LERN\LERNServiceProvider::class
 
     ],
 

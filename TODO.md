@@ -25,7 +25,8 @@ Resonse Type
 - [x] Adding Larvel telescope for the debugging purpose ( requests , exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more )
 - [x] Adding Laravel Socialite for social auth ( Facebook, Twitter, LinkedIn, Google, GitHub and Bitbucket. )
 - [x] Adding Laravel Horizon  as default queue driver.
-
+- [] Add import/export document facility with sample api.
+- [] Add download report facility with sample api.
 
 
 ## TODO 

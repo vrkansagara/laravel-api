@@ -43,5 +43,13 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $visible = ['name','email'];
+    protected $visible = ['name', 'email'];
+
+
+    public function errors()
+    {
+        return $this->hasMany(Error::class);
+    }
+
+
 }
