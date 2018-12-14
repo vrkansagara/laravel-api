@@ -1,11 +1,25 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entities;
 
-use Spatie\Permission\Models\Permission as SpatiePermission;
+use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-class Permission extends SpatiePermission
+/**
+ * Class Permission.
+ *
+ * @package namespace App\Entities;
+ */
+class Permission extends Model implements Transformable
 {
+    use TransformableTrait;
 
-    protected $visible = ['id','name','display_name','guard_name'];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [];
+
 }
