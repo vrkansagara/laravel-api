@@ -2,7 +2,7 @@
 
 namespace App\Events\User;
 
-use App\Entity\User;
+use App\Entities\User;
 use App\Traits\EventTraits;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;

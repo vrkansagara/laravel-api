@@ -21,8 +21,21 @@ class ApiController extends BaseController implements ApiInterface
 
     public function response($data)
     {
+        $responseFormat = [
+            'statusCode' => 200,
+            'message' => 'default message',
+            'errorCode' => 100,
+            'data' => [],
+            'size' => 0
 
-        return response()->json($data);
+        ];
+
+        if (!isset($data['statusCode'])) {
+            unset($responseFormat['errorCode']);
+        }
+        $responseFormat['data'] = $data['data'];
+        $responseFormat['message'] = $data['message'];
+        return response()->json($responseFormat);
 
     }
 }

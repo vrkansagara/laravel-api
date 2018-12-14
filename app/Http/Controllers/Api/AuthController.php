@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Entities\User;
 use App\Events\User\LoginEvent;
 use App\Interfaces\AuthInterface;
 use App\Http\Controllers\ApiController;
-use App\Entity\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
@@ -432,9 +432,9 @@ class AuthController extends ApiController implements AuthInterface
             'password' => 'required|string',
         ];
 
-        $validator = Validator::make($request->all(),$rules);
+        $validator = Validator::make($request->all(), $rules);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             $errorMessages = $validator->getMessageBag();
             $this->response($errorMessages);
         }
@@ -449,7 +449,6 @@ class AuthController extends ApiController implements AuthInterface
         return $this->response($user);
 
 
-
     }
 
     public function forgetPassword(Request $request)
@@ -461,4 +460,28 @@ class AuthController extends ApiController implements AuthInterface
     {
         // TODO: Implement resetPassword() method.
     }
+
+
+    /**
+     * Check weather request belongs to the mobile request
+     *
+     * @param Request $request
+     * @return bool
+     */
+    public static function isMobileRequest(Request $request)
+    {
+        $platform = $request->header('Platform');
+
+        $mobilePlatformList = [
+            'mobile',
+            'android',
+            'ios',
+        ];
+
+        if (in_array($platform, $mobilePlatformList)) {
+            return true;
+        }
+        return false;
+    }
+
 }

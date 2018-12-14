@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\Login;
+
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -24,7 +24,7 @@ class LoginListener
      * @param  Login  $event
      * @return void
      */
-    public function handle(Login $event)
+    public function handle()
     {
         //
     }

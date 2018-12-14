@@ -1,20 +1,23 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entities;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
-
 use Laravel\Passport\HasApiTokens;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+/**
+ * Class User.
+ *
+ * @package namespace App\Entities;
+ */
+class User extends Authenticatable implements Transformable
 {
+    use TransformableTrait;
 
     use Notifiable;
-
-    use HasRoles;
 
     use HasApiTokens;
 
