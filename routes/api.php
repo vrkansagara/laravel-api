@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +15,9 @@ use App\User;
 */
 
 
-Route::get('/ping', function () {
-    return Carbon::now();
-});
+//Route::get('/ping', function () {
+//    return Carbon::now();
+//});
 
 Route::group(['middleware' => ['api'], 'prefix'=>'auth'], function () {
 
@@ -37,13 +36,10 @@ Route::group(['middleware' => ['api'], 'prefix'=>'auth'], function () {
 
 Route::group(['middleware' => ['auth:api']], function () {
 
-    Route::get('user', function (Request $request) {
-        return $request->user();
-    });
-    Route::resource('permission','PermissionController');
-    Route::resource('role','RoleController');
-    Route::resource('passport-token','PassportTokenController');
-    Route::resource('users','UserController');
+    Route::resource('permission','PermissionsController');
+    Route::resource('role','RolesController');
+    Route::resource('passport-token','TokensController');
+    Route::resource('users','UsersController');
 
 });
 

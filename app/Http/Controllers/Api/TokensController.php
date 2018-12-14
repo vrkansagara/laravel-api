@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -17,7 +18,7 @@ use App\Validators\TokenValidator;
  *
  * @package namespace App\Http\Controllers;
  */
-class TokensController extends Controller
+class TokensController extends ApiController
 {
     /**
      * @var TokenRepository

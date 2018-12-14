@@ -2,11 +2,11 @@
 /**
  * Created by PhpStorm.
  * User: vallabh
- * Date: 18/11/18
- * Time: 12:36 PM
+ * Date: 14/12/18
+ * Time: 11:59 PM
  */
 
-namespace App\Interfaces;
+namespace App\Repositories\interfaces;
 
 
 interface ApiInterface

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\ApiInterface;
+use App\Repositories\interfaces\ApiInterface;
 use App\Traits\ApiTraits;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Entities\User;
 use App\Events\User\LoginEvent;
-use App\Interfaces\AuthInterface;
 use App\Http\Controllers\ApiController;
+use App\Repositories\interfaces\AuthInterface;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;

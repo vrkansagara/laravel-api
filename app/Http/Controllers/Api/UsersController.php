@@ -1,41 +1,41 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\PermissionCreateRequest;
-use App\Http\Requests\PermissionUpdateRequest;
-use App\Repositories\interfaces\PermissionRepository;
-use App\Validators\PermissionValidator;
+use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
+use App\Repositories\interfaces\UserRepository;
+use App\Validators\UserValidator;
 
 /**
- * Class PermissionsController.
+ * Class UsersController.
  *
  * @package namespace App\Http\Controllers;
  */
-class PermissionsController extends Controller
+class UsersController extends Controller
 {
     /**
-     * @var PermissionRepository
+     * @var UserRepository
      */
     protected $repository;
 
     /**
-     * @var PermissionValidator
+     * @var UserValidator
      */
     protected $validator;
 
     /**
-     * PermissionsController constructor.
+     * UsersController constructor.
      *
-     * @param PermissionRepository $repository
-     * @param PermissionValidator $validator
+     * @param UserRepository $repository
+     * @param UserValidator $validator
      */
-    public function __construct(PermissionRepository $repository, PermissionValidator $validator)
+    public function __construct(UserRepository $repository, UserValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
@@ -49,38 +49,38 @@ class PermissionsController extends Controller
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $permissions = $this->repository->all();
+        $users = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $permissions,
+                'data' => $users,
             ]);
         }
 
-        return view('permissions.index', compact('permissions'));
+        return view('users.index', compact('users'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  PermissionCreateRequest $request
+     * @param  UserCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(PermissionCreateRequest $request)
+    public function store(UserCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $permission = $this->repository->create($request->all());
+            $user = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'Permission created.',
-                'data'    => $permission->toArray(),
+                'message' => 'User created.',
+                'data'    => $user->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -110,16 +110,16 @@ class PermissionsController extends Controller
      */
     public function show($id)
     {
-        $permission = $this->repository->find($id);
+        $user = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $permission,
+                'data' => $user,
             ]);
         }
 
-        return view('permissions.show', compact('permission'));
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -131,32 +131,32 @@ class PermissionsController extends Controller
      */
     public function edit($id)
     {
-        $permission = $this->repository->find($id);
+        $user = $this->repository->find($id);
 
-        return view('permissions.edit', compact('permission'));
+        return view('users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  PermissionUpdateRequest $request
+     * @param  UserUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(PermissionUpdateRequest $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $permission = $this->repository->update($request->all(), $id);
+            $user = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'Permission updated.',
-                'data'    => $permission->toArray(),
+                'message' => 'User updated.',
+                'data'    => $user->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -194,11 +194,11 @@ class PermissionsController extends Controller
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'Permission deleted.',
+                'message' => 'User deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'Permission deleted.');
+        return redirect()->back()->with('message', 'User deleted.');
     }
 }
