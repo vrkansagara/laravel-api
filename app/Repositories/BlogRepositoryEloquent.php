@@ -5,23 +5,17 @@ namespace App\Repositories;
 use App\Criteria\OrderbyDescCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\interfaces\UserRepository;
-use App\Entities\User;
-use App\Validators\UserValidator;
+use App\Repositories\interfaces\Blog\BlogRepository;
+use App\Entities\Blog\Blog;
+use App\Validators\BlogValidator;
 
 /**
- * Class UserRepositoryEloquent.
+ * Class BlogRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class UserRepositoryEloquent extends BaseRepository implements UserRepository
+class BlogRepositoryEloquent extends BaseRepository implements BlogRepository
 {
-
-    protected $fieldSearchable = [
-        'name' => 'like',
-        'email'
-    ];
-
     /**
      * Specify Model class name
      *
@@ -29,7 +23,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      */
     public function model()
     {
-        return User::class;
+        return Blog::class;
     }
 
     /**
@@ -40,7 +34,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function validator()
     {
 
-        return UserValidator::class;
+        return BlogValidator::class;
     }
 
 

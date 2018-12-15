@@ -35,6 +35,7 @@ class ApiController extends BaseController implements ApiInterface
         }
         $responseFormat['data'] = $data['data'];
         $responseFormat['message'] = $data['message'];
+        $responseFormat['count'] = count($data['data']);
         return response()->json($responseFormat);
 
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Blog;
 
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
@@ -8,38 +8,38 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\UserUpdateRequest;
-use App\Repositories\interfaces\UserRepository;
-use App\Validators\UserValidator;
+use App\Http\Requests\BlogCreateRequest;
+use App\Http\Requests\BlogUpdateRequest;
+use App\Repositories\interfaces\Blog\BlogRepository;
+use App\Validators\BlogValidator;
 
 /**
- * Class UsersController.
+ * Class BlogsController.
  *
  * @package namespace App\Http\Controllers;
  */
-class UsersController extends ApiController
+class BlogsController extends ApiController
 {
     /**
-     * @var UserRepository
+     * @var BlogRepository
      */
     protected $repository;
 
     /**
-     * @var UserValidator
+     * @var BlogValidator
      */
     protected $validator;
 
     /**
-     * UsersController constructor.
+     * BlogsController constructor.
      *
-     * @param UserRepository $repository
-     * @param UserValidator $validator
+     * @param BlogRepository $repository
+     * @param BlogValidator $validator
      */
-    public function __construct(UserRepository $repository, UserValidator $validator)
+    public function __construct(BlogRepository $repository, BlogValidator $validator)
     {
         $this->repository = $repository;
-        $this->validator = $validator;
+        $this->validator  = $validator;
     }
 
     /**
@@ -50,38 +50,38 @@ class UsersController extends ApiController
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $users = $this->repository->all();
+        $blogs = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $users,
+                'data' => $blogs,
             ]);
         }
 
-        return view('users.index', compact('users'));
+        return view('blogs.index', compact('blogs'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UserCreateRequest $request
+     * @param  BlogCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(UserCreateRequest $request)
+    public function store(BlogCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $user = $this->repository->create($request->all());
+            $blog = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'User created.',
-                'data' => $user->toArray(),
+                'message' => 'Blog created.',
+                'data'    => $blog->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -93,7 +93,7 @@ class UsersController extends ApiController
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
-                    'error' => true,
+                    'error'   => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
@@ -111,16 +111,16 @@ class UsersController extends ApiController
      */
     public function show($id)
     {
-        $user = $this->repository->find($id);
+        $blog = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $user,
+                'data' => $blog,
             ]);
         }
 
-        return view('users.show', compact('user'));
+        return view('blogs.show', compact('blog'));
     }
 
     /**
@@ -132,32 +132,32 @@ class UsersController extends ApiController
      */
     public function edit($id)
     {
-        $user = $this->repository->find($id);
+        $blog = $this->repository->find($id);
 
-        return view('users.edit', compact('user'));
+        return view('blogs.edit', compact('blog'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  UserUpdateRequest $request
-     * @param  string $id
+     * @param  BlogUpdateRequest $request
+     * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(BlogUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $user = $this->repository->update($request->all(), $id);
+            $blog = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'User updated.',
-                'data' => $user->toArray(),
+                'message' => 'Blog updated.',
+                'data'    => $blog->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -171,7 +171,7 @@ class UsersController extends ApiController
             if ($request->wantsJson()) {
 
                 return response()->json([
-                    'error' => true,
+                    'error'   => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
@@ -195,28 +195,11 @@ class UsersController extends ApiController
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'User deleted.',
+                'message' => 'Blog deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'User deleted.');
-    }
-
-
-    public function test(Request $request)
-    {
-        $payLoad = $request->all();
-
-
-        $responseData = [
-            'message' => 'User list',
-            'data' => [
-                'users' => $this->repository->all()
-            ],
-        ];
-
-        return $this->response($responseData);
-
+        return redirect()->back()->with('message', 'Blog deleted.');
     }
 }

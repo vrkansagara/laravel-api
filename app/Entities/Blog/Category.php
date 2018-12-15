@@ -1,37 +1,25 @@
 <?php
 
-namespace App\Entity\Blog;
+namespace App\Entities\Blog;
 
 use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-
-class Category extends Model
+/**
+ * Class Category.
+ *
+ * @package namespace App\Entities\Blog;
+ */
+class Category extends Model implements Transformable
 {
-
+    use TransformableTrait;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
+    protected $fillable = [];
 
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-
-    ];
-
-    /**
-     * The attributes that should be visible in arrays.
-     *
-     * @var array
-     */
-    protected $visible = [];
 }
-

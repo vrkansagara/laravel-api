@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
+
+Route::get('test','UsersController@test');
 /*
 |--------------------------------------------------------------------------
 | API Routes

@@ -5,23 +5,17 @@ namespace App\Repositories;
 use App\Criteria\OrderbyDescCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\interfaces\UserRepository;
-use App\Entities\User;
-use App\Validators\UserValidator;
+use App\Repositories\interfaces\Blog\CategoryRepository;
+use App\Entities\Blog\Category;
+use App\Validators\CategoryValidator;
 
 /**
- * Class UserRepositoryEloquent.
+ * Class CategoryRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class UserRepositoryEloquent extends BaseRepository implements UserRepository
+class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
 {
-
-    protected $fieldSearchable = [
-        'name' => 'like',
-        'email'
-    ];
-
     /**
      * Specify Model class name
      *
@@ -29,18 +23,18 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      */
     public function model()
     {
-        return User::class;
+        return Category::class;
     }
 
     /**
-     * Specify Validator class name
-     *
-     * @return mixed
-     */
+    * Specify Validator class name
+    *
+    * @return mixed
+    */
     public function validator()
     {
 
-        return UserValidator::class;
+        return CategoryValidator::class;
     }
 
 
@@ -52,5 +46,5 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         $this->pushCriteria(OrderbyDescCriteria::class);
         $this->pushCriteria(app(RequestCriteria::class));
     }
-
+    
 }

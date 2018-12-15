@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Blog;
 
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
@@ -8,38 +8,38 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\UserUpdateRequest;
-use App\Repositories\interfaces\UserRepository;
-use App\Validators\UserValidator;
+use App\Http\Requests\TagCreateRequest;
+use App\Http\Requests\TagUpdateRequest;
+use App\Repositories\interfaces\Blog\TagRepository;
+use App\Validators\TagValidator;
 
 /**
- * Class UsersController.
+ * Class TagsController.
  *
  * @package namespace App\Http\Controllers;
  */
-class UsersController extends ApiController
+class TagsController extends ApiController
 {
     /**
-     * @var UserRepository
+     * @var TagRepository
      */
     protected $repository;
 
     /**
-     * @var UserValidator
+     * @var TagValidator
      */
     protected $validator;
 
     /**
-     * UsersController constructor.
+     * TagsController constructor.
      *
-     * @param UserRepository $repository
-     * @param UserValidator $validator
+     * @param TagRepository $repository
+     * @param TagValidator $validator
      */
-    public function __construct(UserRepository $repository, UserValidator $validator)
+    public function __construct(TagRepository $repository, TagValidator $validator)
     {
         $this->repository = $repository;
-        $this->validator = $validator;
+        $this->validator  = $validator;
     }
 
     /**
@@ -50,38 +50,38 @@ class UsersController extends ApiController
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $users = $this->repository->all();
+        $tags = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $users,
+                'data' => $tags,
             ]);
         }
 
-        return view('users.index', compact('users'));
+        return view('tags.index', compact('tags'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UserCreateRequest $request
+     * @param  TagCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(UserCreateRequest $request)
+    public function store(TagCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $user = $this->repository->create($request->all());
+            $tag = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'User created.',
-                'data' => $user->toArray(),
+                'message' => 'Tag created.',
+                'data'    => $tag->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -93,7 +93,7 @@ class UsersController extends ApiController
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
-                    'error' => true,
+                    'error'   => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
@@ -111,16 +111,16 @@ class UsersController extends ApiController
      */
     public function show($id)
     {
-        $user = $this->repository->find($id);
+        $tag = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $user,
+                'data' => $tag,
             ]);
         }
 
-        return view('users.show', compact('user'));
+        return view('tags.show', compact('tag'));
     }
 
     /**
@@ -132,32 +132,32 @@ class UsersController extends ApiController
      */
     public function edit($id)
     {
-        $user = $this->repository->find($id);
+        $tag = $this->repository->find($id);
 
-        return view('users.edit', compact('user'));
+        return view('tags.edit', compact('tag'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  UserUpdateRequest $request
-     * @param  string $id
+     * @param  TagUpdateRequest $request
+     * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(TagUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $user = $this->repository->update($request->all(), $id);
+            $tag = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'User updated.',
-                'data' => $user->toArray(),
+                'message' => 'Tag updated.',
+                'data'    => $tag->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -171,7 +171,7 @@ class UsersController extends ApiController
             if ($request->wantsJson()) {
 
                 return response()->json([
-                    'error' => true,
+                    'error'   => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
@@ -195,28 +195,11 @@ class UsersController extends ApiController
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'User deleted.',
+                'message' => 'Tag deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'User deleted.');
-    }
-
-
-    public function test(Request $request)
-    {
-        $payLoad = $request->all();
-
-
-        $responseData = [
-            'message' => 'User list',
-            'data' => [
-                'users' => $this->repository->all()
-            ],
-        ];
-
-        return $this->response($responseData);
-
+        return redirect()->back()->with('message', 'Tag deleted.');
     }
 }

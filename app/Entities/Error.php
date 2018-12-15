@@ -1,17 +1,18 @@
 <?php
 
-namespace App\Entities\Blog;
+namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Tylercd100\LERN\Models\ExceptionModel;
 
 /**
- * Class Tag.
+ * Class Error.
  *
- * @package namespace App\Entities\Blog;
+ * @package namespace App\Entities;
  */
-class Tag extends Model implements Transformable
+class Error extends ExceptionModel implements Transformable
 {
     use TransformableTrait;
 
@@ -21,5 +22,10 @@ class Tag extends Model implements Transformable
      * @var array
      */
     protected $fillable = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

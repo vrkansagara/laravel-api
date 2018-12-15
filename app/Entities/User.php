@@ -46,13 +46,12 @@ class User extends Authenticatable implements Transformable
      *
      * @var array
      */
-    protected $visible = ['name', 'email'];
+    protected $visible = ['id','name', 'email'];
 
 
     public function errors()
     {
         return $this->hasMany(Error::class);
     }
-
 
 }
