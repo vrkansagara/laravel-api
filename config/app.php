@@ -174,7 +174,7 @@ return [
         App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Tylercd100\LERN\LERNServiceProvider::class,
-        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        \App\Providers\RepositoryServiceProvider::class,
 
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -17,7 +18,7 @@ use App\Validators\UserValidator;
  *
  * @package namespace App\Http\Controllers;
  */
-class UsersController extends Controller
+class UsersController extends ApiController
 {
     /**
      * @var UserRepository
