@@ -13,7 +13,9 @@ use Illuminate\Validation\UnauthorizedException;
 use Laravel\Passport\Passport;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Auth\AuthenticationException;
-
+use Spatie\Permission\Exceptions\UnauthorizedException as PermissionUnauthorizedException;
+use Illuminate\Database\Eloquent\MassAssignmentException;
+use ErrorException;
 class Handler extends ExceptionHandler
 {
     /**
@@ -121,6 +123,71 @@ class Handler extends ExceptionHandler
                 ];
                 return ApiResponse::response($data);
             }
+
+
+            /**
+             * Handle Spatie\Permission exception
+             */
+            if ($exception instanceof PermissionUnauthorizedException) {
+                $message = $exception->getMessage();
+                $data = [
+                    'statusCode' => 401,
+                    'message' => $message,
+                    'errorCode' => 100,
+                    'data' => [],
+                    'no-cache' => 1,
+                ];
+                return ApiResponse::response($data);
+            }
+
+            /**
+             * Handle AuthorizationException exception
+             */
+            if ($exception instanceof AuthorizationException) {
+                $message = $exception->getMessage();
+                $data = [
+                    'statusCode' => 401,
+                    'message' => $message,
+                    'errorCode' => 100,
+                    'data' => [],
+                    'no-cache' => 1,
+                ];
+                return ApiResponse::response($data);
+            }
+
+            /**
+             * Handle MassAssignmentException exception
+             */
+            if ($exception instanceof MassAssignmentException) {
+                $message = $exception->getMessage();
+                $data = [
+                    'statusCode' => 401,
+                    'message' => $message,
+                    'errorCode' => 100,
+                    'data' => [],
+                    'no-cache' => 1,
+                ];
+                return ApiResponse::response($data);
+            }
+
+
+            /**
+             * Handle ErrorException exception
+             */
+            if ($exception instanceof ErrorException) {
+                $message = $exception->getMessage();
+                $data = [
+                    'statusCode' => 401,
+                    'message' => $message,
+                    'errorCode' => 100,
+                    'data' => [],
+                    'no-cache' => 1,
+                ];
+                return ApiResponse::response($data);
+            }
+
+
+
 
         }
 
