@@ -82,7 +82,7 @@ class ApiResponse
 
     public static function getSize($payLoad, $sizeType = 'kb', $options = [])
     {
-        if (isset($payLoad['data'])){
+        if (isset($payLoad['data']) && !is_bool($payLoad['data'])){
             return sizeof($payLoad['data']);
         }
 
