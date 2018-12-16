@@ -213,7 +213,7 @@ class Handler extends ExceptionHandler
                 $message = $exception->getMessage();
                 $data = [
                     'statusCode' => 401,
-                    'message' => $message,
+                    'message' => 'Record not found !',
                     'errorCode' => 100,
                     'data' => [],
                     'no-cache' => 1,
