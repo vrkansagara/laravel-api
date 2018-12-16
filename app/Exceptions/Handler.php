@@ -16,6 +16,10 @@ use Illuminate\Auth\AuthenticationException;
 use Spatie\Permission\Exceptions\UnauthorizedException as PermissionUnauthorizedException;
 use Illuminate\Database\Eloquent\MassAssignmentException;
 use ErrorException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\ValidationException;
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -97,8 +101,8 @@ class Handler extends ExceptionHandler
              */
             if ($exception instanceof ClientException) {
                 $response = $exception->getResponse();
-                $jsonBody = (string) $response->getBody();
-                $exception  = json_decode($jsonBody,1);
+                $jsonBody = (string)$response->getBody();
+                $exception = json_decode($jsonBody, 1);
                 $data = [
                     'statusCode' => 422,
                     'message' => $exception['message'],
@@ -186,8 +190,52 @@ class Handler extends ExceptionHandler
                 return ApiResponse::response($data);
             }
 
+            /**
+             * Handle MethodNotAllowedHttpException exception
+             */
+            if ($exception instanceof MethodNotAllowedHttpException) {
+                $message = $exception->getMessage();
+                $data = [
+                    'statusCode' => 401,
+                    'message' => 'Please check HTTP Request Method. - MethodNotAllowedHttpException',
+                    'errorCode' => 100,
+                    'data' => [],
+                    'no-cache' => 1,
+                ];
+                return ApiResponse::response($data);
+            }
 
 
+            /**
+             * Handle ModelNotFoundException exception
+             */
+            if ($exception instanceof ModelNotFoundException) {
+                $message = $exception->getMessage();
+                $data = [
+                    'statusCode' => 401,
+                    'message' => $message,
+                    'errorCode' => 100,
+                    'data' => [],
+                    'no-cache' => 1,
+                ];
+                return ApiResponse::response($data);
+            }
+
+
+            /**
+             * Handle ValidationException exception
+             */
+            if ($exception instanceof ValidationException) {
+                $message = $exception->getMessage();
+                $data = [
+                    'statusCode' => 401,
+                    'message' => $message,
+                    'errorCode' => 100,
+                    'data' => [],
+                    'no-cache' => 1,
+                ];
+                return ApiResponse::response($data);
+            }
 
         }
 
