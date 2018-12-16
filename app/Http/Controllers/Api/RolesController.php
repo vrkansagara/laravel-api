@@ -52,14 +52,13 @@ class RolesController extends ApiController
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $roles = $this->repository->all();
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $roles,
-            ]);
-        }
-
-        return view('roles.index', compact('roles'));
+        $responseFormat = [
+            'message' => 'Roles list.',
+            'data' => [
+                'roles' => $roles
+            ]
+        ];
+        return $this->response($responseFormat);
     }
 
     /**
@@ -91,14 +90,11 @@ class RolesController extends ApiController
 
             return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error' => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            $responseFormat = [
+                'message' => $e->getMessageBag()
+            ];
+            return $this->response($responseFormat);
         }
     }
 
