@@ -74,12 +74,12 @@ class Handler extends ExceptionHandler
 
             if ($exception instanceof NotFoundHttpException) {
                 $data = [
-                    'statusCode' => 403,
+                    'statusCode' => 404,
                     'message' => 'Please check your URL to make sure request is formatted properly. - NotFoundHttpException',
                     'errorCode' => 100,
                     'data' => [],
                     'size' => 0,
-                    'no-cache'=>1,
+                    'no-cache' => 1,
                 ];
                 return ApiResponse::response($data);
             }

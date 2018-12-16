@@ -23,6 +23,13 @@ class ApiResponse
             'data' => [],
         ];
 
+
+        if(!isset($data['statusCode'])){
+            // set default status code.
+            $data['statusCode'] = 404;
+
+        }
+
         $headers = [];
 
 
@@ -43,7 +50,7 @@ class ApiResponse
         $responseFormat['data'] = isset($data['data']) ? $data['data'] : [];
         $responseFormat['message'] = isset($data['message']) ? $data['message'] : [];
         $responseFormat['count'] = is_countable($data['data']) ? count($data['data']) : 0;
-        $responseFormat['statusCode'] = (isset($data['statusCode']) && is_int($data['statusCode'])) ? $data['statusCode'] : 200;
+        $responseFormat['statusCode'] = (isset($data['statusCode']) && is_int($data['statusCode'])) ? $data['statusCode'] : 201;
 
         return response()->json($responseFormat, $responseFormat['statusCode'],$headers);
 
