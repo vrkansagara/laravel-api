@@ -58,6 +58,9 @@
             "database/factories",
             "database/migrations/traits"
         ],
+        "files": [
+            "app/Utilities/Helper.php"
+        ],
         "psr-4": {
             "App\\": "app/"
         }

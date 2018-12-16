@@ -18,43 +18,70 @@ class ApiResponse
         // Set default status code.
 
 
-
         $responseFormat = [
             'statusCode' => 200,
-            'message' => 'OK',
             'errorCode' => 0,
-            'size' => 0,
+            'message' => 'OK',
+            'size' => self::getSize($data),
+//            'ip' => get_ip_address(),
             'data' => [],
         ];
 
 
-        if(isset($data['statusCode']) && is_int($data['statusCode'])){
+        if (isset($data['statusCode']) && is_int($data['statusCode'])) {
             $responseFormat['statusCode'] = $data['statusCode'];
         }
 
         $headers = [];
 
 
-        if(isset($data['no-cache']) && $data['no-cache'] == 1){
+        if (isset($data['no-cache']) && $data['no-cache'] == 1) {
             $noCacheHeaders = [
-                'Cache-Control'  => 'no-cache,no-store, must-revalidate',
+                'Cache-Control' => 'no-cache,no-store, must-revalidate',
                 'Pragma' => 'no-cache'
             ];
 
-            $headers = array_merge($headers,$noCacheHeaders);
+            $headers = array_merge($headers, $noCacheHeaders);
         }
 
-        if(isset($data['headers']) && is_array($data['headers']) && count($data['headers']) >=  1){
-            $headers = array_merge($headers,$data['headers']);
+        if (isset($data['headers']) && is_array($data['headers']) && count($data['headers']) >= 1) {
+            $headers = array_merge($headers, $data['headers']);
         }
 
 
         $responseFormat['data'] = isset($data['data']) ? $data['data'] : [];
         $responseFormat['message'] = isset($data['message']) ? $data['message'] : [];
-        $responseFormat['count'] = is_countable($data['data']) ? count($data['data']) : 0;
 
-        return response()->json($responseFormat, $responseFormat['statusCode'],$headers);
+
+        return response()->json($responseFormat, $responseFormat['statusCode'], $headers);
 
     }
 
+
+    /**
+     * errorCode
+     * This would be used for mobile application.
+     * Custom error code for mobile and web.
+     *
+     * 100 - 199
+     * 200 - 299
+     * 300 - 399
+     * 400 - 499
+     * 500 - 599
+     * @param int $code
+     * @return mixed
+     */
+    public static function errorCode(int $code)
+    {
+        $statusCode = [
+            401 => 'Unauthenticated'
+        ];
+
+        return $statusCode[$code];
+    }
+
+    public static function getSize($payLoad, $sizeType = 'kb', $options = [])
+    {
+        return sizeof($payLoad['data']);
+    }
 }

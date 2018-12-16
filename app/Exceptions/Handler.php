@@ -5,11 +5,14 @@ namespace App\Exceptions;
 use App\Utilities\ApiResponse;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\UnauthorizedException;
+use Laravel\Passport\Passport;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Auth\AuthenticationException;
 
 class Handler extends ExceptionHandler
 {
@@ -86,6 +89,10 @@ class Handler extends ExceptionHandler
                 return ApiResponse::response($data);
             }
 
+
+            /**
+             * This exception will handle GuzzleHttp ClientException
+             */
             if ($exception instanceof ClientException) {
                 $response = $exception->getResponse();
                 $jsonBody = (string) $response->getBody();
@@ -93,6 +100,21 @@ class Handler extends ExceptionHandler
                 $data = [
                     'statusCode' => 422,
                     'message' => $exception['message'],
+                    'errorCode' => 100,
+                    'data' => [],
+                    'no-cache' => 1,
+                ];
+                return ApiResponse::response($data);
+            }
+
+            /**
+             * Handle Unauthenticated exception
+             */
+            if ($exception instanceof AuthenticationException) {
+                $message = $exception->getMessage();
+                $data = [
+                    'statusCode' => 401,
+                    'message' => $message,
                     'errorCode' => 100,
                     'data' => [],
                     'no-cache' => 1,
