@@ -104,14 +104,13 @@ class RolesController extends ApiController
     {
         $role = $this->repository->find($id);
 
-        if (request()->wantsJson()) {
 
-            return response()->json([
-                'data' => $role,
-            ]);
-        }
+        $responseFormat = [
+            'message' => 'Roles details.',
+            'data' => $role->toArray()
+        ];
 
-        return view('roles.show', compact('role'));
+        return $this->response($responseFormat);
     }
 
 
@@ -161,16 +160,30 @@ class RolesController extends ApiController
      */
     public function destroy($id)
     {
-        $deleted = $this->repository->delete($id);
+        try {
+            $deleted = $this->repository->delete($id);
+            if($deleted){
+                $responseFormat = [
+                    'message' => 'Roles deleted successfully !',
+                    'data' => $deleted
+                ];
+            }else{
+                $responseFormat = [
+                    'message' => 'Roles can not be deleted !',
+                    'data' => $deleted
+                ];
+            }
 
-        if (request()->wantsJson()) {
 
-            return response()->json([
-                'message' => 'Role deleted.',
-                'deleted' => $deleted,
-            ]);
+            return $this->response($responseFormat);
+
+        } catch (ValidatorException $e) {
+
+            $responseFormat = [
+                'message' => $e->getMessageBag()
+            ];
+            return $this->response($responseFormat);
         }
 
-        return redirect()->back()->with('message', 'Role deleted.');
     }
 }
