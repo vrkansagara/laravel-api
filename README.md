@@ -9,3 +9,9 @@ Laravel as API layer
 #### User Details
 ![User Login](./data/screenshort/User-details.png)
 
+
+### Folder permission
+
+    sudo chgrp -R nginx storage bootstrap/cache
+
+    sudo chmod -R ug+rwx storage bootstrap/cache
