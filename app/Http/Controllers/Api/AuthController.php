@@ -45,7 +45,6 @@ class AuthController extends ApiController implements AuthInterface
 
     public function login(Request $request)
     {
-
         $this->validateLogin($request);
 
         if ($this->hasTooManyLoginAttempts($request)) {
@@ -105,13 +104,20 @@ class AuthController extends ApiController implements AuthInterface
 //            $token = $this->getClientCredentialsTokenWithGrantType($user);
 
 
-            $responseData = [
+            $data = [
                 'token' => $token,
                 'user' => $user
             ];
 
             event(new LoginEvent($user));
-            return response()->json($responseData);
+            $responseData = [
+                'message' => 'Login successfully !!!',
+                'data' => [
+                    $data
+                ],
+            ];
+
+            return $this->response($responseData);
         }
 
         $this->incrementLoginAttempts($request);
@@ -134,12 +140,20 @@ class AuthController extends ApiController implements AuthInterface
 
 
         $user = Auth::user();
-        $responseData = [
+        $data = [
             'token' => $this->getRefreshToken($refreshToken, $user),
             'user' => $user
         ];
 
-        return response()->json($responseData);
+
+        $responseData = [
+            'message' => 'Referesh token generate successfully !!!',
+            'data' => [
+                $data
+            ],
+        ];
+
+        return $this->response($responseData);
     }
 
 
@@ -422,6 +436,14 @@ class AuthController extends ApiController implements AuthInterface
             $token = $user->tokens->find($id);
             $token->revoke();
         }
+
+        $responseData = [
+            'message' => 'User logout successfully !',
+            'data' => [],
+        ];
+
+        return $this->response($responseData);
+
     }
 
     public function register(Request $request)

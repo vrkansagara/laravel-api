@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\interfaces\ApiInterface;
 use App\Traits\ApiTraits;
+use App\Utilities\ApiResponse;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -21,22 +22,7 @@ class ApiController extends BaseController implements ApiInterface
 
     public function response($data)
     {
-        $responseFormat = [
-            'statusCode' => 200,
-            'message' => 'default message',
-            'errorCode' => 100,
-            'data' => [],
-            'size' => 0
-
-        ];
-
-        if (!isset($data['statusCode'])) {
-            unset($responseFormat['errorCode']);
-        }
-        $responseFormat['data'] = $data['data'];
-        $responseFormat['message'] = $data['message'];
-        $responseFormat['count'] = count($data['data']);
-        return response()->json($responseFormat);
+        ApiResponse::response($data);
 
     }
 }
