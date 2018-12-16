@@ -37,12 +37,12 @@ Route::group(['middleware' => ['api'], 'prefix'=>'auth'], function () {
 
 
 Route::group(['middleware' => ['auth:api']], function () {
-
-    Route::resource('permission','PermissionsController');
-    Route::resource('role','RolesController');
     Route::resource('passport-token','TokensController');
     Route::resource('users','UsersController');
 
+
+    Route::resource('permission','PermissionsController');
+    Route::resource('role','RolesController');
 });
 
 

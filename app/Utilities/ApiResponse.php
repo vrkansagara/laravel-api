@@ -23,10 +23,10 @@ class ApiResponse
             'errorCode' => 0,
             'message' => 'OK',
             'size' => self::getSize($data),
-//            'ip' => get_ip_address(),
             'data' => [],
         ];
 
+//        $responseFormat['ip'] = get_ip_address();
 
         if (isset($data['statusCode']) && is_int($data['statusCode'])) {
             $responseFormat['statusCode'] = $data['statusCode'];
@@ -82,6 +82,11 @@ class ApiResponse
 
     public static function getSize($payLoad, $sizeType = 'kb', $options = [])
     {
-        return sizeof($payLoad['data']);
+        if (isset($payLoad['data'])){
+            return sizeof($payLoad['data']);
+        }
+
+        return 0;
+
     }
 }
