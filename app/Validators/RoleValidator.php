@@ -25,7 +25,10 @@ class RoleValidator extends LaravelValidator
             'display_name' => 'required|min:3|max:191',
             'guard_name' => 'required|min:3|max:191',
         ],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_UPDATE => [
+            'display_name' => 'required|min:3|max:191',
+            'guard_name' => 'required|min:3|max:191',
+        ],
     ];
 
 

@@ -78,17 +78,12 @@ class RolesController extends ApiController
 
             $role = $this->repository->create($request->all());
 
-            $response = [
-                'message' => 'Role created.',
-                'data' => $role->toArray(),
+            $responseFormat = [
+                'data' => $role->toArray()
             ];
 
-            if ($request->wantsJson()) {
+            return $this->response($responseFormat);
 
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
             $responseFormat = [
@@ -119,19 +114,6 @@ class RolesController extends ApiController
         return view('roles.show', compact('role'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $role = $this->repository->find($id);
-
-        return view('roles.edit', compact('role'));
-    }
 
     /**
      * Update the specified resource in storage.
@@ -145,34 +127,27 @@ class RolesController extends ApiController
      */
     public function update(RoleUpdateRequest $request, $id)
     {
+
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             $role = $this->repository->update($request->all(), $id);
 
-            $response = [
-                'message' => 'Role updated.',
-                'data' => $role->toArray(),
+
+            $responseFormat = [
+                'message' => 'Roles updated.',
+                'data' => $role->toArray()
             ];
 
-            if ($request->wantsJson()) {
+            return $this->response($responseFormat);
 
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error' => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            $responseFormat = [
+                'message' => $e->getMessageBag()
+            ];
+            return $this->response($responseFormat);
         }
     }
 
