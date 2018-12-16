@@ -14,4 +14,5 @@ yarn-error.log
 .env
 .phpunit.result.cache
 .phpstorm.meta.php
+
 _ide_helper.php
