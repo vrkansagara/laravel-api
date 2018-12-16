@@ -2,8 +2,10 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\BeforeAnyDbQueryMiddleware;
-use App\Http\Middleware\XClacksOverhead;
+use App\Http\Middleware\Database\BeforeAnyDbQueryMiddleware;
+use App\Http\Middleware\Headers\RemoveUnwantedHeaders;
+use App\Http\Middleware\Headers\SecurityHeaders;
+use App\Http\Middleware\Headers\XClacksOverhead;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Laravel\Passport\Http\Middleware\CheckClientCredentials;
 
@@ -17,14 +19,16 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        SecurityHeaders::class,
+        RemoveUnwantedHeaders::class,
+        XClacksOverhead::class,
+        BeforeAnyDbQueryMiddleware::class,
         \App\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
         \Spatie\Cors\Cors::class,
-        BeforeAnyDbQueryMiddleware::class,
-        XClacksOverhead::class
     ];
 
     /**

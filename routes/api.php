@@ -17,9 +17,9 @@ Route::get('test','UsersController@test');
 */
 
 
-//Route::get('/ping', function () {
-//    return Carbon::now();
-//});
+Route::get('ping', function () {
+    return Carbon::now();
+});
 
 Route::group(['middleware' => ['api'], 'prefix'=>'auth'], function () {
 
