@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use App\Utilities\ApiResponse;
 use Exception;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -69,6 +70,7 @@ class Handler extends ExceptionHandler
     {
 
         if (strpos($request->url(), '/api/') !== false) {
+//            dd($exception->getMessage());
 //            dd(get_class($exception));
             Log::debug('API Request Exception - ' . $request->url() . ' - ' . $exception->getMessage() . (!empty($request->all()) ? ' - ' . json_encode($request->except(['password'])) : ''));
 
@@ -83,6 +85,21 @@ class Handler extends ExceptionHandler
                 ];
                 return ApiResponse::response($data);
             }
+
+            if ($exception instanceof ClientException) {
+                $response = $exception->getResponse();
+                $jsonBody = (string) $response->getBody();
+                $exception  = json_decode($jsonBody,1);
+                $data = [
+                    'statusCode' => 422,
+                    'message' => $exception['message'],
+                    'errorCode' => 100,
+                    'data' => [],
+                    'no-cache' => 1,
+                ];
+                return ApiResponse::response($data);
+            }
+
         }
 
         /*

@@ -24,10 +24,10 @@ Route::get('ping', function () {
 Route::group(['middleware' => ['api'], 'prefix'=>'auth'], function () {
 
     Route::post('login', ['name'=>'auth.login','uses'=>'AuthController@login']);
-    Route::post('logout', ['name'=>'auth.logout','uses'=>'AuthController@logout']);
     Route::post('register', ['name'=>'auth.register','uses'=>'AuthController@register']);
 
     Route::group(['middleware' => ['auth:api']], function () {
+        Route::post('logout', ['name'=>'auth.logout','uses'=>'AuthController@logout']);
         Route::post('refresh', ['name'=>'auth.refresh','uses'=>'AuthController@refreshToken']);
     });
 

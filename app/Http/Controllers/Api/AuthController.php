@@ -429,13 +429,12 @@ class AuthController extends ApiController implements AuthInterface
     public function logout(Request $request)
     {
         $user = $request->user();
+        $value = $request->bearerToken();
+        $id = (new Parser())->parse($value)->getHeader('jti');
+        $token = $user->tokens->find($id);
+        $token= $request->user()->tokens->find($token);
+        $token->revoke();
 
-        if ($user != null) {
-            $value = $request->bearerToken();
-            $id = (new Parser())->parse($value)->getHeader('jti');
-            $token = $user->tokens->find($id);
-            $token->revoke();
-        }
 
         $responseData = [
             'message' => 'User logout successfully !',

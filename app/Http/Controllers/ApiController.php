@@ -22,7 +22,7 @@ class ApiController extends BaseController implements ApiInterface
 
     public function response($data)
     {
-        ApiResponse::response($data);
+        return ApiResponse::response($data);
 
     }
 }
