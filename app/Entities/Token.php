@@ -24,4 +24,22 @@ class Token extends Model implements Transformable
      */
     protected $fillable = [];
 
+
+    /**
+     * The attributes that should be visible in arrays.
+     *
+     * @var array
+     */
+    protected $visible = [];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'deleted_at'
+    ];
+
+
 }
