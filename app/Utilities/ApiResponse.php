@@ -9,12 +9,17 @@
 namespace App\Utilities;
 
 
+use App\Http\Controllers\Api\AuthController;
+use Illuminate\Http\Request;
+
 class ApiResponse
 {
 
 
     public static function response($data)
     {
+        $request = Request::capture();
+
         // Set default status code.
 
 
@@ -53,6 +58,9 @@ class ApiResponse
         $responseFormat['message'] = isset($data['message']) ? $data['message'] : [];
 
 
+        if(AuthController::isMobileRequest($request)){
+            // This is mobile request
+        }
         return response()->json($responseFormat, $responseFormat['statusCode'], $headers);
 
     }
