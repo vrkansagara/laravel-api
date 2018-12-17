@@ -3,7 +3,6 @@
 namespace App\Entities;
 
 use App\Traits\ModelTraits;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -30,4 +29,19 @@ class Role extends SpatieRole implements Transformable
         'name','display_name','guard_name'
     ];
 
+    /**
+     * The attributes that should be visible in arrays.
+     *
+     * @var array
+     */
+    protected $visible = [];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'deleted_at'
+    ];
 }

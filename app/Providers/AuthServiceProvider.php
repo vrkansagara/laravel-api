@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
+use App\Entities\Role;
+use App\Policies\RolePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-
+use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
@@ -15,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        Role::class => RolePolicy::class
     ];
 
     /**
@@ -27,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+
         Passport::routes();
 
         // Passport::useClientModel(Client::class);
@@ -37,12 +39,23 @@ class AuthServiceProvider extends ServiceProvider
         // Passport::personalAccessClientId('client-id');
 
 
-
         Passport::tokensExpireIn(now()->addDays(15));
 
         Passport::refreshTokensExpireIn(now()->addDays(30));
 
 
         // Passport::loadKeysFrom('/secret-keys/oauth');
+
+        // Grant "Super Admin" users all permissions (assuming they are verified using can() and other gate-related functions):
+
+        Gate::before(function ($user, $ability) {
+            /**
+             * Allow everything to supper-admin role
+             */
+//            if ($user->hasRole('supper-admin')) {
+//                return true;
+//            }
+        });
+
     }
 }

@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Entities\Role;
 use App\Http\Controllers\ApiController;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\RoleCreateRequest;
 use App\Http\Requests\RoleUpdateRequest;
 use App\Repositories\interfaces\RoleRepository;
 use App\Validators\RoleValidator;
+use Prettus\Validator\Contracts\ValidatorInterface;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 /**
  * Class RolesController.
@@ -40,6 +38,8 @@ class RolesController extends ApiController
     {
         $this->repository = $repository;
         $this->validator = $validator;
+//        $this->authorizeResource(Role::class,'role');
+
     }
 
     /**
@@ -49,6 +49,8 @@ class RolesController extends ApiController
      */
     public function index()
     {
+        $this->authorize(__FUNCTION__, $this->getCurrentPolicyClass());
+
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $roles = $this->repository->paginate();
 
@@ -62,24 +64,23 @@ class RolesController extends ApiController
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  RoleCreateRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @param RoleCreateRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(RoleCreateRequest $request)
     {
+        $this->authorize(__FUNCTION__, $this->getCurrentPolicyClass());
+
         try {
+
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
             $role = $this->repository->create($request->all());
 
             $responseFormat = [
-                'message'=>'Store created successfully !',
+                'message' => 'Store created successfully !',
                 'data' => $role->toArray()
             ];
 
@@ -95,14 +96,14 @@ class RolesController extends ApiController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($id)
     {
+        $this->authorize(__FUNCTION__, $this->getCurrentPolicyClass());
+
         $role = $this->repository->find($id);
 
 
@@ -127,6 +128,7 @@ class RolesController extends ApiController
      */
     public function update(RoleUpdateRequest $request, $id)
     {
+        $this->authorize(__FUNCTION__, $this->getCurrentPolicyClass());
 
         try {
 
@@ -161,14 +163,16 @@ class RolesController extends ApiController
      */
     public function destroy($id)
     {
+        $this->authorize(__FUNCTION__, $this->getCurrentPolicyClass());
+
         try {
             $deleted = $this->repository->delete($id);
-            if($deleted){
+            if ($deleted) {
                 $responseFormat = [
                     'message' => 'Roles deleted successfully !',
                     'data' => $deleted
                 ];
-            }else{
+            } else {
                 $responseFormat = [
                     'message' => 'Roles can not be deleted !',
                     'data' => $deleted
@@ -186,5 +190,11 @@ class RolesController extends ApiController
             return $this->response($responseFormat);
         }
 
+    }
+
+
+    private function getCurrentPolicyClass()
+    {
+        return Role::class;
     }
 }
