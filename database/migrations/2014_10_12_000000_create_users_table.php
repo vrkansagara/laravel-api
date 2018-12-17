@@ -25,10 +25,10 @@ class CreateUsersTable extends Migration
             $table->boolean('active')->default(false);
             $table->boolean('verify')->default(false);
             $table->boolean('agree')->default(false);
-            $table->softDeletes();
 
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
 
 
             $table->charset = $this->dbconfig['charset'];

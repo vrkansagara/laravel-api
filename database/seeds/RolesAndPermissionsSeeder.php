@@ -75,8 +75,12 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $role = Role::findByName('system-admin','api');
         $role->givePermissionTo(Permission::all());
+        $role->save();
 
         $role = Role::findByName('supper-admin','api');
         $role->givePermissionTo(Permission::all());
+        $role->save();
+
+
     }
 }

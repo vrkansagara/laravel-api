@@ -175,6 +175,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         Tylercd100\LERN\LERNServiceProvider::class,
         \App\Providers\RepositoryServiceProvider::class,
+        \Spatie\Permission\PermissionServiceProvider::class,
+
 
 
 

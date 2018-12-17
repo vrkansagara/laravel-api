@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Criteria\OrderbyDescCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\interfaces\PermissionRepository;
@@ -42,7 +43,18 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
      */
     public function boot()
     {
+        $this->pushCriteria(OrderbyDescCriteria::class);
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function delete($id)
+    {
+
+        $restrictedIds = [1];
+        if (in_array($id, $restrictedIds)) {
+            return false;
+        }
+        return parent::delete($id);
     }
     
 }

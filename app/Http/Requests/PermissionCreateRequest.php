@@ -13,7 +13,11 @@ class PermissionCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        /**
+         * @todo
+         * @fixme
+         */
+        return true;
     }
 
     /**

@@ -50,7 +50,7 @@ class RolesController extends ApiController
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $roles = $this->repository->all();
+        $roles = $this->repository->paginate();
 
         $responseFormat = [
             'message' => 'Roles list.',
@@ -79,6 +79,7 @@ class RolesController extends ApiController
             $role = $this->repository->create($request->all());
 
             $responseFormat = [
+                'message'=>'Store created successfully !',
                 'data' => $role->toArray()
             ];
 

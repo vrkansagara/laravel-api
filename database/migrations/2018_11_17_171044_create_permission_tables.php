@@ -23,6 +23,7 @@ class CreatePermissionTables extends Migration
             $table->string('display_name');
             $table->string('guard_name');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->charset = $this->dbconfig['charset'];
             $table->engine = $this->dbconfig['engine'];
@@ -35,6 +36,7 @@ class CreatePermissionTables extends Migration
             $table->string('display_name');
             $table->string('guard_name');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->charset = $this->dbconfig['charset'];
             $table->engine = $this->dbconfig['engine'];

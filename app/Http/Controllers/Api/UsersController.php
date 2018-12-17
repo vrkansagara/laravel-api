@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Entities\Role;
+use App\Entities\User;
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 
@@ -206,17 +208,19 @@ class UsersController extends ApiController
 
     public function test(Request $request)
     {
-        $payLoad = $request->all();
-
-
-        $responseData = [
-            'message' => 'User list',
-            'data' => [
-                'users' => $this->repository->all()
-            ],
-        ];
-
-        return $this->response($responseData);
+//
+//
+//        $payLoad = $request->all();
+//
+//
+//        $responseData = [
+//            'message' => 'User list',
+//            'data' => [
+//                'users' => $this->repository->all()
+//            ],
+//        ];
+//
+//        return $this->response($responseData);
 
     }
 }

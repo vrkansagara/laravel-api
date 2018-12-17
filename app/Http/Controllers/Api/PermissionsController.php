@@ -42,6 +42,7 @@ class PermissionsController extends ApiController
         $this->validator  = $validator;
     }
 
+
     /**
      * Display a listing of the resource.
      *
@@ -50,26 +51,20 @@ class PermissionsController extends ApiController
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $permissions = $this->repository->all();
+        $roles = $this->repository->paginate();
 
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $permissions,
-            ]);
-        }
-
-        return view('permissions.index', compact('permissions'));
+        $responseFormat = [
+            'message' => 'Permission list.',
+            'data' => [
+                'roles' => $roles
+            ]
+        ];
+        return $this->response($responseFormat);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  PermissionCreateRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @param PermissionCreateRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(PermissionCreateRequest $request)
     {
@@ -79,26 +74,19 @@ class PermissionsController extends ApiController
 
             $permission = $this->repository->create($request->all());
 
-            $response = [
-                'message' => 'Permission created.',
-                'data'    => $permission->toArray(),
+            $responseFormat = [
+                'message'=>'Permission created successfully !',
+                'data' => $permission->toArray()
             ];
 
-            if ($request->wantsJson()) {
+            return $this->response($responseFormat);
 
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
-            if ($request->wantsJson()) {
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
 
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            $responseFormat = [
+                'message' => $e->getMessageBag()
+            ];
+            return $this->response($responseFormat);
         }
     }
 
@@ -111,72 +99,46 @@ class PermissionsController extends ApiController
      */
     public function show($id)
     {
-        $permission = $this->repository->find($id);
+        $role = $this->repository->find($id);
 
-        if (request()->wantsJson()) {
 
-            return response()->json([
-                'data' => $permission,
-            ]);
-        }
+        $responseFormat = [
+            'message' => 'Roles details.',
+            'data' => $role->toArray()
+        ];
 
-        return view('permissions.show', compact('permission'));
+        return $this->response($responseFormat);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $permission = $this->repository->find($id);
-
-        return view('permissions.edit', compact('permission'));
-    }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  PermissionUpdateRequest $request
-     * @param  string            $id
-     *
-     * @return Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @param PermissionUpdateRequest $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(PermissionUpdateRequest $request, $id)
     {
+
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
             $permission = $this->repository->update($request->all(), $id);
 
-            $response = [
-                'message' => 'Permission updated.',
-                'data'    => $permission->toArray(),
+
+            $responseFormat = [
+                'message' => 'Permission updated successfully!',
+                'data' => $permission->toArray()
             ];
 
-            if ($request->wantsJson()) {
+            return $this->response($responseFormat);
 
-                return response()->json($response);
-            }
-
-            return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
-            if ($request->wantsJson()) {
-
-                return response()->json([
-                    'error'   => true,
-                    'message' => $e->getMessageBag()
-                ]);
-            }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+            $responseFormat = [
+                'message' => $e->getMessageBag()
+            ];
+            return $this->response($responseFormat);
         }
     }
 
@@ -190,16 +152,30 @@ class PermissionsController extends ApiController
      */
     public function destroy($id)
     {
-        $deleted = $this->repository->delete($id);
+        try {
+            $deleted = $this->repository->delete($id);
+            if($deleted){
+                $responseFormat = [
+                    'message' => 'Permission deleted successfully !',
+                    'data' => $deleted
+                ];
+            }else{
+                $responseFormat = [
+                    'message' => 'Permission can not be deleted !',
+                    'data' => $deleted
+                ];
+            }
 
-        if (request()->wantsJson()) {
 
-            return response()->json([
-                'message' => 'Permission deleted.',
-                'deleted' => $deleted,
-            ]);
+            return $this->response($responseFormat);
+
+        } catch (ValidatorException $e) {
+
+            $responseFormat = [
+                'message' => $e->getMessageBag()
+            ];
+            return $this->response($responseFormat);
         }
 
-        return redirect()->back()->with('message', 'Permission deleted.');
     }
 }

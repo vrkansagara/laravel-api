@@ -2,11 +2,13 @@
 
 namespace App\Entities;
 
+use App\Traits\ModelTraits;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * Class User.
@@ -20,6 +22,10 @@ class User extends Authenticatable implements Transformable
     use Notifiable;
 
     use HasApiTokens;
+
+    use ModelTraits;
+
+    use HasRoles;
 
     protected $guard_name = 'api'; // or whatever guard you want to use
 
@@ -46,7 +52,7 @@ class User extends Authenticatable implements Transformable
      *
      * @var array
      */
-    protected $visible = ['id','name', 'email'];
+    protected $visible = ['id', 'name', 'email'];
 
 
     public function errors()
