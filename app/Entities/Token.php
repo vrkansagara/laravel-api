@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Traits\ModelTraits;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -14,6 +15,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 class Token extends Model implements Transformable
 {
     use TransformableTrait;
+    use ModelTraits;
 
     /**
      * The attributes that are mass assignable.
