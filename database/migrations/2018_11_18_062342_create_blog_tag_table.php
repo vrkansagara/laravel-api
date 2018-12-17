@@ -18,6 +18,7 @@ class CreateBlogTagTable extends Migration
         Schema::create('blog_tag', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->charset = $this->dbconfig['charset'];
             $table->engine = $this->dbconfig['engine'];
