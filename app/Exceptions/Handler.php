@@ -3,22 +3,19 @@
 namespace App\Exceptions;
 
 use App\Utilities\ApiResponse;
+use ErrorException;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\UnauthorizedException;
-use Laravel\Passport\Passport;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Auth\AuthenticationException;
-use Spatie\Permission\Exceptions\UnauthorizedException as PermissionUnauthorizedException;
 use Illuminate\Database\Eloquent\MassAssignmentException;
-use ErrorException;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Exceptions\UnauthorizedException as PermissionUnauthorizedException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -135,7 +132,7 @@ class Handler extends ExceptionHandler
             if ($exception instanceof PermissionUnauthorizedException) {
                 $message = $exception->getMessage();
                 $data = [
-                    'statusCode' => 401,
+                    'statusCode' => 403,
                     'message' => $message,
                     'errorCode' => 100,
                     'data' => [],

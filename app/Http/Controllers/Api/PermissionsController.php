@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\ApiController;
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
-use Prettus\Validator\Contracts\ValidatorInterface;
-use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\PermissionCreateRequest;
 use App\Http\Requests\PermissionUpdateRequest;
 use App\Repositories\interfaces\PermissionRepository;
 use App\Validators\PermissionValidator;
+use Prettus\Validator\Contracts\ValidatorInterface;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 /**
  * Class PermissionsController.
@@ -68,6 +65,7 @@ class PermissionsController extends ApiController
      */
     public function store(PermissionCreateRequest $request)
     {
+
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);

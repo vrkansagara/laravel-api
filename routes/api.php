@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 
-Route::get('test','UsersController@test');
+//Route::get('test','UsersController@test');
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -45,23 +44,23 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::resource('role','RolesController');
 });
 
-
-Route::group(['middleware' => ['role:super-admin']], function () {
-    //
-});
-
-Route::group(['middleware' => ['permission:publish articles']], function () {
-    //
-});
-
-Route::group(['middleware' => ['role:super-admin','permission:publish articles']], function () {
-    //
-});
-
-Route::group(['middleware' => ['role_or_permission:super-admin']], function () {
-    //
-});
-
-Route::group(['middleware' => ['role_or_permission:publish articles']], function () {
-    //
-});
+//
+//Route::group(['middleware' => ['role:super-admin']], function () {
+//    //
+//});
+//
+//Route::group(['middleware' => ['permission:publish articles']], function () {
+//    //
+//});
+//
+//Route::group(['middleware' => ['role:super-admin','permission:publish articles']], function () {
+//    //
+//});
+//
+//Route::group(['middleware' => ['role_or_permission:super-admin']], function () {
+//    //
+//});
+//
+//Route::group(['middleware' => ['role_or_permission:publish articles']], function () {
+//    //
+//});
