@@ -12,11 +12,11 @@
 */
 
 Route::get('/', function () {
-    return response()->json([
-        'status' => 'Laravel API working fine...',
-        'time' => new \Carbon\Carbon()
-    ]);
-//    return view('welcome');
+//    return response()->json([
+//        'status' => 'Laravel API working fine...',
+//        'time' => new \Carbon\Carbon()
+//    ]);
+    return view('welcome');
 });
 
 Route::get('/ping', function () {
