@@ -20,6 +20,8 @@ Route::get('ping', function () {
     return Carbon::now();
 });
 
+Route::get('info', 'TmpController@index');
+
 Route::group(['middleware' => ['api'], 'prefix'=>'auth'], function () {
 
     Route::post('login', ['name'=>'auth.login','uses'=>'AuthController@login']);
