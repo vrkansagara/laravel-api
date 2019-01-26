@@ -1,0 +1,5 @@
+{
+    "LOGIN": 'auth/login',
+    "REGISTER": 'auth/register',
+    "FORGET": 'auth/user/forget'
+}
