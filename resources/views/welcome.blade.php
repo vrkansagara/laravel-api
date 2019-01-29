@@ -72,11 +72,35 @@
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         </div>
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
-            <a href="#overview" class="mdl-layout__tab is-active">Overview</a>
+            <a href="{{route('/')}}" class="mdl-layout__tab {{isActiveRoute('/')}}">{{__('front.home')}}</a>
+            <a href="#overview" class="mdl-layout__tab">Overview</a>
             <a href="#features" class="mdl-layout__tab">Features</a>
             <a href="#features" class="mdl-layout__tab">Details</a>
             <a href="#features" class="mdl-layout__tab">Technology</a>
             <a href="#features" class="mdl-layout__tab">FAQ</a>
+            <a href="{{route('login')}}" class="mdl-layout__tab">Login</a>
+
+
+            <!-- Right aligned menu below button -->
+            <button id="demo-menu-lower-right"
+                    class="mdl-button mdl-js-button mdl-button--icon">
+                <i class="material-icons">more_vert</i>
+            </button>
+
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                for="demo-menu-lower-right">
+                <li class="mdl-menu__item">
+                    <a href="{{route('language','en')}}"
+                       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">English</a>
+                    </li>
+                <li class="mdl-menu__item">
+                    <a href="{{route('language','fr')}}"
+                       class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">French</a>
+                </li>
+                <li disabled class="mdl-menu__item">Disabled Action</li>
+                <li class="mdl-menu__item">Yet Another Action</li>
+            </ul>
+
             <button
                 class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent"
                 id="add">

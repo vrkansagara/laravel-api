@@ -17,7 +17,7 @@ Route::get('/', function () {
 //        'time' => new \Carbon\Carbon()
 //    ]);
     return view('welcome');
-});
+}) ->name('/');
 
 Route::get('/ping', function () {
     return response()->json([
@@ -44,3 +44,4 @@ Route::get('users/get', 'UsersController@getUsersForTable')->name('usersget');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('language/{language}', 'LanguageController@changeLanguage')->name('language');
