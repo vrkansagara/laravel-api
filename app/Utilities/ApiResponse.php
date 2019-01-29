@@ -11,6 +11,7 @@ namespace App\Utilities;
 
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Http\Request;
+use Illuminate\Support\MessageBag;
 
 class ApiResponse
 {
@@ -27,9 +28,14 @@ class ApiResponse
             'statusCode' => 200,
             'errorCode' => 0,
             'message' => 'OK',
-            'size' => self::getSize($data),
+            // 'size' => self::getSize($data),
             'data' => [],
         ];
+        if($data instanceof MessageBag){
+            $responseFormat ['message'] = implode(',',$data->all());
+            $responseFormat ['errorCode'] = 1;
+            $responseFormat ['statusCode'] = 302;
+        }
 
 //        $responseFormat['ip'] = get_ip_address();
 

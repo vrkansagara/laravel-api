@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "698a5d04a707445ae4c8b5ff4f9df34a",
+    "content-hash": "54b69adfc146d313b43c428df0afce59",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -6685,6 +6685,67 @@
                 "environment"
             ],
             "time": "2018-10-30T17:29:25+00:00"
+        },
+        {
+            "name": "vrkansagara/lara-out-press",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vrkansagara/LaraOutPress.git",
+                "reference": "fcd605bf15ea5d4c3f5f0281f6009c12dd339794"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vrkansagara/LaraOutPress/zipball/fcd605bf15ea5d4c3f5f0281f6009c12dd339794",
+                "reference": "fcd605bf15ea5d4c3f5f0281f6009c12dd339794",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "laravel/framework": "5.5.x"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "branch-alias": {
+                        "dev-master": "develop"
+                    },
+                    "providers": [
+                        "Vrkansagara\\LaraOutPress\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaraOutPress": "Vrkansagara\\LaraOutPress\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Vrkansagara\\LaraOutPress\\": "src/"
+                },
+                "files": [
+                    "src/helper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vallabh Kansagara",
+                    "email": "vrkansagara@gmail.com",
+                    "homepage": "https://vrkansagara.in/"
+                }
+            ],
+            "description": "This is simply compress your final out of Larvel Application and serve to the browser.",
+            "homepage": "https://vrkansagara.in/",
+            "keywords": [
+                "compress",
+                "laravel"
+            ],
+            "time": "2019-01-08T18:31:04+00:00"
         },
         {
             "name": "yajra/laravel-datatables-oracle",

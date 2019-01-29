@@ -40,3 +40,7 @@ Auth::routes();
 //Route::resource('users', 'UsersController');
 Route::get('users', 'UsersController@index');
 Route::get('users/get', 'UsersController@getUsersForTable')->name('usersget');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

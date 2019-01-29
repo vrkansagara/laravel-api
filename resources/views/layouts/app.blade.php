@@ -18,11 +18,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <link  href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
-
-
 </head>
 <body>
     <div id="app">
@@ -81,32 +76,5 @@
             @yield('content')
         </main>
     </div>
-
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script>
-
-        $(document).ready(function () {
-            $.noConflict();
-            $('#table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ url('users/get') }}',
-                "data": function ( d ) {
-                    d.myKey = "myValue";
-                    // d.custom = $('#myInput').val();
-                    // etc
-                }
-                columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'name', name: 'name' },
-                    { data: 'email', name: 'email' }
-                ]
-            });
-
-        });
-
-
-    </script>
-
 </body>
 </html>

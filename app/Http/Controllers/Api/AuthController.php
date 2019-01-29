@@ -457,7 +457,7 @@ class AuthController extends ApiController implements AuthInterface
 
         if ($validator->fails()) {
             $errorMessages = $validator->getMessageBag();
-            $this->response($errorMessages);
+            return $errorMessages;
         }
 
         $payLoad = $request->all();
@@ -466,8 +466,15 @@ class AuthController extends ApiController implements AuthInterface
             'email' => $request->get('email'),
             'password' => bcrypt($request->get('password'))
         ];
-        $user = User::create($userData);
-        return $this->response($user);
+        try{
+            \DB::beginTransaction();
+                $user = User::create($userData);
+            \DB::commit();
+            return $user->toArray();
+        }catch(\Exception $e){
+            \DB::rollBack();
+            return $this->response('Something went wrong !!!');
+        }
 
 
     }

@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>
-        <a href="{{route('user.index')}}">Users</a>
-    </h1>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

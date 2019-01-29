@@ -173,11 +173,16 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+
+        /**
+         * Custom provider
+         */
+        Vrkansagara\LaraOutPress\ServiceProvider::class,
         Tylercd100\LERN\LERNServiceProvider::class,
         \App\Providers\RepositoryServiceProvider::class,
         \Spatie\Permission\PermissionServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-
 
 
 
