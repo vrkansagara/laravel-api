@@ -27,6 +27,7 @@ Resonse Type
 - [x] Adding Laravel Horizon  as default queue driver.
 - [] Add import/export document facility with sample api.
 - [] Add download report facility with sample api.
+- [x] JS Validation library added. 
 
 
 ## TODO 
