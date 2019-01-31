@@ -45,3 +45,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('language/{language}', 'LanguageController@changeLanguage')->name('language');
+
+
+
+Route::get('sample', 'SampleController@indexAction')->name('sample');
+Route::post('sample/submit', 'SampleController@submitAction')->name('sample.submit');

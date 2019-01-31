@@ -183,9 +183,7 @@ return [
         \App\Providers\RepositoryServiceProvider::class,
         \Spatie\Permission\PermissionServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-
-
-
+        Collective\Html\HtmlServiceProvider::class,
 
 
         /**
@@ -246,8 +244,10 @@ return [
         /**
          * Custom application provider with alias
          */
-        'LERN'=> Tylercd100\LERN\LERNServiceProvider::class,
+        'LERN' => Tylercd100\LERN\LERNServiceProvider::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 
