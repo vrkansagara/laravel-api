@@ -1,73 +1,73 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+            <div class="col-md-6">
+                <h2 class="font-bold">Welcome to {{env('APP_SHORT_NAME')}}</h2>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                <p>
+                    Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app
+                    views.
+                </p>
 
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s.
+                </p>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                <p>
+                    When an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                </p>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                <p>
+                    <small>It has survived not only five centuries, but also the leap into electronic typesetting,
+                        remaining essentially unchanged.
+                    </small>
+                </p>
 
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+            </div>
+            <div class="col-md-6">
+                <div class="ibox-content">
+                    {{ Form::open(['route'=>'login','method'=>'POST','class'=>'m-t']) }}
+                    @csrf
+                    <div class="form-group">
+                        {{Form::email('email', old('email') ,['class'=>"form-control",'placeholder'=>__('E-Mail Address'),'title'=>__('E-Mail Address'),'required autofocus'])}}
+                    </div>
+                    <div class="form-group">
+                        {{Form::password('password',['class'=>"form-control",'placeholder'=>__('Password'),'title'=>__('Password'),'required'])}}
+                    </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                    <input class="form-check-input" type="checkbox" name="remember"
+                           id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
+                    <label class="form-check-label" for="remember">
+                        {{ __('Remember Me') }}
+                    </label>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+
+                    <button type="submit" class="btn btn-primary block full-width m-b">{{ __('Login') }}</button>
+
+                    @if (Route::has('password.request'))
+                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                            {{ __('Forgot Your Password?') }}
+                        </a>
+                    @endif
+
+                    <p class="text-muted text-center">
+                        <small>Do not have an account?</small>
+                    </p>
+                    <a class="btn btn-sm btn-white btn-block" href="{{ route('register') }}">Create an account</a>
+                    {{Form::close()}}
                 </div>
             </div>
         </div>
+        <hr/>
+        {!! env('APP_COPYRIGHT') !!}
     </div>
-</div>
 @endsection
+
+

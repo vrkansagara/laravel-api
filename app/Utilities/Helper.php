@@ -1,5 +1,51 @@
 <?php
 
+if (!function_exists('appenv')) {
+    /**
+     * Gets the value of an environment variable.
+     * @scope User can change dynamic value based on config file
+     * @param  string $key
+     * @param  mixed $default
+     * @return mixed
+     */
+    function appenv($key, $default = null)
+    {
+        /**
+         * @todo
+         * @fixme
+         * @implement logic
+         * priority of config to be override is (1) .env file data send (2) Static config file form config/file.php
+         */
+        $value = getenv($key);
+
+        if ($value === false) {
+            return value($default);
+        }
+
+        switch (strtolower($value)) {
+            case 'true':
+            case '(true)':
+                return true;
+            case 'false':
+            case '(false)':
+                return false;
+            case 'empty':
+            case '(empty)':
+                return '';
+            case 'null':
+            case '(null)':
+                return;
+        }
+
+        if (($valueLength = strlen($value)) > 1 && $value[0] === '"' && $value[$valueLength - 1] === '"') {
+            return substr($value, 1, -1);
+        }
+
+        return $value;
+    }
+}
+
+
 if (!function_exists('getIpAddress')) {
 
     /**
