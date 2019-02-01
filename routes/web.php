@@ -1,23 +1,12 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('language/{language}', 'LanguageController@changeLanguage')->name('language');
 
-Route::get('/', function () {
-//    return response()->json([
-//        'status' => 'Laravel API working fine...',
-//        'time' => new \Carbon\Carbon()
-//    ]);
-    return view('welcome');
-}) ->name('/');
+Auth::routes();
+
+Route::get('dashboard', 'HomeController@index')->name('dashboard')->middleware('auth');
+Route::get('force/logout', 'Auth\\LoginController@logout')->name('force.logout');
+
 
 Route::get('/ping', function () {
     return response()->json([
@@ -28,25 +17,16 @@ Route::get('/ping', function () {
                 'time' => new \Carbon\Carbon()
             ]
     ]);
-//    return view('welcome');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
 
 //Route::resource('users', 'UsersController');
-Route::get('users', 'UsersController@index');
-Route::get('users/get', 'UsersController@getUsersForTable')->name('usersget');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('language/{language}', 'LanguageController@changeLanguage')->name('language');
+//Route::get('users', 'UsersController@index');
+//Route::get('users/get', 'UsersController@getUsersForTable')->name('usersget');
 
 
+if (hash_equals(env('APP_NAME'), 'local')) {
+    Route::get('sample', 'SampleController@indexAction')->name('sample');
+    Route::post('sample/submit', 'SampleController@submitAction')->name('sample.submit');
 
-Route::get('sample', 'SampleController@indexAction')->name('sample');
-Route::post('sample/submit', 'SampleController@submitAction')->name('sample.submit');
+}
