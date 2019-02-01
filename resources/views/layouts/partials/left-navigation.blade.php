@@ -15,8 +15,11 @@
                     IN+
                 </div>
             </li>
-            <li class="active">
+            <li class="{{isActiveRoute('dashboard')}}">
                 <a href="{{'dashboard'}}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+            </li>
+            <li class="{{isActiveRoute('users*')}}">
+                <a href="{{route('users.index')}}"><i class="fa fa-th-large"></i> <span class="nav-label">User</span></a>
             </li>
             <li>
                 <a href="minor.html"><i class="fa fa-th-large"></i> <span class="nav-label">Minor view</span> </a>

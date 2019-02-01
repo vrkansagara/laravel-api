@@ -20,8 +20,7 @@ Route::get('/ping', function () {
 });
 
 
-//Route::resource('users', 'UsersController');
-//Route::get('users', 'UsersController@index');
+Route::resource('users', 'UsersController');
 //Route::get('users/get', 'UsersController@getUsersForTable')->name('usersget');
 
 

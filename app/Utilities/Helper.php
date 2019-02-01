@@ -369,9 +369,9 @@ if (!function_exists('isActiveRoute')) {
     | Very useful for navigation, marking if the link is active.
     |
     */
-    function isActiveRoute($route, $output = "is-active")
+    function isActiveRoute($route, $output = "active")
     {
-        if (Route::currentRouteName() == $route) {
+        if (request()->is($route)) {
             return $output;
         }
     }
