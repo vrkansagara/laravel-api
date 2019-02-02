@@ -8,6 +8,9 @@ use Laravel\Passport\HasApiTokens;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -15,7 +18,7 @@ use Spatie\Permission\Traits\HasRoles;
  *
  * @package namespace App\Entities;
  */
-class User extends Authenticatable implements Transformable
+class User extends Authenticatable implements Transformable, HasMedia
 {
     use TransformableTrait;
 
@@ -26,6 +29,8 @@ class User extends Authenticatable implements Transformable
     use ModelTraits;
 
     use HasRoles;
+
+    use HasMediaTrait;
 
     protected $guard_name = 'api'; // or whatever guard you want to use
 
@@ -58,6 +63,17 @@ class User extends Authenticatable implements Transformable
     public function errors()
     {
         return $this->hasMany(Error::class);
+    }
+
+
+    // in your model
+
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('avatar')
+            ->singleFile();
+
+
     }
 
 }

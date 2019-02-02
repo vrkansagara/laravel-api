@@ -48,6 +48,7 @@
 
     <div id="page-wrapper" class="gray-bg @yield('page-wrapper-class')">
         @include('layouts.partials.top-navigation')
+{{--        @include('layouts.partials.bradcrumb')--}}
         <div class="wrapper wrapper-content @yield('wrapper-class')">
             @yield('content')
         </div>

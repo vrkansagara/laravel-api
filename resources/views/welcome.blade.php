@@ -72,7 +72,7 @@
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
         </div>
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
-            <a href="{{route('/')}}" class="mdl-layout__tab {{isActiveRoute('/')}}">{{__('front.home')}}</a>
+            <a href="{{route('front.home')}}" class="mdl-layout__tab {{isActiveRoute('front.home')}}">{{__('front.home')}}</a>
             <a href="#overview" class="mdl-layout__tab">Overview</a>
             <a href="#features" class="mdl-layout__tab">Features</a>
             <a href="#features" class="mdl-layout__tab">Details</a>

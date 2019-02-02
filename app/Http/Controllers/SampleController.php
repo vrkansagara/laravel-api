@@ -45,4 +45,11 @@ class SampleController extends Controller
 
         dd($payLoad);
     }
+
+
+    public function samplePageAction()
+    {
+        return view('sample.page');
+
+    }
 }

@@ -7,8 +7,8 @@ return [
      *
      * Supported: 'jsvalidation::bootstrap', 'jsvalidation::bootstrap4'
      */
-//    'view' => 'jsvalidation::bootstrap',
-    'view' => 'jsvalidation::bootstrap4',
+    'view' => 'jsvalidation::bootstrap',
+//    'view' => 'jsvalidation::bootstrap4',
 
 
     /*
@@ -21,7 +21,7 @@ return [
      * If you change the focus on detect some error then active
      * this parameter to move the focus to the first error found.
      */
-    'focus_on_error' => false,
+    'focus_on_error' => true,
 
     /*
      * Duration time for the animation when We are moving the focus
@@ -33,7 +33,7 @@ return [
      * Enable or disable Ajax validations of Database and custom rules.
      * By default Unique, ActiveURL, Exists and custom validations are validated via AJAX
      */
-    'disable_remote_validation' => false,
+    'disable_remote_validation' => true,
 
     /*
      * Field name used in the remote validation Ajax request

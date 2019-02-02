@@ -1,5 +1,23 @@
 
-Resonse Type 
+## Git config
+-[] Add space change command to root git folder
+
+
+## Functional Implementation
+- [x] Login / Logout
+    
+    -[] Add jsvalidation into login form
+    
+- [] User Profile / Reset Password - WIP
+- [] Register / Forget password
+- [] Image upload  
+- [] Breadcrumb
+
+
+## Known Issue
+-[] Login not redirect after login success to dashboard page.
+
+## Resonse Type 
 - [x] JSON
     - Currently supported
 

@@ -1,10 +1,11 @@
 <?php
 
+Route::get('/','IndexController@index')->name('front.home');
 Route::get('language/{language}', 'LanguageController@changeLanguage')->name('language');
 
 Auth::routes();
 
-Route::get('dashboard', 'HomeController@index')->name('dashboard')->middleware('auth');
+Route::get('dashboard', 'HomeController@index')->name('dashboard');
 Route::get('force/logout', 'Auth\\LoginController@logout')->name('force.logout');
 
 
@@ -20,12 +21,21 @@ Route::get('/ping', function () {
 });
 
 
+// Manage User
+
 Route::resource('users', 'UsersController');
 //Route::get('users/get', 'UsersController@getUsersForTable')->name('usersget');
 
 
-if (hash_equals(env('APP_NAME'), 'local')) {
+// Manage User Profile
+Route::resource('profile', 'UserprofileController');
+
+
+
+
+if (hash_equals(env('APP_ENV'), 'local')) {
     Route::get('sample', 'SampleController@indexAction')->name('sample');
+    Route::get('sample/page', 'SampleController@samplePageAction')->name('sample.page');
     Route::post('sample/submit', 'SampleController@submitAction')->name('sample.submit');
 
 }

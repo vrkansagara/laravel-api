@@ -7,6 +7,7 @@ use App\Http\Middleware\Headers\RemoveUnwantedHeaders;
 use App\Http\Middleware\Headers\SecurityHeaders;
 use App\Http\Middleware\Headers\XClacksOverhead;
 use App\Http\Middleware\LocaleMiddleware;
+use App\Http\Middleware\ViewShare;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Laravel\Passport\Http\Middleware\CheckClientCredentials;
 
@@ -46,7 +47,8 @@ class Kernel extends HttpKernel
             XClacksOverhead::class,
             BeforeAnyDbQueryMiddleware::class,
             \Spatie\Cors\Cors::class,
-            LocaleMiddleware::class
+            LocaleMiddleware::class,
+            ViewShare::class
         ],
 
         'api' => [

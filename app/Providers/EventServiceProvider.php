@@ -12,6 +12,7 @@ use App\Listeners\ActiveInactiveStatusListener;
 use App\Listeners\ForgetpasswordListener;
 use App\Listeners\LoginListener;
 use App\Listeners\LogoutListener;
+use App\Listeners\MediaLogger;
 use App\Listeners\RegisterListener;
 use App\Listeners\ResetpasswordListener;
 use Illuminate\Auth\Events\Login;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Spatie\MediaLibrary\Events\MediaHasBeenAdded;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -51,6 +53,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ActiveInactiveStatusEvent::class => [
             ActiveInactiveStatusListener::class
+        ],
+        MediaHasBeenAdded::class => [
+            MediaLogger::class
         ]
     ];
 
