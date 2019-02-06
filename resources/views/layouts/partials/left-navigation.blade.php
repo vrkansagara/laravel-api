@@ -20,10 +20,12 @@
             <li class="{{isActiveRoute('dashboard')}}">
                 <a href="{{'dashboard'}}"><i class="fa fa-th-large"></i> <span class="nav-label">{{__('menu.dashboard')}}</span></a>
             </li>
+            @can('user-view')
             <li class="{{isActiveRoute('users*')}}">
                 <a href="{{route('users.index')}}"><i class="fa fa-th-large"></i> <span
                         class="nav-label">{{__('menu.users')}}</span></a>
             </li>
+            @endcan
             @if (hash_equals(env('APP_ENV'), 'local')) {
             <li class="{{isActiveRoute('sample*')}}">
                 <a href="{{route('sample.page')}}"><i class="fa fa-th-large"></i> <span

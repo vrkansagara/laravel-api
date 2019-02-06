@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Entities\User;
+use App\Http\Requests\User\UserIndexRequest;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Repositories\interfaces\Blog\UserRepository;
+use App\Repositories\interfaces\UserRepository;
 use App\Validators\UserValidator;
-use Yajra\DataTables\Facades\DataTables;
 
 /**
  * Class UsersController.
@@ -37,32 +35,30 @@ class UsersController extends Controller
      * @param UserRepository $repository
      * @param UserValidator $validator
      */
-//    public function __construct(UserRepository $repository, UserValidator $validator)
-//    {
-//        $this->repository = $repository;
-//        $this->validator  = $validator;
-//    }
+    public function __construct(UserRepository $repository, UserValidator $validator)
+    {
+        $this->repository = $repository;
+        $this->validator  = $validator;
+    }
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UserIndexRequest $request)
     {
-//        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-//        $users = $this->repository->all();
-//
-//        if (request()->wantsJson()) {
-//
-//            return response()->json([
-//                'data' => $users,
-//            ]);
-//        }
+        $payLoad = $request->all();
 
-        $users = User::all();
+        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        $users = $this->repository->all();
 
+        if (request()->wantsJson()) {
 
+            return response()->json([
+                'data' => $users,
+            ]);
+        }
 
         return view('users.index', compact('users'));
     }
@@ -206,11 +202,5 @@ class UsersController extends Controller
         }
 
         return redirect()->back()->with('message', 'User deleted.');
-    }
-
-    public function getUsersForTable()
-    {
-        return DataTables::of(User::query())->make(true);
-        
     }
 }
