@@ -101,20 +101,20 @@ return [
      */
 
     'collectors' => [
-        'phpinfo'         => true,  // Php version
+        'phpinfo'         => false,  // Php version
         'messages'        => true,  // Messages
-        'time'            => true,  // Time Datalogger
-        'memory'          => true,  // Memory usage
+        'time'            => false,  // Time Datalogger
+        'memory'          => false,  // Memory usage
         'exceptions'      => true,  // Exception displayer
         'log'             => true,  // Logs from Monolog (merged in messages if enabled)
         'db'              => true,  // Show database (PDO) queries and bindings
         'views'           => true,  // Views with their data
         'route'           => true,  // Current route information
-        'auth'            => true, // Display Laravel authentication status
-        'gate'            => true, // Display Laravel Gate checks
+        'auth'            => false, // Display Laravel authentication status
+        'gate'            => false, // Display Laravel Gate checks
         'session'         => true,  // Display session data
-        'symfony_request' => true,  // Only one can be enabled..
-        'mail'            => true,  // Catch mail messages
+        'symfony_request' => false,  // Only one can be enabled..
+        'mail'            => false,  // Catch mail messages
         'laravel'         => false, // Laravel version and environment
         'events'          => false, // All events fired
         'default_request' => false, // Regular or special Symfony request logger

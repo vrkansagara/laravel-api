@@ -42,12 +42,13 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            LocaleMiddleware::class,
             SecurityHeaders::class,
             RemoveUnwantedHeaders::class,
             XClacksOverhead::class,
             BeforeAnyDbQueryMiddleware::class,
             \Spatie\Cors\Cors::class,
-            LocaleMiddleware::class,
+
             ViewShare::class
         ],
 

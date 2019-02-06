@@ -6,7 +6,7 @@ return [
      *
      * @var bool
      */
-    'status' => false,
+    'status' => env('APP_LOCALE_CONVERT',FALSE),
     /*
      * Available languages
      *
@@ -40,5 +40,6 @@ return [
         // 'ru'    => ['ru', 'ru-RU', false],
         // 'sv'    => ['sv', 'sv_SE', false],
         // 'th'    => ['th', 'th_TH', false],
+         'hi'    => ['hi', 'hi_IN', false],
     ],
 ];

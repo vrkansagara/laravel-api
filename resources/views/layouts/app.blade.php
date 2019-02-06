@@ -16,7 +16,7 @@
     <title>{{ config('app.name', 'Laravel Enterprise Starter Kit') }}</title>
 
     <!-- Scripts -->
-    <script src="{{asset('assets/js/jquery-3.1.1.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery-i3.1.1.min.js')}}"></script>
 
     <script>
         $(document).ready(function () {

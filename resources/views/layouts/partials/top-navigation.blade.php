@@ -12,6 +12,21 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
+                <a href="{{route('language','en')}}">
+                    <i class="fa fa-flag"></i> English
+                </a>
+            </li>
+            <li>
+                <a href="{{route('language','hi')}}">
+                    <i class="fa fa-flag"></i> Hindi
+                </a>
+            </li>
+            <li>
+                <a href="{{route('language','fr')}}">
+                    <i class="fa fa-flag"></i> French
+                </a>
+            </li>
+            <li>
                 <a href="{{route('force.logout')}}">
                     <i class="fa fa-sign-out"></i> Log out
                 </a>

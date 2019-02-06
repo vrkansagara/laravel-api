@@ -18,16 +18,16 @@
                 </div>
             </li>
             <li class="{{isActiveRoute('dashboard')}}">
-                <a href="{{'dashboard'}}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+                <a href="{{'dashboard'}}"><i class="fa fa-th-large"></i> <span class="nav-label">{{__('menu.dashboard')}}</span></a>
             </li>
             <li class="{{isActiveRoute('users*')}}">
                 <a href="{{route('users.index')}}"><i class="fa fa-th-large"></i> <span
-                        class="nav-label">User</span></a>
+                        class="nav-label">{{__('menu.users')}}</span></a>
             </li>
             @if (hash_equals(env('APP_ENV'), 'local')) {
             <li class="{{isActiveRoute('sample*')}}">
                 <a href="{{route('sample.page')}}"><i class="fa fa-th-large"></i> <span
-                        class="nav-label">Sample Page</span></a>
+                        class="nav-label">{{__('menu.sample-page')}}</span></a>
             </li>
             @endif
         </ul>
