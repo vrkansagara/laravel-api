@@ -35,6 +35,14 @@ class User extends Authenticatable implements Transformable, HasMedia
     protected $guard_name = 'api'; // or whatever guard you want to use
 
     /**
+     * The storage format of the model's date columns.
+     *
+     * @var string
+     */
+    protected $dateFormat = 'Y-m-d H:i:s';
+
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -57,7 +65,7 @@ class User extends Authenticatable implements Transformable, HasMedia
      *
      * @var array
      */
-    protected $visible = ['id', 'name', 'email'];
+    protected $visible = ['id', 'name', 'email','active','verify','created_at'];
 
 
     public function errors()

@@ -8,6 +8,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\interfaces\UserRepository;
 use App\Entities\User;
 use App\Validators\UserValidator;
+use Yajra\DataTables\Facades\DataTables;
 
 /**
  * Class UserRepositoryEloquent.
@@ -50,7 +51,24 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function boot()
     {
         $this->pushCriteria(OrderbyDescCriteria::class);
-        $this->pushCriteria(app(RequestCriteria::class));
+//        $this->pushCriteria(app(RequestCriteria::class));
     }
 
+    public function getUserListForDataTable( array  $payLoad)
+    {
+        $users = $this->all();
+        return DataTables::of($users)
+            ->escapeColumns(['name', 'email'])
+            ->editColumn('status', function ($user) {
+                return ( $user->active === 1 ) ? 'Active' : 'Inactive';
+            })
+            ->editColumn('verify', function ($user) {
+                return ( $user->verify=== 1 ) ? 'Yes' : 'No';
+            })
+            ->addColumn('actions', function ($user) {
+                return view('users.listaction',compact('user'))->render();
+            })
+            ->make(true);
+
+    }
 }

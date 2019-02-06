@@ -203,4 +203,16 @@ class UsersController extends Controller
 
         return redirect()->back()->with('message', 'User deleted.');
     }
+
+    /**
+     * Get user list for data table.
+     * @param UserIndexRequest $request
+     * @return mixed
+     */
+    public function getUserListForDataTable(UserIndexRequest $request)
+    {
+        $payLoad = $request->all();
+        return $this->repository->getUserListForDataTable($payLoad);
+        
+    }
 }

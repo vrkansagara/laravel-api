@@ -53,8 +53,9 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         $user = \Auth::user();
-
         View::share('user', $user);
+        $datatable = config('application.datatable');
+        View::share('dataTable', $datatable);
     }
 
     /**

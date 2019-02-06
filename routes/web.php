@@ -24,7 +24,7 @@ Route::get('/ping', function () {
 // Manage User
 
 Route::resource('users', 'UsersController');
-//Route::get('users/get', 'UsersController@getUsersForTable')->name('usersget');
+Route::post('users/get', 'UsersController@getUserListForDataTable')->name('user.get.list');
 
 
 // Manage User Profile

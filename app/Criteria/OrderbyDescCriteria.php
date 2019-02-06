@@ -22,7 +22,7 @@ class OrderbyDescCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        $model = $model->orderBy('id','DESC');
+        $model = $model->orderBy('created_at','DESC');
         return $model;
     }
 }
