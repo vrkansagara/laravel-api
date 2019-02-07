@@ -1,6 +1,6 @@
-# laravel-api
+# laravel-adminpanel-starter-kit
 
-Laravel as API layer
+Laravel Admin Panel Starter Kit
 
 
 #### User Login
