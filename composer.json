@@ -1,6 +1,6 @@
 {
-    "name": "vrkansagara/laravel-api",
-    "description": "Laravel API",
+    "name": "vrkansagara/laravel-adminpanel-starter-kit",
+    "description": "Laravel Admin Panel Starter Kit",
     "keywords": ["framework", "laravel"],
     "license": "BSD-3-Clause",
     "type": "project",
