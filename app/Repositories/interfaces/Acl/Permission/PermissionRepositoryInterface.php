@@ -11,5 +11,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface PermissionRepositoryInterface extends RepositoryInterface
 {
-    //
+    public function getPermissionListForDataTable(array $payLoad);
 }

@@ -30,8 +30,8 @@ Route::resource('roles', 'RolesController');
 Route::post('roles/get', 'RolesController@getRoleListForDataTable')->name('role.get.list');
 
 // Manage Permission
-//Route::resource('users', 'UsersController');
-//Route::post('users/get', 'UsersController@getPermissionListForDataTable')->name('user.get.list');
+Route::resource('permissions', 'PermissionsController');
+Route::post('permissions/get', 'PermissionsController@getPermissionListForDataTable')->name('permission.get.list');
 
 // Manage User Profile
 Route::resource('profile', 'UserprofileController');

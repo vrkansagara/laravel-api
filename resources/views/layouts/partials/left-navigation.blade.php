@@ -32,6 +32,12 @@
                             class="nav-label">{{__('menu.roles')}}</span></a>
                 </li>
             @endcan
+            @can('permission-view')
+                <li class="{{isActiveRoute('permissions*')}}">
+                    <a href="{{route('permissions.index')}}"><i class="fa fa-th-large"></i> <span
+                            class="nav-label">{{__('menu.permissions')}}</span></a>
+                </li>
+            @endcan
             @if (hash_equals(env('APP_ENV'), 'local')) {
             <li class="{{isActiveRoute('sample*')}}">
                 <a href="{{route('sample.page')}}"><i class="fa fa-th-large"></i> <span

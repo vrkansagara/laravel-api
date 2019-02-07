@@ -61,17 +61,11 @@ class RoleRepositoryEloquent extends BaseRepository implements RoleRepositoryInt
 
     public function getRoleListForDataTable(array $payLoad)
     {
-        $users = $this->all();
-        return DataTables::of($users)
-            ->escapeColumns(['name', 'email'])
-            ->editColumn('status', function ($user) {
-                return ( $user->active === 1 ) ? 'Active' : 'Inactive';
-            })
-            ->editColumn('verify', function ($user) {
-                return ( $user->verify=== 1 ) ? 'Yes' : 'No';
-            })
-            ->addColumn('actions', function ($user) {
-                return view('users.listaction',compact('user'))->render();
+        $roles = $this->all();
+        return DataTables::of($roles)
+            ->escapeColumns(['name'])
+            ->addColumn('actions', function ($role) {
+                return view('roles.listaction',compact('role'))->render();
             })
             ->make(true);
 

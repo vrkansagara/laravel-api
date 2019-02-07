@@ -44,7 +44,6 @@
         "spatie/laravel-medialibrary": "^7.5",
         "spatie/laravel-permission": "^2.29",
         "tylercd100/lern": "^4.5",
-        "vrkansagara/lara-out-press": "^2.0",
         "yajra/laravel-datatables-oracle": "~8.0"
     },
     "require-dev": {

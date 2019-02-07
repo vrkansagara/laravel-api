@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Acl\Permission\PermissionIndexRequest;
 use App\Repositories\interfaces\Acl\Permission\PermissionRepositoryInterface;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -199,4 +200,14 @@ class PermissionsController extends Controller
 
         return redirect()->back()->with('message', 'Permission deleted.');
     }
+
+    public function getPermissionListForDataTable(PermissionIndexRequest $request)
+    {
+        $payLoad = $request->all();
+        return $this->repository->getPermissionListForDataTable($payLoad);
+
+    }
+
+
+
 }

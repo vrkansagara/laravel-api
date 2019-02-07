@@ -4,7 +4,7 @@ namespace App\Http\Requests\Acl\Permission;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PermissionUpdateRequest extends FormRequest
+class PermissionIndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class PermissionUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()->can('permission-update');
+        return auth()->user()->can('permission-create') || auth()->user()->can('permission-delete');
     }
 
     /**

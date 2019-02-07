@@ -13,11 +13,7 @@ class PermissionCreateRequest extends FormRequest
      */
     public function authorize()
     {
-        /**
-         * @todo
-         * @fixme
-         */
-        return true;
+        return auth()->user()->can('permission-create');
     }
 
     /**

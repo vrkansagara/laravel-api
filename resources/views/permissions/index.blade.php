@@ -66,7 +66,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{ route("role.get.list") }}',
+                    url: '{{ route("permission.get.list") }}',
                     type: 'post',
                     data: {status: 1, trashed: false}
                 },

@@ -8,6 +8,7 @@ use App\Repositories\interfaces\Acl\Permission\PermissionRepositoryInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Validators\PermissionValidator;
+use Yajra\DataTables\Facades\DataTables;
 
 /**
  * Class PermissionRepositoryEloquent.
@@ -55,6 +56,18 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
             return false;
         }
         return parent::delete($id);
+    }
+
+    public function getPermissionListForDataTable(array $payLoad)
+    {
+        $roles = $this->all();
+        return DataTables::of($roles)
+            ->escapeColumns(['name'])
+            ->addColumn('actions', function ($permission) {
+                return view('permissions.listaction',compact('permission'))->render();
+            })
+            ->make(true);
+
     }
     
 }
