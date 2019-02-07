@@ -60,6 +60,7 @@
             z-index: 900;
         }
     </style>
+    @include('layouts.partials.google.analytics')
 </head>
 <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">

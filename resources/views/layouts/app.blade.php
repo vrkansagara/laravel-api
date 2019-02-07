@@ -40,6 +40,8 @@
     <link href="{{asset('assets/css/custom/custom.css')}}" rel="stylesheet">
     @yield('after-style')
 
+    @include('layouts.partials.google.analytics')
+
 </head>
 <body class="@yield('body-class')">
 <div id="wrapper @yield('wrapper')">
