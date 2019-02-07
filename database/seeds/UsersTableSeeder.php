@@ -45,7 +45,7 @@ class UsersTableSeeder extends Seeder
             $user = new \App\Entities\User($user);
 
             if($role == 'all'){
-                $user->assignRole(\App\Entities\Role::all());
+                $user->assignRole(\App\Entities\Acl\Role\Role::all());
             }else{
                 $user->assignRole($role);
             }
