@@ -1,43 +1,43 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\ApiController;
-use Illuminate\Http\Request;
+use App\Http\Requests\ACL\Role\RoleIndexRequest;
+use App\Repositories\interfaces\Acl\Role\RoleRepositoryInterface;
 
-use League\OAuth2\Server\Repositories\UserRepositoryInterface;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Repositories\interfaces\UserRepository;
-use App\Validators\UserValidator;
+use App\Http\Requests\ACL\Role\RoleCreateRequest;
+use App\Http\Requests\ACL\Role\RoleUpdateRequest;
+use App\Validators\RoleValidator;
 
 /**
- * Class UsersController.
+ * Class RolesController.
  *
  * @package namespace App\Http\Controllers;
  */
-class UsersController extends ApiController
+class RolesController extends Controller
 {
     /**
-     * @var UserRepository
+     * @var RoleRepository
      */
     protected $repository;
 
     /**
-     * @var UserValidator
+     * @var RoleValidator
      */
     protected $validator;
 
     /**
-     * UsersController constructor.
+     * RolesController constructor.
      *
-     * @param UserRepository $repository
-     * @param UserValidator $validator
+     * @param RoleRepository $repository
+     * @param RoleValidator $validator
      */
-    public function __construct(UserRepositoryInterface $repository, UserValidator $validator)
+    public function __construct(RoleRepositoryInterface $repository, RoleValidator $validator)
     {
         $this->repository = $repository;
-        $this->validator = $validator;
+        $this->validator  = $validator;
     }
 
     /**
@@ -48,38 +48,38 @@ class UsersController extends ApiController
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $users = $this->repository->all();
+        $roles = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $users,
+                'data' => $roles,
             ]);
         }
 
-        return view('users.index', compact('users'));
+        return view('roles.index', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UserCreateRequest $request
+     * @param  RoleCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(UserCreateRequest $request)
+    public function store(RoleCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $user = $this->repository->create($request->all());
+            $role = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'User created.',
-                'data' => $user->toArray(),
+                'message' => 'Role created.',
+                'data'    => $role->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -91,7 +91,7 @@ class UsersController extends ApiController
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
-                    'error' => true,
+                    'error'   => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
@@ -109,16 +109,16 @@ class UsersController extends ApiController
      */
     public function show($id)
     {
-        $user = $this->repository->find($id);
+        $role = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $user,
+                'data' => $role,
             ]);
         }
 
-        return view('users.show', compact('user'));
+        return view('roles.show', compact('role'));
     }
 
     /**
@@ -130,32 +130,32 @@ class UsersController extends ApiController
      */
     public function edit($id)
     {
-        $user = $this->repository->find($id);
+        $role = $this->repository->find($id);
 
-        return view('users.edit', compact('user'));
+        return view('roles.edit', compact('role'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  UserUpdateRequest $request
-     * @param  string $id
+     * @param  RoleUpdateRequest $request
+     * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(RoleUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $user = $this->repository->update($request->all(), $id);
+            $role = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'User updated.',
-                'data' => $user->toArray(),
+                'message' => 'Role updated.',
+                'data'    => $role->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -169,7 +169,7 @@ class UsersController extends ApiController
             if ($request->wantsJson()) {
 
                 return response()->json([
-                    'error' => true,
+                    'error'   => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
@@ -193,30 +193,23 @@ class UsersController extends ApiController
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'User deleted.',
+                'message' => 'Role deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'User deleted.');
+        return redirect()->back()->with('message', 'Role deleted.');
     }
 
-
-    public function test(Request $request)
+    /**
+     * Get user list for data table.
+     * @param UserIndexRequest $request
+     * @return mixed
+     */
+    public function getRoleListForDataTable(RoleIndexRequest $request)
     {
-//
-//
-//        $payLoad = $request->all();
-//
-//
-//        $responseData = [
-//            'message' => 'User list',
-//            'data' => [
-//                'users' => $this->repository->all()
-//            ],
-//        ];
-//
-//        return $this->response($responseData);
+        $payLoad = $request->all();
+        return $this->repository->getRoleListForDataTable($payLoad);
 
     }
 }

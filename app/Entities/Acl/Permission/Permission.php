@@ -1,24 +1,20 @@
 <?php
-
-namespace App\Entities;
+namespace App\Entities\Acl\Permission;
 
 use App\Traits\ModelTraits;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
-use Spatie\Permission\Models\Role as SpatieRole;
+use Spatie\Permission\Models\Permission as SpatiePermission;
 
 /**
- * Class Role.
+ * Class Permission.
  *
  * @package namespace App\Entities;
  */
-class Role extends SpatieRole implements Transformable
+class Permission extends SpatiePermission implements Transformable
 {
     use TransformableTrait;
-    use SoftDeletes;
     use ModelTraits;
-
 
     /**
      * The attributes that are mass assignable.
@@ -26,7 +22,7 @@ class Role extends SpatieRole implements Transformable
      * @var array
      */
     protected $fillable = [
-        'name','display_name','guard_name'
+        'name', 'display_name', 'guard_name'
     ];
 
     /**
@@ -44,4 +40,5 @@ class Role extends SpatieRole implements Transformable
     protected $hidden = [
         'deleted_at'
     ];
+
 }

@@ -2,8 +2,8 @@
 
 namespace App\Transformers;
 
+use App\Entities\Acl\Role\Role;
 use League\Fractal\TransformerAbstract;
-use App\Entities\Role;
 
 /**
  * Class RoleTransformer.

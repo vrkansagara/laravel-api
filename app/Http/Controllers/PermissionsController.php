@@ -1,43 +1,42 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\ApiController;
-use Illuminate\Http\Request;
-
-use League\OAuth2\Server\Repositories\UserRepositoryInterface;
+use App\Repositories\interfaces\Acl\Permission\PermissionRepositoryInterface;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Repositories\interfaces\UserRepository;
-use App\Validators\UserValidator;
+use App\Http\Requests\PermissionCreateRequest;
+use App\Http\Requests\PermissionUpdateRequest;
+use App\Repositories\interfaces\Blog\PermissionRepository;
+use App\Validators\PermissionValidator;
 
 /**
- * Class UsersController.
+ * Class PermissionsController.
  *
  * @package namespace App\Http\Controllers;
  */
-class UsersController extends ApiController
+class PermissionsController extends Controller
 {
     /**
-     * @var UserRepository
+     * @var PermissionRepository
      */
     protected $repository;
 
     /**
-     * @var UserValidator
+     * @var PermissionValidator
      */
     protected $validator;
 
     /**
-     * UsersController constructor.
+     * PermissionsController constructor.
      *
-     * @param UserRepository $repository
-     * @param UserValidator $validator
+     * @param PermissionRepository $repository
+     * @param PermissionValidator $validator
      */
-    public function __construct(UserRepositoryInterface $repository, UserValidator $validator)
+    public function __construct(PermissionRepositoryInterface $repository, PermissionValidator $validator)
     {
         $this->repository = $repository;
-        $this->validator = $validator;
+        $this->validator  = $validator;
     }
 
     /**
@@ -48,38 +47,38 @@ class UsersController extends ApiController
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $users = $this->repository->all();
+        $permissions = $this->repository->all();
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $users,
+                'data' => $permissions,
             ]);
         }
 
-        return view('users.index', compact('users'));
+        return view('permissions.index', compact('permissions'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UserCreateRequest $request
+     * @param  PermissionCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function store(UserCreateRequest $request)
+    public function store(PermissionCreateRequest $request)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_CREATE);
 
-            $user = $this->repository->create($request->all());
+            $permission = $this->repository->create($request->all());
 
             $response = [
-                'message' => 'User created.',
-                'data' => $user->toArray(),
+                'message' => 'Permission created.',
+                'data'    => $permission->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -91,7 +90,7 @@ class UsersController extends ApiController
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
-                    'error' => true,
+                    'error'   => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
@@ -109,16 +108,16 @@ class UsersController extends ApiController
      */
     public function show($id)
     {
-        $user = $this->repository->find($id);
+        $permission = $this->repository->find($id);
 
         if (request()->wantsJson()) {
 
             return response()->json([
-                'data' => $user,
+                'data' => $permission,
             ]);
         }
 
-        return view('users.show', compact('user'));
+        return view('permissions.show', compact('permission'));
     }
 
     /**
@@ -130,32 +129,32 @@ class UsersController extends ApiController
      */
     public function edit($id)
     {
-        $user = $this->repository->find($id);
+        $permission = $this->repository->find($id);
 
-        return view('users.edit', compact('user'));
+        return view('permissions.edit', compact('permission'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  UserUpdateRequest $request
-     * @param  string $id
+     * @param  PermissionUpdateRequest $request
+     * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(PermissionUpdateRequest $request, $id)
     {
         try {
 
             $this->validator->with($request->all())->passesOrFail(ValidatorInterface::RULE_UPDATE);
 
-            $user = $this->repository->update($request->all(), $id);
+            $permission = $this->repository->update($request->all(), $id);
 
             $response = [
-                'message' => 'User updated.',
-                'data' => $user->toArray(),
+                'message' => 'Permission updated.',
+                'data'    => $permission->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -169,7 +168,7 @@ class UsersController extends ApiController
             if ($request->wantsJson()) {
 
                 return response()->json([
-                    'error' => true,
+                    'error'   => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
@@ -193,30 +192,11 @@ class UsersController extends ApiController
         if (request()->wantsJson()) {
 
             return response()->json([
-                'message' => 'User deleted.',
+                'message' => 'Permission deleted.',
                 'deleted' => $deleted,
             ]);
         }
 
-        return redirect()->back()->with('message', 'User deleted.');
-    }
-
-
-    public function test(Request $request)
-    {
-//
-//
-//        $payLoad = $request->all();
-//
-//
-//        $responseData = [
-//            'message' => 'User list',
-//            'data' => [
-//                'users' => $this->repository->all()
-//            ],
-//        ];
-//
-//        return $this->response($responseData);
-
+        return redirect()->back()->with('message', 'Permission deleted.');
     }
 }

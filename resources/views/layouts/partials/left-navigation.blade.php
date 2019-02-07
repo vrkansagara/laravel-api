@@ -26,6 +26,12 @@
                         class="nav-label">{{__('menu.users')}}</span></a>
             </li>
             @endcan
+            @can('role-view')
+                <li class="{{isActiveRoute('roles*')}}">
+                    <a href="{{route('roles.index')}}"><i class="fa fa-th-large"></i> <span
+                            class="nav-label">{{__('menu.roles')}}</span></a>
+                </li>
+            @endcan
             @if (hash_equals(env('APP_ENV'), 'local')) {
             <li class="{{isActiveRoute('sample*')}}">
                 <a href="{{route('sample.page')}}"><i class="fa fa-th-large"></i> <span

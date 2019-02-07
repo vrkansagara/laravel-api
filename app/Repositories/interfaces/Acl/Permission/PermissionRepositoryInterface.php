@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\interfaces;
+namespace App\Repositories\interfaces\Acl\Permission;
 
 use Prettus\Repository\Contracts\RepositoryInterface;
 
@@ -9,7 +9,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  *
  * @package namespace App\Repositories\interfaces;
  */
-interface PermissionRepository extends RepositoryInterface
+interface PermissionRepositoryInterface extends RepositoryInterface
 {
     //
 }

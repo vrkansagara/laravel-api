@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\ApiController;
-use App\Http\Requests\PermissionCreateRequest;
-use App\Http\Requests\PermissionUpdateRequest;
-use App\Repositories\interfaces\PermissionRepository;
+use App\Repositories\interfaces\Acl\Permission\PermissionRepositoryInterface;
 use App\Validators\PermissionValidator;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -33,7 +31,7 @@ class PermissionsController extends ApiController
      * @param PermissionRepository $repository
      * @param PermissionValidator $validator
      */
-    public function __construct(PermissionRepository $repository, PermissionValidator $validator)
+    public function __construct(PermissionRepositoryInterface $repository, PermissionValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;

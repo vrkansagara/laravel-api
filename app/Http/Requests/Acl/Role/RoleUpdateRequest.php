@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Acl\Role;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PermissionUpdateRequest extends FormRequest
+class RoleUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,11 +13,7 @@ class PermissionUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        /**
-         * @todo
-         * @fixme
-         */
-        return true;
+        return auth()->user()->can('role-update');
     }
 
     /**

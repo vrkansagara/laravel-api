@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Entities\Role;
 use App\Http\Controllers\ApiController;
-use App\Http\Requests\RoleCreateRequest;
-use App\Http\Requests\RoleUpdateRequest;
-use App\Repositories\interfaces\RoleRepository;
+use App\Repositories\interfaces\Acl\Role\RoleRepositoryInterface;
 use App\Validators\RoleValidator;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -34,7 +31,7 @@ class RolesController extends ApiController
      * @param RoleRepository $repository
      * @param RoleValidator $validator
      */
-    public function __construct(RoleRepository $repository, RoleValidator $validator)
+    public function __construct(RoleRepositoryInterface $repository, RoleValidator $validator)
     {
         $this->repository = $repository;
         $this->validator = $validator;

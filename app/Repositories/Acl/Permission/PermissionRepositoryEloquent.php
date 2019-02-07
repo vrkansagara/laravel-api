@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Acl\Permission;
 
 use App\Criteria\OrderbyDescCriteria;
-use App\Entities\Role;
-use App\Repositories\interfaces\RoleRepository;
-use App\Validators\RoleValidator;
-use Prettus\Repository\Criteria\RequestCriteria;
+use App\Entities\Acl\Permission\Permission;
+use App\Repositories\interfaces\Acl\Permission\PermissionRepositoryInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
+use Prettus\Repository\Criteria\RequestCriteria;
+use App\Validators\PermissionValidator;
 
 /**
- * Class RoleRepositoryEloquent.
+ * Class PermissionRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
+class PermissionRepositoryEloquent extends BaseRepository implements PermissionRepositoryInterface
 {
     /**
      * Specify Model class name
@@ -23,18 +23,18 @@ class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
      */
     public function model()
     {
-        return Role::class;
+        return Permission::class;
     }
 
     /**
-     * Specify Validator class name
-     *
-     * @return mixed
-     */
+    * Specify Validator class name
+    *
+    * @return mixed
+    */
     public function validator()
     {
 
-        return RoleValidator::class;
+        return PermissionValidator::class;
     }
 
 
@@ -56,6 +56,5 @@ class RoleRepositoryEloquent extends BaseRepository implements RoleRepository
         }
         return parent::delete($id);
     }
-
-
+    
 }
