@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ACL\Role\RoleIndexRequest;
+use App\Http\Requests\Acl\Role\RoleCreateRequest;
+use App\Http\Requests\Acl\Role\RoleIndexRequest;
+use App\Http\Requests\Acl\Role\RoleUpdateRequest;
 use App\Repositories\interfaces\Acl\Role\RoleRepositoryInterface;
 
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\ACL\Role\RoleCreateRequest;
-use App\Http\Requests\ACL\Role\RoleUpdateRequest;
 use App\Validators\RoleValidator;
 
 /**
