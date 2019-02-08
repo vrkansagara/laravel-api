@@ -6,7 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration
 {
-    use MigrationTrait;
+    use DatabaseTrait;
+
 
     /**
      * Run the migrations.

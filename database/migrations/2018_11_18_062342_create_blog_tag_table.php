@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateBlogTagTable extends Migration
 {
-    use MigrationTrait;
+    use DatabaseTrait;
 
     /**
      * Run the migrations.

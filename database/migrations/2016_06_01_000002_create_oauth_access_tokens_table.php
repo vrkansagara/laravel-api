@@ -6,7 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateOauthAccessTokensTable extends Migration
 {
-    use MigrationTrait;
+    use DatabaseTrait;
+
     /**
      * Run the migrations.
      *

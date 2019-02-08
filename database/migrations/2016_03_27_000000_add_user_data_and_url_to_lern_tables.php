@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 
 class AddUserDataAndUrlToLernTables extends Migration {
 
-    use MigrationTrait;
+    use DatabaseTrait;
     /**
      * Run the migrations.
      *

@@ -5,8 +5,21 @@ use Spatie\Permission\Models\Permission;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
+    use DatabaseTrait;
+
     public function run()
     {
+        $this->disableForeignKeys();
+
+        $this->truncate(config('permission.table_names.role_has_permissions'));
+        $this->truncate(config('permission.table_names.model_has_roles'));
+        $this->truncate(config('permission.table_names.model_has_permissions'));
+        $this->truncate(config('permission.table_names.permissions'));
+        $this->truncate(config('permission.table_names.roles'));
+
+        $this->enableForeignKeys();
+
+
         // Reset cached roles and permissions
         app()['cache']->forget('spatie.permission.cache');
 
@@ -14,27 +27,32 @@ class RolesAndPermissionsSeeder extends Seeder
             [
                 'name'=>'system-admin',
                 'display_name'=>'System Admin',
-                'guard_name'=>'api',
+                'guard_name'=>'web',
+            ],
+            [
+                'name'=>'supper-most-admin',
+                'display_name'=>'Supper Most Admin',
+                'guard_name'=>'web',
             ],
             [
                 'name'=>'supper-admin',
                 'display_name'=>'Supper Admin',
-                'guard_name'=>'api',
+                'guard_name'=>'web',
             ],
             [
                 'name'=>'admin',
                 'display_name'=>'Admin',
-                'guard_name'=>'api',
+                'guard_name'=>'web',
             ],
             [
                 'name'=>'guest',
                 'display_name'=>'Guest',
-                'guard_name'=>'api',
+                'guard_name'=>'web',
             ],
             [
                 'name'=>'band',
                 'display_name'=>'Band',
-                'guard_name'=>'api',
+                'guard_name'=>'web',
             ]
         ];
         foreach ($roles as $role){
@@ -42,16 +60,19 @@ class RolesAndPermissionsSeeder extends Seeder
         }
 
 
-        $permisionMetaItems = ['create','update','delte','view','enable','disable'];
+        $permisionMetaItems = ['create','update','delete','view','enable','disable','manage'];
         $permissionModules = [
             'user',
-            'company',
             'role',
             'permission',
+            'dashboard',
+            'blog',
+            'blog-category',
+            'blog-tags',
+            'company',
             'audit-log',
             'application-log',
             'oauth2',
-            'dashboard'
         ];
 
         $permissionListWithModuleItems = [];
@@ -67,20 +88,19 @@ class RolesAndPermissionsSeeder extends Seeder
             $permission = [
                 'name' => $permissionListWithModuleItem,
                 'display_name' => ucfirst($displayName[0]).' '.$displayName[1],
-                'guard_name' => 'api',
+                'guard_name' => 'web',
             ];
 
             Permission::create($permission);
         }
 
-        $role = Role::findByName('system-admin','api');
+        $role = Role::findByName('system-admin','web');
         $role->givePermissionTo(Permission::all());
         $role->save();
 
-        $role = Role::findByName('supper-admin','api');
+        $role = Role::findByName('supper-admin','web');
         $role->givePermissionTo(Permission::all());
         $role->save();
-
 
     }
 }

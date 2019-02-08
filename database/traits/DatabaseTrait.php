@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: vallabh
- * Date: 18/11/18
- * Time: 12:22 PM
- */
 
-trait MigrationTrait
+trait DatabaseTrait
 {
+    use DisableForeignKeys,TruncateTable;
     private $dbconfig;
 
     public function __construct()

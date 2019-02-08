@@ -6,7 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateProfilesTable extends Migration
 {
-    use MigrationTrait;
+    use DatabaseTrait;
+
     private $table = 'profile';
 
     /**

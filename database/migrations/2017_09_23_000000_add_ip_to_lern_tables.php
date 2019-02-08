@@ -5,7 +5,8 @@ use Illuminate\Database\Schema\Blueprint;
 
 class AddIpToLernTables extends Migration {
 
-    use MigrationTrait;
+    use DatabaseTrait;
+
     /**
      * Run the migrations.
      *

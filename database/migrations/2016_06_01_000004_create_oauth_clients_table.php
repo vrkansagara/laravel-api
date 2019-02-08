@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateOauthClientsTable extends Migration
 {
-    use MigrationTrait;
+    use DatabaseTrait;
     /**
      * Run the migrations.
      *

@@ -7,7 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 class CreateBlogTable extends Migration
 {
 
-    use MigrationTrait;
+    use DatabaseTrait;
     private $table = 'blog';
 
     /**

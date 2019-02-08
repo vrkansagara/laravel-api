@@ -32,7 +32,7 @@ class User extends Authenticatable implements Transformable, HasMedia
 
     use HasMediaTrait;
 
-    protected $guard_name = 'api'; // or whatever guard you want to use
+    protected $guard_name = 'web'; // or whatever guard you want to use
 
     /**
      * The storage format of the model's date columns.
