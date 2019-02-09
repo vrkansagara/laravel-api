@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\User;
 
-use App\Events\UserRegister;
+use App\Events\Forgetpassword;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserRegisterListener
+class ForgetpasswordListener
 {
     /**
      * Create the event listener.
@@ -21,10 +21,10 @@ class UserRegisterListener
     /**
      * Handle the event.
      *
-     * @param  UserRegister  $event
+     * @param  Forgetpassword  $event
      * @return void
      */
-    public function handle(UserRegister $event)
+    public function handle(Forgetpassword $event)
     {
         //
     }

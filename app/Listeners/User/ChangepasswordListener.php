@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\User;
 
-use App\Events\ActiveInactiveStatus;
+use App\Events\Changepassword;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ActiveInactiveStatusListener
+class ChangepasswordListener
 {
     /**
      * Create the event listener.
@@ -21,10 +21,10 @@ class ActiveInactiveStatusListener
     /**
      * Handle the event.
      *
-     * @param  ActiveInactiveStatus  $event
+     * @param  Changepassword  $event
      * @return void
      */
-    public function handle(ActiveInactiveStatus $event)
+    public function handle(Changepassword $event)
     {
         //
     }

@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\User;
 
-use App\Events\Logout;
+use App\Events\Register;
+use App\Events\User\RegisterEvent;
+use App\Notifications\UserRegisterNotification;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class LogoutListener
+class RegisterListener
 {
     /**
      * Create the event listener.
@@ -21,11 +23,11 @@ class LogoutListener
     /**
      * Handle the event.
      *
-     * @param  Logout  $event
+     * @param  Register  $event
      * @return void
      */
-    public function handle(Logout $event)
+    public function handle(RegisterEvent $event)
     {
-        //
+        return new UserRegisterNotification($event->user);
     }
 }

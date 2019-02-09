@@ -65,8 +65,8 @@ class UsersTableSeeder extends Seeder
                 'role' => 'admin'
             ]
         ];
-
-        foreach ($defaultUsers as $user) {
+        $bulkInsert = [];
+        foreach ($defaultUsers as $k => $user) {
             $role = $user['role'];
             unset($user['role']);
 
@@ -78,9 +78,18 @@ class UsersTableSeeder extends Seeder
                 $user->assignRole($role);
             }
 
-            $user->save();
+            try {
+                DB::beginTransaction();
+                $user->save();
+                DB::commit();
+                event(new \App\Events\User\RegisterEvent($user));
+                $bulkInsert[$k]['user'] = $user;
+            } catch (Exception $exception) {
+                $bulkInsert[$k]['error'] = $exception->getMessage();
+            }
         }
 
+        // Fake user creation.
         factory(\App\Entities\User::class, 5)->create();
 
 

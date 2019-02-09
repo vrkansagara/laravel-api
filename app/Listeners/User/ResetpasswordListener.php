@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\User;
 
-use App\Events\Register;
+use App\Events\Resetpassword;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class RegisterListener
+class ResetpasswordListener
 {
     /**
      * Create the event listener.
@@ -21,10 +21,10 @@ class RegisterListener
     /**
      * Handle the event.
      *
-     * @param  Register  $event
+     * @param  Resetpassword  $event
      * @return void
      */
-    public function handle(Register $event)
+    public function handle(Resetpassword $event)
     {
         //
     }

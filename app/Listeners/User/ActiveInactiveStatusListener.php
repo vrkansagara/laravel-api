@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\User;
 
-use App\Events\Forgetpassword;
+use App\Events\ActiveInactiveStatus;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ForgetpasswordListener
+class ActiveInactiveStatusListener
 {
     /**
      * Create the event listener.
@@ -21,10 +21,10 @@ class ForgetpasswordListener
     /**
      * Handle the event.
      *
-     * @param  Forgetpassword  $event
+     * @param  ActiveInactiveStatus  $event
      * @return void
      */
-    public function handle(Forgetpassword $event)
+    public function handle(ActiveInactiveStatus $event)
     {
         //
     }
