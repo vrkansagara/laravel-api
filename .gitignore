@@ -17,4 +17,4 @@ yarn-error.log
 _ide_helper.php
 /data/theme
 app/Http/Controllers/SampleController.php
-routes/local.php
+routes/local/*

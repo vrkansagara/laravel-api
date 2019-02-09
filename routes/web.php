@@ -1,6 +1,7 @@
 <?php
 
-includeIfExists(__DIR__.'/local.php');
+includeRouteFiles(__DIR__.'/local/');
+
 
 Route::get('/','IndexController@index')->name('front.home');
 Route::get('language/{language}', 'LanguageController@changeLanguage')->name('language');

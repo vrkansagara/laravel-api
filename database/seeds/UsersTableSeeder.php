@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'System Admin',
                 'email' => 'system@admin.com',
                 'email_verified_at' => $now,
-                'password' => bcrypt(env('SUPERMOST_ADMIN_EMAIL')),
+                'password' => bcrypt(generateRandomString(32)),
                 'remember_token' => str_random(10),
                 'active' => 1,
                 'verify' => 1,
@@ -45,7 +45,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Account Manager',
                 'email' => 'account@manager.com',
                 'email_verified_at' => $now,
-                'password' => bcrypt('account@manager.com'), // secret
+                'password' => bcrypt(generateRandomString(16)), // secret
                 'remember_token' => str_random(10),
                 'active' => 1,
                 'verify' => 1,
@@ -57,7 +57,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Guest',
                 'email' => 'guest@admin.com',
                 'email_verified_at' => $now,
-                'password' => bcrypt('account@manager.com'), // secret
+                'password' => bcrypt(generateRandomString(16)), // secret
                 'remember_token' => str_random(10),
                 'active' => 1,
                 'verify' => 1,

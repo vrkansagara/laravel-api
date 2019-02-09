@@ -5,7 +5,7 @@ use Laravel\Telescope\Http\Middleware\Authorize;
 
 return [
 
-    'path' => 'telescope',
+    'path' => 'appdebug',
 
     /*
     |--------------------------------------------------------------------------
