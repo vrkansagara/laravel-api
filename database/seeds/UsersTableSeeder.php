@@ -18,11 +18,10 @@ class UsersTableSeeder extends Seeder
         $this->truncate('users');
         $defaultUsers = [
             [
-                'id' => 0,
                 'name' => 'System Admin',
                 'email' => 'system@admin.com',
                 'email_verified_at' => $now,
-                'password' => bcrypt('supermost@admin.com'),
+                'password' => bcrypt(env('SUPERMOST_ADMIN_EMAIL')),
                 'remember_token' => str_random(10),
                 'active' => 1,
                 'verify' => 1,
@@ -34,7 +33,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Supermost Admin',
                 'email' => 'supermost@admin.com',
                 'email_verified_at' => $now,
-                'password' => bcrypt('supermost@admin.com'),
+                'password' => bcrypt(env('SUPERMOST_ADMIN_EMAIL')),
                 'remember_token' => str_random(10),
                 'active' => 1,
                 'verify' => 1,
@@ -82,7 +81,7 @@ class UsersTableSeeder extends Seeder
             $user->save();
         }
 
-        factory(\App\Entities\User::class, 500)->create();
+        factory(\App\Entities\User::class, 5)->create();
 
 
     }

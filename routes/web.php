@@ -1,5 +1,7 @@
 <?php
 
+includeIfExists(__DIR__.'/local.php');
+
 Route::get('/','IndexController@index')->name('front.home');
 Route::get('language/{language}', 'LanguageController@changeLanguage')->name('language');
 
@@ -35,13 +37,3 @@ Route::post('permissions/get', 'PermissionsController@getPermissionListForDataTa
 
 // Manage User Profile
 Route::resource('profile', 'UserprofileController');
-
-
-
-
-if (hash_equals(env('APP_ENV'), 'local')) {
-    Route::get('sample', 'SampleController@indexAction')->name('sample');
-    Route::get('sample/page', 'SampleController@samplePageAction')->name('sample.page');
-    Route::post('sample/submit', 'SampleController@submitAction')->name('sample.submit');
-
-}
