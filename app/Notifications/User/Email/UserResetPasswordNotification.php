@@ -49,7 +49,7 @@ EOF;
 Hello $userName ,
 GREAT;
 
-        
+
         return (new MailMessage)
             ->subject(' [User] - [ Reset password ] event fired on '. route('front.home'))
             ->greeting($greeting)
