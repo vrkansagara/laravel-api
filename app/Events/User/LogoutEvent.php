@@ -2,8 +2,10 @@
 
 namespace App\Events\User;
 
+use App\Entities\User;
 use App\Traits\EventTraits;
 use Illuminate\Broadcasting\Channel;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,21 +13,24 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class LogoutEvent
+class LogoutEvent implements ShouldQueue
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     use EventTraits;
 
+
+    public $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
+
 
     /**
      * Get the channels the event should broadcast on.

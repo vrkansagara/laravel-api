@@ -5,6 +5,7 @@ namespace App\Events\User;
 use App\Entities\User;
 use App\Traits\EventTraits;
 use Illuminate\Broadcasting\Channel;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -12,7 +13,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class RegisterEvent
+class RegisterEvent implements ShouldQueue
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

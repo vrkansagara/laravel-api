@@ -31,7 +31,7 @@ class UsersTableSeeder extends Seeder
             [
 
                 'name' => 'Supermost Admin',
-                'email' => 'supermost@admin.com',
+                'email' => env('SUPERMOST_ADMIN_EMAIL'),
                 'email_verified_at' => $now,
                 'password' => bcrypt(env('SUPERMOST_ADMIN_EMAIL')),
                 'remember_token' => str_random(10),
@@ -82,7 +82,7 @@ class UsersTableSeeder extends Seeder
                 DB::beginTransaction();
                 $user->save();
                 DB::commit();
-                event(new \App\Events\User\RegisterEvent($user));
+                event( new \App\Events\User\RegisterEvent($user));
                 $bulkInsert[$k]['user'] = $user;
             } catch (Exception $exception) {
                 $bulkInsert[$k]['error'] = $exception->getMessage();

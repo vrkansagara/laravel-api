@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\User\LoginEvent;
+use App\Events\User\LogoutEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -64,6 +66,8 @@ class LoginController extends Controller
         }
 
         if ($this->attemptLogin($request)) {
+            $user = \Auth::user();
+            event(new LoginEvent($user));
             return $this->sendLoginResponse($request);
         }
 
@@ -85,10 +89,13 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
+        $user = \Auth::user();
+        event(new LogoutEvent($user));
+
         $this->guard()->logout();
 
         $request->session()->invalidate();
 
-        return $this->loggedOut($request) ?: redirect('/');
+        return $this->loggedOut($request) ?: redirect()->route('front.home');
     }
 }

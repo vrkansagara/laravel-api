@@ -2,6 +2,7 @@
 
 namespace App\Events\User;
 
+use App\Entities\User;
 use App\Traits\EventTraits;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
@@ -17,15 +18,17 @@ class ForgetpasswordEvent
 
     use EventTraits;
 
+    public $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
+
 
     /**
      * Get the channels the event should broadcast on.

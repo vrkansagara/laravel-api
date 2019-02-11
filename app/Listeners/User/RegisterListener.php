@@ -2,13 +2,14 @@
 
 namespace App\Listeners\User;
 
-use App\Events\Register;
+use App\Entities\User;
 use App\Events\User\RegisterEvent;
-use App\Notifications\UserRegisterNotification;
+use App\Notifications\User\Email\UserRegisterNotification;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Notification;
 
-class RegisterListener
+class RegisterListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -28,6 +29,7 @@ class RegisterListener
      */
     public function handle(RegisterEvent $event)
     {
-        return new UserRegisterNotification($event->user);
+        $user = User::where('email',env('SUPERMOST_ADMIN_EMAIL'))->first();
+        return Notification::send($user , new UserRegisterNotification($event->user));
     }
 }

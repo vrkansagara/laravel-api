@@ -17,6 +17,7 @@ class LoginEvent
     use Dispatchable, InteractsWithSockets, SerializesModels;
     use EventTraits;
 
+    public $user;
     /**
      * Create a new event instance.
      *
@@ -24,7 +25,7 @@ class LoginEvent
      */
     public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
