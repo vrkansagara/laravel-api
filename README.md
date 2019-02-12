@@ -3,15 +3,9 @@
 Laravel Admin Panel Starter Kit
 
 
-#### User Login
-![User Login](./data/screenshort/Login-details.png)
-
-#### User Details
-![User Login](./data/screenshort/User-details.png)
+## [ Demo  ](https://api.vrkansagara.in/)
 
 
-### Folder permission
+    User name:- vrkansagara@gmail.coml
 
-    sudo chgrp -R nginx storage bootstrap/cache
-
-    sudo chmod -R ug+rwx storage bootstrap/cache
+    Passwrod:- vrkansagara@gmail.coml
