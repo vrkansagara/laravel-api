@@ -2,7 +2,7 @@
 
 trait DatabaseTrait
 {
-    use DisableForeignKeys,TruncateTable;
+    use DisableForeignKeys, TruncateTable;
     private $dbconfig;
 
     public function __construct()

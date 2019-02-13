@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 
-use League\OAuth2\Server\Repositories\UserRepositoryInterface;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Repositories\interfaces\UserRepository;
@@ -34,7 +33,7 @@ class UsersController extends ApiController
      * @param UserRepository $repository
      * @param UserValidator $validator
      */
-    public function __construct(UserRepositoryInterface $repository, UserValidator $validator)
+    public function __construct(UserRepository $repository, UserValidator $validator)
     {
         $this->repository = $repository;
         $this->validator = $validator;

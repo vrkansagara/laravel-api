@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\ApiController;
+use App\Repositories\TokenRepositoryEloquent;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -10,7 +11,6 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\TokenCreateRequest;
 use App\Http\Requests\TokenUpdateRequest;
-use App\Repositories\interfaces\TokenRepository;
 use App\Validators\TokenValidator;
 
 /**
@@ -36,7 +36,7 @@ class TokensController extends ApiController
      * @param TokenRepository $repository
      * @param TokenValidator $validator
      */
-    public function __construct(TokenRepository $repository, TokenValidator $validator)
+    public function __construct(TokenRepositoryEloquent $repository, TokenValidator $validator)
     {
         $this->repository = $repository;
         $this->validator  = $validator;
