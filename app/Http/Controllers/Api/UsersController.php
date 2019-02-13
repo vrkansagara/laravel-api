@@ -47,7 +47,7 @@ class UsersController extends ApiController
     public function index()
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $users = $this->repository->all()->paginate(1);
+        $users = $this->repository->paginate(1);
 
         if (request()->wantsJson()) {
 
