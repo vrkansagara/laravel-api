@@ -215,4 +215,10 @@ class UsersController extends Controller
         return $this->repository->getUserListForDataTable($payLoad);
         
     }
+
+    public function getUserListForModalBox(UserIndexRequest $request)
+    {
+        return $this->repository->paginate(1);
+
+    }
 }

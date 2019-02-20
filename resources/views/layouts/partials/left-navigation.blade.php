@@ -38,6 +38,11 @@
                             class="nav-label">{{__('menu.permissions')}}</span></a>
                 </li>
             @endcan
+            <li class="{{isActiveRoute('bootstrap*')}}">
+                <a href="{{route('bootstrap.modalbox')}}"><i class="fa fa-th-large"></i> <span
+                        class="nav-label">{{__('Modal Example')}}</span></a>
+            </li>
+
             @if (hash_equals(env('APP_ENV'), 'local')) {
             <li class="{{isActiveRoute('sample*')}}">
                 <a href="{{route('sample.page')}}"><i class="fa fa-th-large"></i> <span
