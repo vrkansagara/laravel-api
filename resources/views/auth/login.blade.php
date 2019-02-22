@@ -41,12 +41,14 @@
                     </div>
 
 
-                    <input class="form-check-input" type="checkbox" name="remember"
-                           id="remember" {{ old('remember') ? 'checked' : '' }}>
+                    <div class="form-group">
+                        <input class="form-check-input" type="checkbox" name="remember"
+                               id="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <label class="form-check-label" for="remember">
+                            {{ __('Remember Me') }}
+                        </label>
+                    </div>
 
-                    <label class="form-check-label" for="remember">
-                        {{ __('Remember Me') }}
-                    </label>
 
 
                     <button type="submit" class="btn btn-primary block full-width m-b">{{ __('Login') }}</button>

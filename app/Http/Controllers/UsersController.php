@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\User;
+use App\Http\Requests\User\UserCreateRequest;
 use App\Http\Requests\User\UserIndexRequest;
-use Illuminate\Http\Request;
-
+use App\Http\Requests\User\UserShowRequest;
+use App\Http\Requests\User\UserUpdateRequest;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\interfaces\UserRepository;
 use App\Validators\UserValidator;
 
@@ -38,29 +39,31 @@ class UsersController extends Controller
     public function __construct(UserRepository $repository, UserValidator $validator)
     {
         $this->repository = $repository;
-        $this->validator  = $validator;
+        $this->validator = $validator;
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param UserIndexRequest $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(UserIndexRequest $request)
     {
+        $this->authorize(__FUNCTION__, Auth::user());
+        return view('users.index');
+    }
+
+    /**
+     * @param UserIndexRequest $request
+     * @return mixed
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function getUserListForDataTable(UserIndexRequest $request)
+    {
+        $this->authorize('indexx', Auth::user());
         $payLoad = $request->all();
+        return $this->repository->getUserListForDataTable($payLoad);
 
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $users = $this->repository->all();
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $users,
-            ]);
-        }
-
-        return view('users.index', compact('users'));
     }
 
     /**
@@ -82,7 +85,7 @@ class UsersController extends Controller
 
             $response = [
                 'message' => 'User created.',
-                'data'    => $user->toArray(),
+                'data' => $user->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -94,7 +97,7 @@ class UsersController extends Controller
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
-                    'error'   => true,
+                    'error' => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
@@ -133,16 +136,23 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->repository->find($id);
+        $this->authorize(__FUNCTION__, \Auth::user(), new User());
 
-        return view('users.edit', compact('user'));
+        $user = $this->repository->find($id);
+//        $jsValidation = $request->rules();
+//        echo '<pre>'; print_r($jsValidation); echo __FILE__; echo __LINE__; exit(0);
+        $layoutData = [
+            'user' => $user
+        ];
+
+        return view('users.edit', $layoutData);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  UserUpdateRequest $request
-     * @param  string            $id
+     * @param  string $id
      *
      * @return Response
      *
@@ -158,7 +168,7 @@ class UsersController extends Controller
 
             $response = [
                 'message' => 'User updated.',
-                'data'    => $user->toArray(),
+                'data' => $user->toArray(),
             ];
 
             if ($request->wantsJson()) {
@@ -172,7 +182,7 @@ class UsersController extends Controller
             if ($request->wantsJson()) {
 
                 return response()->json([
-                    'error'   => true,
+                    'error' => true,
                     'message' => $e->getMessageBag()
                 ]);
             }
@@ -204,17 +214,7 @@ class UsersController extends Controller
         return redirect()->back()->with('message', 'User deleted.');
     }
 
-    /**
-     * Get user list for data table.
-     * @param UserIndexRequest $request
-     * @return mixed
-     */
-    public function getUserListForDataTable(UserIndexRequest $request)
-    {
-        $payLoad = $request->all();
-        return $this->repository->getUserListForDataTable($payLoad);
-        
-    }
+
 
     public function getUserListForModalBox(UserIndexRequest $request)
     {

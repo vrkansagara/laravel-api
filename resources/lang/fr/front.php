@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'home' => 'maison......in french'
+    'home' => 'maison'
 ];

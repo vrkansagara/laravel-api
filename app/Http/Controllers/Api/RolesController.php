@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Entities\Acl\Role\Role;
 use App\Http\Controllers\ApiController;
 use App\Repositories\interfaces\Acl\Role\RoleRepositoryInterface;
 use App\Validators\RoleValidator;

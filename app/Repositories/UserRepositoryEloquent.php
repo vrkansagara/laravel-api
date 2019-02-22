@@ -56,7 +56,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
     public function getUserListForDataTable( array  $payLoad)
     {
-        $users = $this->all();
+        $users = $this->findByField('name','name');
         return DataTables::of($users)
             ->escapeColumns(['name', 'email'])
             ->editColumn('status', function ($user) {

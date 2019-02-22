@@ -61,8 +61,18 @@
     <script src="{{asset('assets/js/plugins/dataTables/dataTables.bootstrap4.min.js')}}"></script>
     <!-- Page-Level Scripts END-->
     <script>
-
         $(document).ready(function () {
+            $.fn.dataTable.ext.errMode = 'none';
+            $.fn.dataTable.ext.errMode = function (settings, tn, msg) {
+                debugger;
+                if (settings && settings.jqXHR && settings.jqXHR.status == 403) {
+                    // Handling for 401 specifically
+                    $("#" + settings.nTable.id).append("<b>This action is unauthorized.</b>");
+                }
+                // Handling for all other errors, this implements the DataTables default
+                // behavior of throwing an alert
+
+            };
             $('#userDataTable').DataTable({
                 processing: true,
                 serverSide: true,
@@ -70,6 +80,14 @@
                     url: '{{ route("user.get.list") }}',
                     type: 'post',
                     data: {status: 1, trashed: false}
+                },
+                error: function(reason) {
+                    console.log("Error occurred !",reason);
+                    // parse "reason" here and take appropriate action
+                    $("#userDataTable").append(reason);
+                },
+                failure: function () {
+                    $("#userDataTable").append(" Error when fetching data please contact administrator");
                 },
                 columns: [
                     {data: 'name', name: 'name'},
