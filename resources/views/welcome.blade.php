@@ -21,6 +21,9 @@
     @include('layouts.partials.google.analytics')
 </head>
 <body id="page-top" class="landing-page no-skin-config">
+<div style="font-family: sans-serif; position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1050; text-align: center; font-weight: bold; font-size: 120%; color: #FFF; background-color: #1ab394; padding: 5px 0;">
+    <a  style="color: #FFFF;" target="_blank" href="https://github.com/vrkansagara/laravel-adminpanel-starter-kit">Fork me on github </a>
+</div>
 <div class="navbar-wrapper">
     <nav class="navbar navbar-default navbar-fixed-top navbar-expand-md" role="navigation">
         <div class="container">
