@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\User;
-use App\Http\Requests\User\UserCreateRequest;
-use App\Http\Requests\User\UserIndexRequest;
-use App\Http\Requests\User\UserShowRequest;
-use App\Http\Requests\User\UserUpdateRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -20,19 +17,11 @@ use App\Validators\UserValidator;
  */
 class UsersController extends Controller
 {
-    /**
-     * @var UserRepository
-     */
     protected $repository;
-
-    /**
-     * @var UserValidator
-     */
     protected $validator;
 
     /**
      * UsersController constructor.
-     *
      * @param UserRepository $repository
      * @param UserValidator $validator
      */
@@ -43,22 +32,22 @@ class UsersController extends Controller
     }
 
     /**
-     * @param UserIndexRequest $request
+     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function index(UserIndexRequest $request)
+    public function index(Request $request)
     {
         $this->authorize(__FUNCTION__, Auth::user());
         return view('users.index');
     }
 
     /**
-     * @param UserIndexRequest $request
+     * @param Request $request
      * @return mixed
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function getUserListForDataTable(UserIndexRequest $request)
+    public function getUserListForDataTable(Request $request)
     {
         $this->authorize('index', Auth::user());
         $payLoad = $request->all();
@@ -67,15 +56,10 @@ class UsersController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  UserCreateRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function store(UserCreateRequest $request)
+    public function store(Request $request)
     {
         try {
 
@@ -107,11 +91,8 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
     public function show($id)
     {
@@ -128,11 +109,9 @@ class UsersController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($id)
     {
@@ -149,16 +128,11 @@ class UsersController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  UserUpdateRequest $request
-     * @param  string $id
-     *
-     * @return Response
-     *
-     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function update(UserUpdateRequest $request, $id)
+    public function update(Request $request, $id)
     {
         try {
 
@@ -191,13 +165,9 @@ class UsersController extends Controller
         }
     }
 
-
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     *
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
@@ -214,9 +184,11 @@ class UsersController extends Controller
         return redirect()->back()->with('message', 'User deleted.');
     }
 
-
-
-    public function getUserListForModalBox(UserIndexRequest $request)
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getUserListForModalBox(Request $request)
     {
         return $this->repository->paginate(1);
 
