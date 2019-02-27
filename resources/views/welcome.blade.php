@@ -188,8 +188,8 @@
         <div class="row m-b-lg">
             <div class="col-lg-12 text-center">
                 <div class="navy-line"></div>
-                <h1>Our Team</h1>
-                <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.</p>
+                <h1>Contributors</h1>
+                <p>Thanks to our contributors of this starter kit.</p>
             </div>
         </div>
         <div class="row">
