@@ -144,13 +144,12 @@ class UsersController extends Controller
                 'message' => 'User updated.',
                 'data' => $user->toArray(),
             ];
-
             if ($request->wantsJson()) {
 
                 return response()->json($response);
             }
 
-            return redirect()->back()->with('message', $response['message']);
+            return redirect()->route('users.index')->with('message', $response['message']);
         } catch (ValidatorException $e) {
 
             if ($request->wantsJson()) {

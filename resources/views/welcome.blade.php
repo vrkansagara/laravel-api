@@ -196,7 +196,7 @@
 
             <div class="col-sm-12">
                 <div class="team-member wow zoomIn">
-                    <img src="https://avatars2.githubusercontent.com/u/12006483?s=460&v=4" class="img-fluid rounded-circle" style="height:230px"  alt="">
+                    <img src="https://avatars2.githubusercontent.com/u/12006483?s=460&v=4" class="img-fluid rounded-circle img-lg" alt="">
                     <h4><span class="navy">Vallabh</span> Kansagara</h4>
                     <p>A day by Software Engineering ,Open source contributor at @github with various projects.</p>
                     <ul class="list-inline social-icon">

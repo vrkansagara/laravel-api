@@ -133,7 +133,7 @@ var dataTable = function (dataTableParams) {
                 }
             }
         ],
-        searchDelay:searchDelay,
+        searchDelay: searchDelay,
         language: {
             emptyTable: "No data available",
             loadingRecords: '&nbsp;',
