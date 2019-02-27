@@ -27,7 +27,7 @@ class UserprofileController extends Controller
 //        dd($user->getMedia());
         $validationRules = config('validation_rules.user_profile');
         $validator = JsValidatorFacade::make($validationRules);
-        if (isset(Auth::user()->media) && null !=  Auth::user()->media){
+        if (isset(Auth::user()->media) && null !=  Auth::user()->media->first()){
             $userImage = Auth::user()->media->first()->getFullUrl();
         }else{
             $userImage = '';
