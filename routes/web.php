@@ -1,6 +1,9 @@
 <?php
 
-includeRouteFiles(__DIR__ . '/local/');
+$localDirectory = __DIR__ . '/local/';
+if(is_dir($localDirectory)){
+    includeRouteFiles($localDirectory);
+}
 
 Route::get('bootstrap/modal', 'BootstrapController@modalBox')->name('bootstrap.modalbox');
 
