@@ -60,7 +60,7 @@ class UsersController extends Controller
      */
     public function getUserListForDataTable(UserIndexRequest $request)
     {
-        $this->authorize('indexx', Auth::user());
+        $this->authorize('index', Auth::user());
         $payLoad = $request->all();
         return $this->repository->getUserListForDataTable($payLoad);
 

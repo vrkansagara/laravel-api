@@ -54,19 +54,44 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 //        $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function getUserListForDataTable( array  $payLoad)
+    public function getUsers($payLoad, array $options = [])
     {
-        $users = $this->findByField('name','name');
+        $payLoadKeys = array_keys($payLoad);
+        $whereCondition = [];
+        $whereNotIn = [];
+
+        if (isset($payLoad['active']) && in_array('active', $payLoadKeys)) {
+            $whereCondition['active'] = $payLoad['active'];
+        }
+
+        if (isset($payLoad['trashed']) && in_array('trashed', array_keys($payLoad)) && is_bool($payLoad['trashed'])) {
+        }
+
+
+//        if (in_array('supper-admin', \Auth::user()->getRoleNames())) {
+//            $this->findWhereNotIn([]);
+//        } else {
+//            $this->findWhereNotIn($whereNotIn);
+//        }
+
+        $query = $this->findWhere($whereCondition);
+
+        return $query;
+    }
+
+    public function getUserListForDataTable(array $payLoad)
+    {
+        $users = $this->getUsers($payLoad);
         return DataTables::of($users)
             ->escapeColumns(['name', 'email'])
             ->editColumn('status', function ($user) {
-                return ( $user->active === 1 ) ? 'Active' : 'Inactive';
+                return ($user->active === 1) ? 'Active' : 'Inactive';
             })
             ->editColumn('verify', function ($user) {
-                return ( $user->verify=== 1 ) ? 'Yes' : 'No';
+                return ($user->verify === 1) ? 'Yes' : 'No';
             })
             ->addColumn('actions', function ($user) {
-                return view('users.listaction',compact('user'))->render();
+                return view('users.listaction', compact('user'))->render();
             })
             ->make(true);
 

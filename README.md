@@ -6,6 +6,6 @@ Laravel Admin Panel Starter Kit
 ## [ Demo  ](https://api.vrkansagara.in/)
 
 
-    User name:- vrkansagara@gmail.coml
+    User name:- vrkansagara@gmail.com
 
-    Passwrod:- vrkansagara@gmail.coml
+    Passwrod:- vrkansagara@gmail.com

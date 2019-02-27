@@ -74,6 +74,7 @@
 <!-- Custom JS -->
 <script src="{{asset('assets/js/custom/custom.js')}}"></script>
 <script src="{{asset('assets/js/custom/ajax.js')}}"></script>
+<script src="{{asset('assets/js/custom/datatable.js')}}"></script>
 @yield('after-script')
 </body>
 </html>

@@ -14,15 +14,7 @@
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#" class="dropdown-item">Config option 1</a>
-                            </li>
-                            <li><a href="#" class="dropdown-item">Config option 2</a>
-                            </li>
-                        </ul>
+                        <a id="btn-reload"><i class="fa fa-circle"></i></a>
                         <a class="close-link">
                             <i class="fa fa-times"></i>
                         </a>
@@ -61,69 +53,29 @@
     <script src="{{asset('assets/js/plugins/dataTables/dataTables.bootstrap4.min.js')}}"></script>
     <!-- Page-Level Scripts END-->
     <script>
+        var params = $.extend({}, dataTableParams_default);
+        params['tableSelector'] = '#userDataTable';
+        params['url'] = '{{ route("user.get.list") }}';
+        params['requestType'] = 'POST';
+        params['data'] = {active: 1, trashed: false};
+        params['pageLength'] = "{{$dataTable['pageLength']}}";
+        params['columns'] = [
+            {data: 'name', name: 'name'},
+            {data: 'email', name: 'email', searchable: true, sortable: true},
+            {data: 'status', name: 'status'},
+            {data: 'verify', name: 'verify'},
+            {data: 'created_at', name: 'created_at'},
+            {data: 'actions', name: 'actions', searchable: false, sortable: false}
+        ];
         $(document).ready(function () {
-            $.fn.dataTable.ext.errMode = 'none';
-            $.fn.dataTable.ext.errMode = function (settings, tn, msg) {
-                debugger;
-                if (settings && settings.jqXHR && settings.jqXHR.status == 403) {
-                    // Handling for 401 specifically
-                    $("#" + settings.nTable.id).append("<b>This action is unauthorized.</b>");
-                }
-                // Handling for all other errors, this implements the DataTables default
-                // behavior of throwing an alert
 
-            };
-            $('#userDataTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: '{{ route("user.get.list") }}',
-                    type: 'post',
-                    data: {status: 1, trashed: false}
-                },
-                error: function(reason) {
-                    console.log("Error occurred !",reason);
-                    // parse "reason" here and take appropriate action
-                    $("#userDataTable").append(reason);
-                },
-                failure: function () {
-                    $("#userDataTable").append(" Error when fetching data please contact administrator");
-                },
-                columns: [
-                    {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email',searchable: true, sortable: true},
-                    {data: 'status', name: 'status'},
-                    {data: 'verify', name: 'verify'},
-                    {data: 'created_at', name: 'created_at'},
-                    {data: 'actions', name: 'actions', searchable: false, sortable: false}
-                ],
-                pageLength: "{{$dataTable['pageLength']}}",
-                // order: [[4, "desc"]],
-                responsive: true,
-                dom: '<"html5buttons"B>lTfgitp',
-                // dom: 'lBfrtip',
-                buttons: [
-                    {extend: 'copy'},
-                    {extend: 'csv'},
-                    {extend: 'excel', title: 'ExampleFile'},
-                    {extend: 'pdf', title: 'ExampleFile'},
-
-                    {
-                        extend: 'print',
-                        customize: function (win) {
-                            $(win.document.body).addClass('white-bg');
-                            $(win.document.body).css('font-size', '10px');
-
-                            $(win.document.body).find('table')
-                                .addClass('compact')
-                                .css('font-size', 'inherit');
-                        }
-                    }
-                ]
-
+            var userTable = dataTable(params);
+            $('#btn-reload').on('click', function () {
+                userTable.ajax.reload();
             });
 
         });
+
 
     </script>
 
