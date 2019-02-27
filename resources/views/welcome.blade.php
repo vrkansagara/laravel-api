@@ -71,7 +71,7 @@
                     </p>
                 </div>
                 <div class="carousel-image wow zoomIn">
-                    <img src="img/landing/laptop.png" alt="laptop"/>
+                    <img src="{{asset('assets/img/landing/laptop.png')}}" alt="laptop"/>
                 </div>
             </div>
             <!-- Set background for slide in css -->
@@ -148,7 +148,7 @@
             </div>
         </div>
         <div class="col-md-6 text-center  wow zoomIn">
-            <img src="img/landing/perspective.png" alt="dashboard" class="img-fluid">
+            <img src="{{asset('assets/img/landing/perspective.png')}}" alt="dashboard" class="img-fluid">
         </div>
         <div class="col-md-3 text-center wow fadeInRight">
             <div>
@@ -178,7 +178,7 @@
             <a href="" class="btn btn-primary">Learn more</a>
         </div>
         <div class="col-lg-6 text-right wow fadeInRight">
-            <img src="img/landing/dashboard.png" alt="dashboard" class="img-fluid float-right">
+            <img src="{{asset('assets/img/landing/dashboard.png')}}" alt="dashboard" class="img-fluid float-right">
         </div>
     </div>
 </section>
@@ -193,47 +193,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4 wow fadeInLeft">
-                <div class="team-member">
-                    <img src="img/landing/avatar3.jpg" class="img-fluid rounded-circle img-small" alt="">
-                    <h4><span class="navy">Amelia</span> Smith</h4>
-                    <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus. </p>
-                    <ul class="list-inline social-icon">
-                        <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-4">
+
+            <div class="col-sm-12">
                 <div class="team-member wow zoomIn">
-                    <img src="img/landing/avatar1.jpg" class="img-fluid rounded-circle" alt="">
-                    <h4><span class="navy">John</span> Novak</h4>
-                    <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.</p>
+                    <img src="https://avatars2.githubusercontent.com/u/12006483?s=460&v=4" class="img-fluid rounded-circle" style="height:230px"  alt="">
+                    <h4><span class="navy">Vallabh</span> Kansagara</h4>
+                    <p>A day by Software Engineering ,Open source contributor at @github with various projects.</p>
                     <ul class="list-inline social-icon">
-                        <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a>
+                        <li class="list-inline-item"><a  target="_blank" href="https://twitter.com/vrkansagara"><i class="fa fa-twitter"></i></a>
                         </li>
-                        <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a>
+                        <li class="list-inline-item"><a  target="_blank" href="https://www.facebook.com/VRKANSAGARA"><i class="fa fa-facebook"></i></a>
                         </li>
-                        <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-4 wow fadeInRight">
-                <div class="team-member">
-                    <img src="img/landing/avatar2.jpg" class="img-fluid rounded-circle img-small" alt="">
-                    <h4><span class="navy">Peter</span> Johnson</h4>
-                    <p>Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.</p>
-                    <ul class="list-inline social-icon">
-                        <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a>
+                        <li class="list-inline-item"><a  target="_blank" href="https://www.linkedin.com/in/vrkansagara"><i class="fa fa-linkedin"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -264,7 +235,7 @@
                 <a href="" class="btn btn-primary">Learn more</a>
             </div>
             <div class="col-lg-6 text-right m-t-n-lg wow zoomIn">
-                <img src="img/landing/iphone.jpg" class="img-fluid" alt="dashboard">
+                <img src="{{asset('assets/img/landing/iphone.jpg')}}" class="img-fluid" alt="dashboard">
             </div>
             <div class="col-lg-3 features-text text-right wow fadeInRight">
                 <small>INSPINIA</small>
@@ -375,7 +346,7 @@
                 </div>
                 <div class="comments-avatar">
                     <a href="" class="float-left">
-                        <img alt="image" src="img/landing/avatar3.jpg">
+                        <img alt="image" src="{{asset('assets/img/landing/avatar3.jpg')}}">
                     </a>
                     <div class="media-body">
                         <div class="commens-name">
@@ -392,7 +363,7 @@
                 </div>
                 <div class="comments-avatar">
                     <a href="" class="float-left">
-                        <img alt="image" src="img/landing/avatar1.jpg">
+                        <img alt="image" src="{{asset('assets/img/landing/avatar1.jpg')}}">
                     </a>
                     <div class="media-body">
                         <div class="commens-name">
@@ -409,7 +380,7 @@
                 </div>
                 <div class="comments-avatar">
                     <a href="" class="float-left">
-                        <img alt="image" src="img/landing/avatar2.jpg">
+                        <img alt="image" src="{{asset('assets/img/landing/avatar2.jpg')}}">
                     </a>
                     <div class="media-body">
                         <div class="commens-name">
@@ -616,11 +587,11 @@
                     Or follow us on social platform
                 </p>
                 <ul class="list-inline social-icon">
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a>
+                    <li class="list-inline-item"><a  target="_blank" href="#"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a>
+                    <li class="list-inline-item"><a  target="_blank" href="#"><i class="fa fa-facebook"></i></a>
                     </li>
-                    <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a>
+                    <li class="list-inline-item"><a  target="_blank" href="#"><i class="fa fa-linkedin"></i></a>
                     </li>
                 </ul>
             </div>
