@@ -12,6 +12,7 @@ class UserprofileController extends Controller
 {
 
     private $userRepository;
+
     public function __construct(UserRepository $userRepository)
     {
         $this->middleware('auth');
@@ -26,16 +27,17 @@ class UserprofileController extends Controller
 //        dd($user->getMedia());
         $validationRules = config('validation_rules.user_profile');
         $validator = JsValidatorFacade::make($validationRules);
-
+        $userImage = Auth::user()->media->first()->getFullUrl();
         $layoutData = [
 //            'validator' => $validator
+            'userImageUrl' => $userImage
         ];
 
         return view('users.profile.index', $layoutData);
 
     }
 
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
 
         $user = $this->userRepository->find($id);
@@ -43,6 +45,7 @@ class UserprofileController extends Controller
         $image = $request->file('image');
 
         $user->addMedia($image)->toMediaCollection('avatar');
+        $media = $user->media->first()->getUrl();
         $payLoad = $request->all();
 
         return redirect()->route('profile.index');

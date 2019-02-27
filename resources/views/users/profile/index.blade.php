@@ -8,7 +8,7 @@
 
     <div class="row m-b-lg m-t-lg">
         <div class="profile-image">
-            <img src="#" class="rounded-circle circle-border m-b-md" alt="profile">
+            <img src="{{$userImageUrl}}" class="rounded-circle circle-border m-b-md" alt="profile">
         </div>
         <div class="profile-info">
             <div class="">
