@@ -58,6 +58,6 @@
 
 @section('after-script')
     <!-- Laravel Javascript Validation -->
-{{--    {!! $validator->selector('#user-profile') !!}--}}
+    {!! $validator->selector('#user-profile') !!}
 @endsection
 

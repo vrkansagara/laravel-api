@@ -11,8 +11,8 @@ return [
         'password' => 'required|min:3|max:80',
     ],
     'user_profile' => [
-        'image' => 'sometime|file',
-        'password' => 'required|min:3|max:80',
-        'confirm_password' => 'required|same:password',
+        'image' => 'sometimes|mimes:jpeg,jpg,png,gif|max:10000',
+        'password' => 'sometimes|max:80',
+        'confirm_password' => 'sometimes|same:password',
     ]
 ];

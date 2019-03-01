@@ -7,7 +7,7 @@
             <h5>User edit</h5>
         </div>
         <div class="ibox-content">
-            {{Form::model($user,['route'=> ['users.update',$user->id],'method' => 'patch'])}}
+            {{Form::model($user,['route'=> ['users.update',$user->id],'method' => 'patch','id'=>'userProfile'])}}
                 <div class="form-group row">
                     {{ Form::label('email','Email',['class'=>"col-lg-2 col-form-label"]) }}
                     <div class="col-lg-10">
@@ -35,7 +35,8 @@
 
 
 @section('after-script')
-
+{{ $validator->selector('#user-profile') }}
 @endsection
+
 
 

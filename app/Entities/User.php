@@ -80,8 +80,6 @@ class User extends Authenticatable implements Transformable, HasMedia
     {
         $this->addMediaCollection('avatar')
             ->singleFile();
-
-
     }
 
 }

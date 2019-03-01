@@ -3,13 +3,12 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <img src="" alt="">
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="block m-t-xs font-bold">{{$user->name}}</span>
-                        <span class="text-muted text-xs block">menu <b class="caret"></b></span>
+                        <span class="text-muted text-xs block">Menu <b class="caret"></b></span>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                        <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                        <li><a href="{{route('force.logout')}}"><i class="fa fa-sign-out"></i> Log out</a></li>
                         <li><a class="dropdown-item" href="{{route('profile.index')}}">Profile</a></li>
                     </ul>
                 </div>
