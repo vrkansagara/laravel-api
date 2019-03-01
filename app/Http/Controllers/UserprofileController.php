@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -25,7 +25,7 @@ class UserprofileController extends Controller
     public function index(Request $request)
     {
 
-        $validationRules = config('validation_rules.user_profile');
+        $validationRules = config('validation_rules.user.profile');
         $validator = JsValidatorFacade::make($validationRules);
 
         $layoutData = [
@@ -40,7 +40,7 @@ class UserprofileController extends Controller
     public function update(Request $request, $id)
     {
 
-        $validationRules = config('validation_rules.user_profile');
+        $validationRules = config('validation_rules.user.profile');
 
         $validator = Validator::make($request->toArray(),$validationRules);
         if($validator->fails()){

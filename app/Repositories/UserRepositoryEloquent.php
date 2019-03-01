@@ -1,8 +1,13 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Repositories;
 
 use App\Criteria\OrderbyDescCriteria;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Queue;
+use PhpParser\Node\Expr\Cast\Bool_;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\interfaces\UserRepository;
@@ -54,7 +59,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 //        $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function getUsers($payLoad, array $options = [])
+    public function getUsers($payLoad, array $options = []): Collection
     {
         $payLoadKeys = array_keys($payLoad);
         $whereCondition = [];
@@ -67,19 +72,12 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         if (isset($payLoad['trashed']) && in_array('trashed', array_keys($payLoad)) && is_bool($payLoad['trashed'])) {
         }
 
-
-//        if (in_array('supper-admin', \Auth::user()->getRoleNames())) {
-//            $this->findWhereNotIn([]);
-//        } else {
-//            $this->findWhereNotIn($whereNotIn);
-//        }
-
         $query = $this->findWhere($whereCondition);
 
         return $query;
     }
 
-    public function getUserListForDataTable(array $payLoad)
+    public function getUserListForDataTable(array $payLoad): JsonResponse
     {
         $users = $this->getUsers($payLoad);
         return DataTables::of($users)
@@ -95,5 +93,20 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
             })
             ->make(true);
 
+    }
+
+    /**
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function isEditableUser(User $user): bool
+    {
+        $disAllowedEmailAddress = [env('SUPERMOST_ADMIN_EMAIL')];
+        if (in_array($user->email, $disAllowedEmailAddress)) {
+            return false;
+        }
+
+        return true;
     }
 }

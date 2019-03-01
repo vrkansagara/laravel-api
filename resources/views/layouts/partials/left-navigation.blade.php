@@ -3,6 +3,9 @@
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
+                    <div class="profile-image">
+                        <img src="{{$user->profileImage()}}" class="rounded-circle circle-border m-b-md" alt="profile">
+                    </div>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="block m-t-xs font-bold">{{$user->name}}</span>
                         <span class="text-muted text-xs block">Menu <b class="caret"></b></span>

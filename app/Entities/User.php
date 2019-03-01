@@ -2,12 +2,14 @@
 
 namespace App\Entities;
 
+use App\Entities\User\UserAttributes;
 use App\Traits\ModelTraits;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\MediaLibrary\File;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
@@ -31,6 +33,8 @@ class User extends Authenticatable implements Transformable, HasMedia
     use HasRoles;
 
     use HasMediaTrait;
+
+    use UserAttributes;
 
     protected $guard_name = 'web'; // or whatever guard you want to use
 
@@ -65,7 +69,7 @@ class User extends Authenticatable implements Transformable, HasMedia
      *
      * @var array
      */
-    protected $visible = ['id', 'name', 'email','active','verify','created_at'];
+    protected $visible = ['id', 'name', 'email', 'active', 'verify', 'created_at'];
 
 
     public function errors()
@@ -76,10 +80,19 @@ class User extends Authenticatable implements Transformable, HasMedia
 
     // in your model
 
-    public function registerMediaCollections()
+    public function registerMediaCollections(Media $media = null)
     {
         $this->addMediaCollection('avatar')
+            ->acceptsFile(function (File $file) {
+                return $file->mimeType === 'image/jpeg';
+            })
             ->singleFile();
+
+        $this->addMediaConversion('thumb')->width(40)->height(40)->sharpen(10);
+        $this->addMediaConversion('email')->width(100)->height(100)->performOnCollections('logo');
+        $this->addMediaConversion('base')->width(225)->height(225)->performOnCollections('logo');
+
+
     }
 
 }

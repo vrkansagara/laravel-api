@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -9,6 +9,7 @@ use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Repositories\interfaces\UserRepository;
 use App\Validators\UserValidator;
+use Proengsoft\JsValidation\Facades\JsValidatorFacade;
 
 /**
  * Class UsersController.
@@ -118,10 +119,15 @@ class UsersController extends Controller
         $this->authorize(__FUNCTION__, \Auth::user(), new User());
 
         $user = $this->repository->find($id);
-//        $jsValidation = $request->rules();
-//        echo '<pre>'; print_r($jsValidation); echo __FILE__; echo __LINE__; exit(0);
+        $isUserEditable = $this->repository->isEditableUser($user);
+        echo '<pre>'; print_r($isUserEditable); echo __FILE__; echo __LINE__; exit(0);
+
+        $validationRules = config('validation_rules.user.create_edit');
+        $validator = JsValidatorFacade::make($validationRules);
+
         $layoutData = [
-            'user' => $user
+            'user' => $user,
+            'validator' => $validator
         ];
 
         return view('users.edit', $layoutData);

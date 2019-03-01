@@ -30,7 +30,7 @@
         "fzaninotto/faker": "^1.8",
         "graham-campbell/flysystem": "^5.1",
         "laravel/cashier": "^8.0",
-        "laravel/framework": "5.7.*",
+        "laravel/framework": "5.8.*",
         "laravel/horizon": "^2.0",
         "laravel/passport": "^7.0",
         "laravel/socialite": "^4.1",
