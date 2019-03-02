@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('wrapper-class','animated fadeInRight')
 @section('after-style')
     <link href="{{asset('assets/css/plugins/dataTables/datatables.min.css')}}" rel="stylesheet">
 @endsection
