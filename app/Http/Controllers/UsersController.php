@@ -120,6 +120,10 @@ class UsersController extends Controller
 
         $user = $this->repository->find($id);
         $isUserEditable = $this->repository->isEditableUser($user);
+
+        if(!$isUserEditable){
+            return redirect()->back()->withErrors('You are not allowed to edit this user!');
+        }
         echo '<pre>'; print_r($isUserEditable); echo __FILE__; echo __LINE__; exit(0);
 
         $validationRules = config('validation_rules.user.create_edit');

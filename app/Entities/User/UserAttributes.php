@@ -1,10 +1,18 @@
 <?php
+
 namespace App\Entities\User;
 
-trait  UserAttributes{
+trait  UserAttributes
+{
 
-    public function  profileImage(){
-        return \Auth::user()->getFirstMedia('avatar')->getFullUrl();
-
+    public function profileImage()
+    {
+        $profileImage = \Auth::user()->getFirstMedia('avatar');
+        if (null !== $profileImage)  {
+            return $profileImage->getFullUrl();
+        }else{
+            $profileImage = asset('assets/img/profile.jpg');
+        }
+        return $profileImage;
     }
 }

@@ -20,7 +20,7 @@
                 </div>
             </li>
             <li class="{{isActiveRoute('dashboard')}}">
-                <a href="{{'dashboard'}}"><i class="fa fa-th-large"></i> <span class="nav-label">{{__('menu.dashboard')}}</span></a>
+                <a href="{{route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">{{__('menu.dashboard')}}</span></a>
             </li>
             @can('user-view')
             <li class="{{isActiveRoute('users*')}}">

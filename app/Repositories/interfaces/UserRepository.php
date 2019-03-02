@@ -2,6 +2,7 @@
 
 namespace App\Repositories\interfaces;
 
+use App\Entities\User;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
@@ -12,4 +13,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface UserRepository extends RepositoryInterface
 {
     public function getUserListForDataTable(array $payLoad);
+
+    public function isEditableUser(User $user);
 }

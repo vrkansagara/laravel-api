@@ -19,3 +19,7 @@ _ide_helper.php
 app/Http/Controllers/SampleController.php
 routes/local/*
 /public/media/
+
+database/db.sqlite-journal
+storage/files/
+storage/medialibrary/

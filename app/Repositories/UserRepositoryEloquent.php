@@ -103,6 +103,9 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function isEditableUser(User $user): bool
     {
         $disAllowedEmailAddress = [env('SUPERMOST_ADMIN_EMAIL')];
+        $disAllowedRoles = ['system-admin', 'supper-most-admin'];
+        $currentUserRole = \Auth::user()->getRoleNames();
+
         if (in_array($user->email, $disAllowedEmailAddress)) {
             return false;
         }

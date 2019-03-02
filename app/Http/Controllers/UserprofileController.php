@@ -30,7 +30,7 @@ class UserprofileController extends Controller
 
         $layoutData = [
             'validator' => $validator,
-            'userImageUrl' => Auth::user()->getFirstMedia('avatar')->getFullUrl()
+            'userImageUrl' => Auth::user()->profileImage()
         ];
 
         return view('users.profile.index', $layoutData);
