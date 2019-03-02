@@ -92,7 +92,7 @@ class UsersTableSeeder extends Seeder
         }
 
         // Fake user creation.
-        factory(\App\Entities\User::class, 5)->create();
+        factory(\App\Entities\User::class, 500)->create();
 
 
     }

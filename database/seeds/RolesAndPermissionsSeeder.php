@@ -59,7 +59,8 @@ class RolesAndPermissionsSeeder extends Seeder
         foreach ($roles as $role) {
             Role::create($role);
         }
-
+        // Fake user creation.
+        factory(\App\Entities\Acl\Role\Role::class, 50)->create();
 
         $permisionMetaItems = [
             'index',
@@ -116,7 +117,6 @@ class RolesAndPermissionsSeeder extends Seeder
         $role->save();
 
 
-
         // Creating bad permission and it's combination.
         $permisionMetaItems = [
             'manageBan',
@@ -140,6 +140,8 @@ class RolesAndPermissionsSeeder extends Seeder
             Permission::create($permission);
         }
 
+        // Fake user creation.
+        factory(\App\Entities\Acl\Permission\Permission::class, 500)->create();
 
         app()['cache']->forget('spatie.permission.cache');
 

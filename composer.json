@@ -98,7 +98,8 @@
             "php artisan ide-helper:meta"
         ],
         "cs-check": "./vendor/bin/phpcs",
-        "cs-fix": "./vendor/bin/phpcbf"
+        "cs-fix": "./vendor/bin/phpcbf",
+        "lclear": "rm -rf bootstrap/cache/*.php  && php artisan view:clear && php artisan config:clear && php artisan route:clear"
     },
     "config": {
         "preferred-install": "dist",
