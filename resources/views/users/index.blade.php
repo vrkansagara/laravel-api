@@ -27,6 +27,7 @@
                         <table class="table table-striped table-bordered table-hover" id="userDataTable">
                             <thead>
                             <tr>
+                                <th></th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Status</th>
@@ -59,25 +60,35 @@
         params['url'] = '{{ route("user.get.list") }}';
         params['requestType'] = 'POST';
         params['data'] = {active: 1, trashed: false};
-        params['pageLength'] = "{{$dataTable['pageLength']}}";
+        params['pageLength'] = {{$dataTable['pageLength']}};
         params['columns'] = [
+            {data: 'DT_RowIndex', orderable: false, searchable: false},
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email', searchable: true, sortable: true},
-            {data: 'status', name: 'status'},
-            {data: 'verify', name: 'verify'},
+            {data: 'status', name: 'status',orderable: false, searchable: false},
+            {data: 'verify', name: 'verify',orderable: false, searchable: false},
             {data: 'created_at', name: 'created_at'},
             {data: 'actions', name: 'actions', searchable: false, sortable: false}
         ];
-        $(document).ready(function () {
+        params['buttons'] = [];
+        params['columnDefs'] =  [{
+            targets: 'no-sort',
+            orderable: false,
+        },{
+            targets: 0,
+            visible: true,
+        },{
+            targets: 6,
+            className: 'text-center',
+        }];
 
+        $(document).ready(function () {
             var userTable = dataTable(params);
             $('#btn-reload').on('click', function () {
                 userTable.ajax.reload();
             });
 
         });
-
-
     </script>
 
 @endsection

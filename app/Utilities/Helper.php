@@ -374,6 +374,7 @@ if (!function_exists('isActiveRoute')) {
         if (request()->is($route)) {
             return $output;
         }
+        return 'inactive';
     }
 }
 

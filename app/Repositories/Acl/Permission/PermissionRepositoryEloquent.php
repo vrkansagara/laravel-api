@@ -62,6 +62,7 @@ class PermissionRepositoryEloquent extends BaseRepository implements PermissionR
     {
         $roles = $this->all();
         return DataTables::of($roles)
+            ->addIndexColumn()
             ->escapeColumns(['name'])
             ->addColumn('actions', function ($permission) {
                 return view('permissions.listaction',compact('permission'))->render();

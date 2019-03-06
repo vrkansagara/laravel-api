@@ -55,16 +55,17 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      */
     public function boot()
     {
-        $this->pushCriteria(OrderbyDescCriteria::class);
+//        $this->pushCriteria(OrderbyDescCriteria::class);
 //        $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function getUsers($payLoad, array $options = []): Collection
+    public function getUsers($payLoad, array $options = [])
     {
         $payLoadKeys = array_keys($payLoad);
         $whereCondition = [];
         $whereNotIn = [];
 
+        $query = $this;
         if (isset($payLoad['active']) && in_array('active', $payLoadKeys)) {
             $whereCondition['active'] = $payLoad['active'];
         }
@@ -72,8 +73,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         if (isset($payLoad['trashed']) && in_array('trashed', array_keys($payLoad)) && is_bool($payLoad['trashed'])) {
         }
 
-        $query = $this->findWhere($whereCondition);
-
+        $query  = $query->findWhere($whereCondition);
         return $query;
     }
 
@@ -81,12 +81,13 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
         $users = $this->getUsers($payLoad);
         return DataTables::of($users)
+            ->addIndexColumn()
             ->escapeColumns(['name', 'email'])
             ->editColumn('status', function ($user) {
-                return ($user->active === 1) ? 'Active' : 'Inactive';
+                return ($user->active == 1) ? 'Active' : 'Inactive';
             })
             ->editColumn('verify', function ($user) {
-                return ($user->verify === 1) ? 'Yes' : 'No';
+                return ($user->verify == 1) ? 'Yes' : 'No';
             })
             ->addColumn('actions', function ($user) {
                 return view('users.listaction', compact('user'))->render();
@@ -99,14 +100,13 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      *
      * @param User $user
      * @return bool
+     * @todo
      */
     public function isEditableUser(User $user): bool
     {
-        $disAllowedEmailAddress = [env('SUPERMOST_ADMIN_EMAIL')];
         $disAllowedRoles = ['system-admin', 'supper-most-admin'];
-        $currentUserRole = \Auth::user()->getRoleNames();
-
-        if (in_array($user->email, $disAllowedEmailAddress)) {
+        $currentUserRole = $user->getRoleNames()->toArray();
+        if (count(array_intersect($disAllowedRoles,$currentUserRole)) >= 1 ) {
             return false;
         }
 

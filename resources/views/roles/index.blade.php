@@ -31,9 +31,10 @@
                 <div class="ibox-content">
 
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" id="userDataTable">
+                        <table class="table table-striped table-bordered table-hover" id="roleDataTable">
                             <thead>
                             <tr>
+                                <th></th>
                                 <th>Name</th>
                                 <th>Display name</th>
                                 <th>Guard name</th>
@@ -59,52 +60,40 @@
     <script src="{{asset('assets/js/plugins/dataTables/datatables.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/dataTables/dataTables.bootstrap4.min.js')}}"></script>
     <!-- Page-Level Scripts END-->
+
     <script>
+        var params = $.extend({}, dataTableParams_default);
+        params['tableSelector'] = '#roleDataTable';
+        params['url'] = '{{ route("role.get.list") }}';
+        params['requestType'] = 'POST';
+        params['data'] = {active: 1, trashed: false};
+        params['pageLength'] = {{$dataTable['pageLength']}};
+        params['columns'] = [
+            {data: 'DT_RowIndex', orderable: false, searchable: false},
+            {data: 'name', name: 'name'},
+            {data: 'display_name', name: 'display_name'},
+            {data: 'guard_name', name: 'guard_name'},
+            {data: 'created_at', name: 'created_at'},
+            {data: 'actions', name: 'actions', searchable: false, sortable: false}
+        ];
+        params['buttons'] = [];
+        params['columnDefs'] = [{
+            targets: 'no-sort',
+            orderable: false,
+        }, {
+            targets: 0,
+            visible: true,
+        }, {
+            targets: 5,
+            className: 'text-center',
+        }];
 
         $(document).ready(function () {
-            $('#userDataTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: '{{ route("role.get.list") }}',
-                    type: 'post',
-                    data: {status: 1, trashed: false}
-                },
-                columns: [
-                    {data: 'name', name: 'name'},
-                    {data: 'display_name', name: 'display_name'},
-                    {data: 'guard_name', name: 'guard_name'},
-                    {data: 'created_at', name: 'created_at'},
-                    {data: 'actions', name: 'actions', searchable: false, sortable: false}
-                ],
-                pageLength: "{{$dataTable['pageLength']}}",
-                order: [[3, "desc"]],
-                responsive: true,
-                dom: '<"html5buttons"B>lTfgitp',
-                // dom: 'lBfrtip',
-                buttons: [
-                    {extend: 'copy'},
-                    {extend: 'csv'},
-                    {extend: 'excel', title: 'ExampleFile'},
-                    {extend: 'pdf', title: 'ExampleFile'},
-
-                    {
-                        extend: 'print',
-                        customize: function (win) {
-                            $(win.document.body).addClass('white-bg');
-                            $(win.document.body).css('font-size', '10px');
-
-                            $(win.document.body).find('table')
-                                .addClass('compact')
-                                .css('font-size', 'inherit');
-                        }
-                    }
-                ]
-
+            var roleTable = dataTable(params);
+            $('#btn-reload').on('click', function () {
+                roleTable.ajax.reload();
             });
 
         });
-
     </script>
-
 @endsection

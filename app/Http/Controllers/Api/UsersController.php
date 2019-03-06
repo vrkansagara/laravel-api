@@ -46,16 +46,6 @@ class UsersController extends ApiController
      */
     public function index()
     {
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $users = $this->repository->paginate(1);
-
-        if (request()->wantsJson()) {
-
-            return response()->json([
-                'data' => $users,
-            ]);
-        }
-
         return view('users.index', compact('users'));
     }
 
@@ -200,22 +190,4 @@ class UsersController extends ApiController
         return redirect()->back()->with('message', 'User deleted.');
     }
 
-
-    public function test(Request $request)
-    {
-//
-//
-//        $payLoad = $request->all();
-//
-//
-//        $responseData = [
-//            'message' => 'User list',
-//            'data' => [
-//                'users' => $this->repository->all()
-//            ],
-//        ];
-//
-//        return $this->response($responseData);
-
-    }
 }

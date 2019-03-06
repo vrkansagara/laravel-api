@@ -77,7 +77,7 @@
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions', searchable: false, sortable: false}
                 ],
-                pageLength: "{{$dataTable['pageLength']}}",
+                pageLength: {{$dataTable['pageLength']}},
                 order: [[3, "desc"]],
                 responsive: true,
                 dom: '<"html5buttons"B>lTfgitp',

@@ -1,7 +1,7 @@
 <?php
 
 $localDirectory = __DIR__ . '/local/';
-if(is_dir($localDirectory)){
+if (is_dir($localDirectory)) {
     includeRouteFiles($localDirectory);
 }
 
@@ -19,7 +19,6 @@ Route::get('/ping', function () {
 });
 
 
-
 Route::get('/', 'IndexController@index')->name('front.home');
 Route::get('language/{language}', 'LanguageController@changeLanguage')->name('language');
 
@@ -29,19 +28,22 @@ Route::get('login/{socialProvider}/callback', 'Auth\LoginController@handleProvid
 
 Auth::routes();
 
-Route::get('dashboard', 'HomeController@index')->name('dashboard');
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('dashboard', 'HomeController@index')->name('dashboard');
 // Manage User
-Route::resource('users', 'UsersController');
-Route::post('users/get', 'UsersController@getUserListForDataTable')->name('user.get.list');
-Route::post('users/get/modalbox', 'UsersController@getUserListForModalBox')->name('user.get.list.modalbox');
+    Route::resource('users', 'UsersController');
+    Route::post('users/get', 'UsersController@getUserListForDataTable')->name('user.get.list');
+    Route::post('users/get/modalbox', 'UsersController@getUserListForModalBox')->name('user.get.list.modalbox');
 
 // Manage Role
-Route::resource('roles', 'RolesController');
-Route::post('roles/get', 'RolesController@getRoleListForDataTable')->name('role.get.list');
+    Route::resource('roles', 'RolesController');
+    Route::post('roles/get', 'RolesController@getRoleListForDataTable')->name('role.get.list');
 
 // Manage Permission
-Route::resource('permissions', 'PermissionsController');
-Route::post('permissions/get', 'PermissionsController@getPermissionListForDataTable')->name('permission.get.list');
+    Route::resource('permissions', 'PermissionsController');
+    Route::post('permissions/get', 'PermissionsController@getPermissionListForDataTable')->name('permission.get.list');
 
 // Manage User Profile
-Route::resource('profile', 'UserprofileController');
+    Route::resource('profile', 'UserprofileController');
+});

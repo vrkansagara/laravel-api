@@ -24,13 +24,16 @@
         "arcanedev/log-viewer": "^4.6",
         "barryvdh/laravel-debugbar": "^3.2",
         "barryvdh/laravel-ide-helper": "^2.5",
+        "barryvdh/laravel-snappy": "^0.4.4",
         "doctrine/dbal": "^2.8",
         "facebook/graph-sdk": "^5.7",
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.8",
         "graham-campbell/flysystem": "^5.1",
+        "h4cc/wkhtmltoimage-amd64": "0.12.x",
+        "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "laravel/cashier": "^8.0",
-        "laravel/framework": "5.8.*",
+        "laravel/framework": "5.7.*",
         "laravel/horizon": "^2.0",
         "laravel/passport": "^7.0",
         "laravel/socialite": "^4.1",
@@ -54,6 +57,8 @@
         "laravel/telescope": "^0.1.6",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
+        "nunomaduro/larastan": "^0.3.15",
+        "phpstan/phpstan": "^0.11.2",
         "phpunit/phpunit": "^7.0",
         "roave/security-advisories": "dev-master",
         "zendframework/zend-coding-standard": "^1.0"
@@ -95,7 +100,8 @@
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
             "php artisan ide-helper:generate",
-            "php artisan ide-helper:meta"
+            "php artisan ide-helper:meta",
+            "chmod +x vendor/bin/wkhtmlto*"
         ],
         "cs-check": "./vendor/bin/phpcs",
         "cs-fix": "./vendor/bin/phpcbf",

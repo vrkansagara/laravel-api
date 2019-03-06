@@ -63,6 +63,7 @@ class RoleRepositoryEloquent extends BaseRepository implements RoleRepositoryInt
     {
         $roles = $this->all();
         return DataTables::of($roles)
+            ->addIndexColumn()
             ->escapeColumns(['name'])
             ->addColumn('actions', function ($role) {
                 return view('roles.listaction',compact('role'))->render();
