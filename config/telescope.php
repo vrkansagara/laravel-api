@@ -28,6 +28,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Telescope Master Switch
+    |--------------------------------------------------------------------------
+    |
+    | This option may be used to disable all Telescope watchers regardless
+    | of their individual configuration, which simply provides a single
+    | and convenient way to enable or disable Telescope data storage.
+    |
+    */
+
+    'enabled' => env('TELESCOPE_ENABLED', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Telescope Route Middleware
     |--------------------------------------------------------------------------
     |
@@ -44,6 +57,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Ignored Paths & Commands
+    |--------------------------------------------------------------------------
+    |
+    | The following array lists the URI paths and Artisan commands that will
+    | not be watched by Telescope. In addition to this list, some Laravel
+    | commands, like migrations and queue commands, are always ignored.
+    |
+    */
+
+    'ignore_paths' => [
+        //
+    ],
+
+    'ignore_commands' => [
+        //
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Telescope Watchers
     |--------------------------------------------------------------------------
     |
@@ -55,18 +87,29 @@ return [
 
     'watchers' => [
         Watchers\CacheWatcher::class => env('TELESCOPE_CACHE_WATCHER', true),
-        Watchers\CommandWatcher::class => env('TELESCOPE_COMMAND_WATCHER', true),
+
+        Watchers\CommandWatcher::class => [
+            'enabled' => env('TELESCOPE_COMMAND_WATCHER', true),
+            'ignore' => [],
+        ],
+
         Watchers\DumpWatcher::class => env('TELESCOPE_DUMP_WATCHER', true),
         Watchers\EventWatcher::class => env('TELESCOPE_EVENT_WATCHER', true),
         Watchers\ExceptionWatcher::class => env('TELESCOPE_EXCEPTION_WATCHER', true),
         Watchers\JobWatcher::class => env('TELESCOPE_JOB_WATCHER', true),
         Watchers\LogWatcher::class => env('TELESCOPE_LOG_WATCHER', true),
         Watchers\MailWatcher::class => env('TELESCOPE_MAIL_WATCHER', true),
-        Watchers\ModelWatcher::class => env('TELESCOPE_MODEL_WATCHER', true),
+
+        Watchers\ModelWatcher::class => [
+            'enabled' => env('TELESCOPE_MODEL_WATCHER', true),
+            'events' => ['eloquent.*'],
+        ],
+
         Watchers\NotificationWatcher::class => env('TELESCOPE_NOTIFICATION_WATCHER', true),
 
         Watchers\QueryWatcher::class => [
             'enabled' => env('TELESCOPE_QUERY_WATCHER', true),
+            'ignore_packages' => true,
             'slow' => 100,
         ],
 
@@ -74,7 +117,13 @@ return [
 
         Watchers\RequestWatcher::class => [
             'enabled' => env('TELESCOPE_REQUEST_WATCHER', true),
-            'size_limit' => env('TELESCOPE_REQUEST_SIZE_LIMIT', 64),
+            'size_limit' => env('TELESCOPE_RESPONSE_SIZE_LIMIT', 64),
+        ],
+
+        Watchers\GateWatcher::class => [
+            'enabled' => env('TELESCOPE_GATE_WATCHER', true),
+            'ignore_abilities' => [],
+            'ignore_packages' => true,
         ],
 
         Watchers\ScheduleWatcher::class => env('TELESCOPE_SCHEDULE_WATCHER', true),

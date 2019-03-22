@@ -12,7 +12,9 @@ return [
     ],
     'user' => [
         'profile' => [
-            'image' => 'sometimes|mimes:jpeg,jpg,png,gif|max:10000',
+            'image' => 'sometime|mimes:jpeg,jpg,png,gif|max:10000',
+//            'image' => 'required|mimes:jpeg,jpg,png,gif|max:10000',
+            'image2' => 'required|mimes:jpeg,jpg,png,gif|max:10000',
             'password' => 'sometimes|max:80',
             'confirm_password' => 'sometimes|same:password',
         ],

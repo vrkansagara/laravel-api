@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use Laravel\Telescope\Telescope;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Telescope\IncomingEntry;
+use Laravel\Telescope\Telescope;
 use Laravel\Telescope\TelescopeApplicationServiceProvider;
 
 class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
@@ -18,16 +18,38 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     {
         // Telescope::night();
 
+        $this->hideSensitiveRequestDetails();
+
         Telescope::filter(function (IncomingEntry $entry) {
             if ($this->app->isLocal()) {
                 return true;
             }
 
             return $entry->isReportableException() ||
-                   $entry->isFailedJob() ||
-                   $entry->isScheduledTask() ||
-                   $entry->hasMonitoredTag();
+                $entry->isFailedJob() ||
+                $entry->isScheduledTask() ||
+                $entry->hasMonitoredTag();
         });
+    }
+
+    /**
+     * Prevent sensitive request details from being logged by Telescope.
+     *
+     * @return void
+     */
+    protected function hideSensitiveRequestDetails()
+    {
+        if ($this->app->isLocal()) {
+            return;
+        }
+
+        Telescope::hideRequestParameters(['_token']);
+
+        Telescope::hideRequestHeaders([
+            'cookie',
+            'x-csrf-token',
+            'x-xsrf-token',
+        ]);
     }
 
     /**
@@ -45,4 +67,22 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
             ]);
         });
     }
+
+    protected function authorization()
+    {
+        $this->gate();
+        Telescope::auth(function ($request) {
+            $returnResponse = false;
+            if (app()->environment('local')) {
+                $returnResponse = true;
+            } elseif (null !== $request->user('web') && $request->user('web')->can('viewTelescope')) {
+                $returnResponse = true;
+            } else {
+                $returnResponse = false;
+            }
+            return $returnResponse;
+
+        });
+    }
+
 }
