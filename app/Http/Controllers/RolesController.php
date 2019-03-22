@@ -7,6 +7,7 @@ use App\Http\Requests\Acl\Role\RoleIndexRequest;
 use App\Http\Requests\Acl\Role\RoleUpdateRequest;
 use App\Repositories\interfaces\Acl\Role\RoleRepositoryInterface;
 
+use Illuminate\Support\Facades\Log;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
 use App\Validators\RoleValidator;
@@ -89,6 +90,7 @@ class RolesController extends Controller
 
             return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
+            Log::critical(__CLASS__,[__FILE__,__LINE__,$e->getMessage()]);
             if ($request->wantsJson()) {
                 return response()->json([
                     'error'   => true,
@@ -165,7 +167,7 @@ class RolesController extends Controller
 
             return redirect()->back()->with('message', $response['message']);
         } catch (ValidatorException $e) {
-
+            Log::critical(__CLASS__,[__FILE__,__LINE__,$e->getMessage()]);
             if ($request->wantsJson()) {
 
                 return response()->json([
