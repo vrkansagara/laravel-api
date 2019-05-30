@@ -42,7 +42,14 @@
                         <label>Confirm Password</label>
                         {{Form::password('confirm_password',['class'=>"form-control",'placeholder'=>__('Confirm Password'),'title'=>__('Confirm Password')])}}
                     </div>
-                    {{ Form::submit('Submit',['class'=>"btn btn-primary btn-block"]) }}
+
+                    <div class="form-group">
+                        <span>This is image validatin</span>
+                        <img src="sdfdsf" alt="image2" name="image2" id="image2">
+                    </div>
+
+                    {{ Form::button('Submit',['class'=>"btn btn-primary btn-block",'id'=>'submit']) }}
+
                     {{ Form::close() }}
 
 
@@ -59,5 +66,21 @@
 @section('after-script')
     <!-- Laravel Javascript Validation -->
     {!! $validator->selector('#user-profile') !!}
+
+    <script>
+        $( document ).ready(function() {
+            $('#submit').on('click',function () {
+console.log("i am clicked on submit");
+
+                // if($('#image2').attr('src') == "" || $('#image2').attr('src') == undefined){
+                event.preventDefault();
+                // }
+                var isVAlid = $('#user-profile').valid();
+
+console.log("form is ",isVAlid)
+
+            });
+        });
+    </script>
 @endsection
 
