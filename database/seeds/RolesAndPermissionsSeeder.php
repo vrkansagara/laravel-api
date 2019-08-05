@@ -10,141 +10,142 @@ class RolesAndPermissionsSeeder extends Seeder
 
     public function run()
     {
-        $this->disableForeignKeys();
+        try {
+            {
+//                $this->disableForeignKeys();
+//                $this->truncate(config('permission.table_names.role_has_permissions'));
+//                $this->truncate(config('permission.table_names.model_has_roles'));
+//                $this->truncate(config('permission.table_names.model_has_permissions'));
+//                $this->truncate(config('permission.table_names.permissions'));
+//                $this->truncate(config('permission.table_names.roles'));
+//                $this->enableForeignKeys();
 
-        $this->truncate(config('permission.table_names.role_has_permissions'));
-        $this->truncate(config('permission.table_names.model_has_roles'));
-        $this->truncate(config('permission.table_names.model_has_permissions'));
-        $this->truncate(config('permission.table_names.permissions'));
-        $this->truncate(config('permission.table_names.roles'));
+                // Reset cached roles and permissions
+                app()['cache']->forget('spatie.permission.cache');
 
-        $this->enableForeignKeys();
+                $roles = [
+                    [
+                        'name' => 'system-admin',
+                        'display_name' => 'System Admin',
+                        'guard_name' => 'web',
+                    ],
+                    [
+                        'name' => 'supper-most-admin',
+                        'display_name' => 'Supper Most Admin',
+                        'guard_name' => 'web',
+                    ],
+                    [
+                        'name' => 'supper-admin',
+                        'display_name' => 'Supper Admin',
+                        'guard_name' => 'web',
+                    ],
+                    [
+                        'name' => 'admin',
+                        'display_name' => 'Admin',
+                        'guard_name' => 'web',
+                    ],
+                    [
+                        'name' => 'guest',
+                        'display_name' => 'Guest',
+                        'guard_name' => 'web',
+                    ],
+                    [
+                        'name' => 'band',
+                        'display_name' => 'Band',
+                        'guard_name' => 'web',
+                    ]
+                ];
+                foreach ($roles as $role) {
+                    Role::create($role);
+                }
+                // Fake user creation.
+                factory(\App\Entities\Acl\Role\Role::class, 50)->create();
+
+                $permisionMetaItems = [
+                    'index',
+                    'view',
+                    'create',
+                    'edit',
+                    'update',
+                    'enable',
+                    'disable',
+                    'delete',
+                    'forceDelete',
+                    'restore',
+                    'manage',
+                ];
+                $permissionModules = [
+                    'user',
+                    'role',
+                    'permission',
+                    'dashboard',
+                    'blog',
+                    'blog-category',
+                    'blog-tags',
+                    'company',
+                    'audit-log',
+                    'application-log',
+                    'oauth2',
+                ];
+
+                $permissionListWithModuleItems = [];
+                foreach ($permissionModules as $permissionModule) {
+                    foreach ($permisionMetaItems as $permisionMetaItem) {
+                        $permissionListWithModuleItems[] = $permissionModule . '-' . $permisionMetaItem;
+                    }
+                }
 
 
-        // Reset cached roles and permissions
-        app()['cache']->forget('spatie.permission.cache');
+                foreach ($permissionListWithModuleItems as $permissionListWithModuleItem) {
+                    $displayName = explode('-', $permissionListWithModuleItem);
+                    $permission = [
+                        'name' => $permissionListWithModuleItem,
+                        'display_name' => ucfirst($displayName[0]) . ' ' . $displayName[1],
+                        'guard_name' => 'web',
+                    ];
 
-        $roles = [
-            [
-                'name' => 'system-admin',
-                'display_name' => 'System Admin',
-                'guard_name' => 'web',
-            ],
-            [
-                'name' => 'supper-most-admin',
-                'display_name' => 'Supper Most Admin',
-                'guard_name' => 'web',
-            ],
-            [
-                'name' => 'supper-admin',
-                'display_name' => 'Supper Admin',
-                'guard_name' => 'web',
-            ],
-            [
-                'name' => 'admin',
-                'display_name' => 'Admin',
-                'guard_name' => 'web',
-            ],
-            [
-                'name' => 'guest',
-                'display_name' => 'Guest',
-                'guard_name' => 'web',
-            ],
-            [
-                'name' => 'band',
-                'display_name' => 'Band',
-                'guard_name' => 'web',
-            ]
-        ];
-        foreach ($roles as $role) {
-            Role::create($role);
-        }
-        // Fake user creation.
-        factory(\App\Entities\Acl\Role\Role::class, 50)->create();
+                    Permission::create($permission);
+                }
 
-        $permisionMetaItems = [
-            'index',
-            'view',
-            'create',
-            'edit',
-            'update',
-            'enable',
-            'disable',
-            'delete',
-            'forceDelete',
-            'restore',
-            'manage',
-        ];
-        $permissionModules = [
-            'user',
-            'role',
-            'permission',
-            'dashboard',
-            'blog',
-            'blog-category',
-            'blog-tags',
-            'company',
-            'audit-log',
-            'application-log',
-            'oauth2',
-        ];
+                $role = Role::findByName('system-admin', 'web');
+                $role->givePermissionTo(Permission::all());
+                $role->save();
 
-        $permissionListWithModuleItems = [];
-        foreach ($permissionModules as $permissionModule) {
-            foreach ($permisionMetaItems as $permisionMetaItem) {
-                $permissionListWithModuleItems[] = $permissionModule . '-' . $permisionMetaItem;
+                $role = Role::findByName('supper-admin', 'web');
+                $role->givePermissionTo(Permission::all());
+                $role->save();
+
+
+                // Creating bad permission and it's combination.
+                $permisionMetaItems = [
+                    'manageBan',
+                ];
+
+                $permissionListWithModuleItems = [];
+                foreach ($permissionModules as $permissionModule) {
+                    foreach ($permisionMetaItems as $permisionMetaItem) {
+                        $permissionListWithModuleItems[] = $permissionModule . '-' . $permisionMetaItem;
+                    }
+                }
+
+                foreach ($permissionListWithModuleItems as $permissionListWithModuleItem) {
+                    $displayName = explode('-', $permissionListWithModuleItem);
+                    $permission = [
+                        'name' => $permissionListWithModuleItem,
+                        'display_name' => ucfirst($displayName[0]) . ' ' . $displayName[1],
+                        'guard_name' => 'web',
+                    ];
+
+                    Permission::create($permission);
+                }
+
+                // Fake user creation.
+                factory(\App\Entities\Acl\Permission\Permission::class, 50)->create();
+                app()['cache']->forget('spatie.permission.cache');
             }
+
+        } catch (Exception $exception) {
+            dd($exception->getMessage());
         }
-
-
-        foreach ($permissionListWithModuleItems as $permissionListWithModuleItem) {
-            $displayName = explode('-', $permissionListWithModuleItem);
-            $permission = [
-                'name' => $permissionListWithModuleItem,
-                'display_name' => ucfirst($displayName[0]) . ' ' . $displayName[1],
-                'guard_name' => 'web',
-            ];
-
-            Permission::create($permission);
-        }
-
-        $role = Role::findByName('system-admin', 'web');
-        $role->givePermissionTo(Permission::all());
-        $role->save();
-
-        $role = Role::findByName('supper-admin', 'web');
-        $role->givePermissionTo(Permission::all());
-        $role->save();
-
-
-        // Creating bad permission and it's combination.
-        $permisionMetaItems = [
-            'manageBan',
-        ];
-
-        $permissionListWithModuleItems = [];
-        foreach ($permissionModules as $permissionModule) {
-            foreach ($permisionMetaItems as $permisionMetaItem) {
-                $permissionListWithModuleItems[] = $permissionModule . '-' . $permisionMetaItem;
-            }
-        }
-
-        foreach ($permissionListWithModuleItems as $permissionListWithModuleItem) {
-            $displayName = explode('-', $permissionListWithModuleItem);
-            $permission = [
-                'name' => $permissionListWithModuleItem,
-                'display_name' => ucfirst($displayName[0]) . ' ' . $displayName[1],
-                'guard_name' => 'web',
-            ];
-
-            Permission::create($permission);
-        }
-
-        // Fake user creation.
-        factory(\App\Entities\Acl\Permission\Permission::class, 500)->create();
-
-        app()['cache']->forget('spatie.permission.cache');
-
-
     }
 }

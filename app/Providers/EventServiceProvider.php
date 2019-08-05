@@ -33,7 +33,6 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-
         LoginEvent::class => [
             LoginListener::class
         ],
