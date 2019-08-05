@@ -14,11 +14,15 @@ fi
 php composer-setup.php --quiet
 RESULT=$?
 rm composer-setup.php
+sudo mv composer.phar composer
+sudo chmod +x composer
 exit $RESULT
 
-sudo find . -type f -exec chmod 644 {} \;
-sudo find . -type d -exec chmod 755 {} \;
-sudo chgrp -R www-data storage bootstrap/cache
-sudo chmod -R ug+rwx storage bootstrap/cache
+sudo adduser root www-data
+sudo chown -R $USER:www-data storage
+sudo chown -R $USER:www-data bootstrap/cache
+sudo find ./ -type f -exec chmod 664 {} \;
+sudo find ./ -type d -exec chmod 775 {} \;
 sudo rm -rf bootstrap/cache/*.php && sudo  composer dump-autoload && sudo  php artisan config:cache && sudo  php artisan view:clear && sudo  php artisan route:clear
 sudo php artisan config:cache
+git config core.fileMode false
