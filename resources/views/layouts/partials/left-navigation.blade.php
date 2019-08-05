@@ -20,13 +20,14 @@
                 </div>
             </li>
             <li class="{{isActiveRoute('dashboard')}}">
-                <a href="{{route('dashboard')}}"><i class="fa fa-th-large"></i> <span class="nav-label">{{__('menu.dashboard')}}</span></a>
+                <a href="{{route('dashboard')}}"><i class="fa fa-th-large"></i> <span
+                        class="nav-label">{{__('menu.dashboard')}}</span></a>
             </li>
             @can('user-view')
-            <li class="{{isActiveRoute('users*')}}">
-                <a href="{{route('users.index')}}"><i class="fa fa-th-large"></i> <span
-                        class="nav-label">{{__('menu.users')}}</span></a>
-            </li>
+                <li class="{{isActiveRoute('users*')}}">
+                    <a href="{{route('users.index')}}"><i class="fa fa-th-large"></i> <span
+                            class="nav-label">{{__('menu.users')}}</span></a>
+                </li>
             @endcan
             @can('role-view')
                 <li class="{{isActiveRoute('roles*')}}">
@@ -44,17 +45,6 @@
                 <a href="{{route('bootstrap.modalbox')}}"><i class="fa fa-th-large"></i> <span
                         class="nav-label">{{__('Modal Example')}}</span></a>
             </li>
-
-            @if (hash_equals(env('APP_ENV'), 'local'))
-            <li class="{{isActiveRoute('sample.page')}}">
-                <a href="{{route('sample.page')}}"><i class="fa fa-th-large"></i> <span
-                        class="nav-label">{{__('menu.sample-page')}}</span></a>
-            </li>
-            <li class="{{isActiveRoute('sample.editor')}}">
-                <a href="{{route('sample.editor')}}"><i class="fa fa-th-large"></i> <span
-                        class="nav-label">{{__('menu.sample-editor')}}</span></a>
-            </li>
-            @endif
         </ul>
 
     </div>
